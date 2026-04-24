@@ -9,6 +9,7 @@ interface WhatsAppButtonProps {
   label?: string;
   className?: string;
   fullWidth?: boolean;
+  variant?: "whatsapp" | "cta-orange";
 }
 
 const WhatsAppIcon = () => (
@@ -26,13 +27,14 @@ const WhatsAppButton = ({
   label = "Хочу получить доступ к системе «Врач на миллион»",
   className,
   fullWidth = true,
+  variant = "whatsapp",
 }: WhatsAppButtonProps) => {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
     <Button
       asChild
-      variant="whatsapp"
+      variant={variant}
       size="cta"
       className={cn(
         "font-semibold leading-tight whitespace-normal text-center",
