@@ -10,6 +10,7 @@ interface WhatsAppButtonProps {
   className?: string;
   fullWidth?: boolean;
   variant?: "whatsapp" | "cta-orange";
+  subtitle?: string;
 }
 
 const WhatsAppIcon = () => (
@@ -28,25 +29,36 @@ const WhatsAppButton = ({
   className,
   fullWidth = true,
   variant = "whatsapp",
+  subtitle,
 }: WhatsAppButtonProps) => {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
   return (
-    <Button
-      asChild
-      variant={variant}
-      size="cta"
-      className={cn(
-        "font-semibold leading-tight whitespace-normal text-center",
-        fullWidth && "w-full",
-        className,
+    <div className={cn(fullWidth && "w-full")}>
+      <Button
+        asChild
+        variant={variant}
+        size="cta"
+        className={cn(
+          "font-semibold leading-tight whitespace-normal text-center",
+          fullWidth && "w-full",
+          className,
+        )}
+      >
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Записаться на диагностику в WhatsApp"
+        >
+          <WhatsAppIcon />
+          <span>{label}</span>
+        </a>
+      </Button>
+      {subtitle && (
+        <p className="mt-2 text-center text-xs text-muted-foreground">{subtitle}</p>
       )}
-    >
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        <WhatsAppIcon />
-        <span>{label}</span>
-      </a>
-    </Button>
+    </div>
   );
 };
 

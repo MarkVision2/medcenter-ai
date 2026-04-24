@@ -6,13 +6,31 @@ interface BannerProps {
   className?: string;
   /** italic + жёлтый текст на синем — как в референсе */
   italic?: boolean;
+  size?: "sm" | "md";
 }
 
 /**
  * "Колхозная" продающая плашка-баннер: синий фон, жёлтый жирный текст, на всю ширину.
- * Используется для главных тезисов / якорей внимания.
+ * size="sm" — компактный pill-бейдж для hero/якорей.
+ * size="md" — полноформатный баннер для главных тезисов.
  */
-const Banner = ({ children, className, italic = true }: BannerProps) => {
+const Banner = ({ children, className, italic = true, size = "md" }: BannerProps) => {
+  if (size === "sm") {
+    return (
+      <div
+        className={cn(
+          "inline-flex items-center justify-center rounded-full bg-banner px-4 py-1.5",
+          "text-banner-foreground font-bold uppercase tracking-wide",
+          "text-xs sm:text-sm",
+          italic && "italic",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
