@@ -157,7 +157,7 @@ const Index = () => {
 
       {/* 6. РЕЗУЛЬТАТ */}
       <Section>
-        <div className="rounded-2xl bg-ink-deep p-7 text-center text-white sm:p-10">
+        <div className="rounded-2xl bg-banner p-7 text-center text-white sm:p-10">
           <p className="text-sm font-semibold uppercase tracking-wider text-highlight">
             За 3 месяца
           </p>
