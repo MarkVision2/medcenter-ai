@@ -9,7 +9,7 @@ const Index = () => {
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
       <Section className="pt-6 pb-8 sm:pt-10 sm:pb-12">
-        <Banner className="px-3 py-3 text-xs sm:px-4 sm:py-4 sm:text-base">
+        <Banner className="px-3 py-3 sm:px-4 sm:py-4 sm:text-base text-base">
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
 
