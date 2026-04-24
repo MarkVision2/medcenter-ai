@@ -8,24 +8,24 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
-      <Section className="flex min-h-[100svh] flex-col justify-center pt-4 pb-6 sm:pt-8 sm:pb-10">
+      <Section className="pt-6 pb-8 sm:pt-10 sm:pb-12">
         <Banner className="px-3 py-3 text-xs sm:px-4 sm:py-4 sm:text-base">
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
 
-        <h1 className="mt-4 text-center text-base font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
+        <h1 className="mt-5 text-center text-lg font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
           ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ, И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ СВОИХ ДОКТОРОВ
         </h1>
 
-        <div className="mt-4 sm:mt-8">
+        <div className="mt-5 sm:mt-8">
           <Banner className="px-3 py-3 text-xs sm:px-4 sm:py-4 sm:text-base">
             Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
           </Banner>
         </div>
 
-        <div className="mt-4 sm:mt-8">
+        <div className="mt-5 sm:mt-8">
           <WhatsAppButton />
-          <p className="mt-2 text-center text-xs text-muted-foreground">
+          <p className="mt-3 text-center text-xs text-muted-foreground">
             ​Записаться на диагностику в WhatsApp
           </p>
         </div>
