@@ -8,22 +8,22 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
-      <Section className="pt-8 sm:pt-12">
-        <Banner>
+      <Section className="flex min-h-[100svh] flex-col justify-center py-6 sm:py-10">
+        <Banner className="px-4 py-4 text-xs sm:text-base">
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
 
-        <h1 className="mt-8 text-center text-2xl font-extrabold uppercase leading-[1.05] tracking-tight sm:text-4xl md:text-5xl">
+        <h1 className="mt-6 text-center text-xl font-extrabold uppercase leading-[1.1] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
           Ищу 2-х владельцев медцентров, которые хотят стабильный поток первичных пациентов
         </h1>
 
-        <div className="mt-8">
-          <Banner>
+        <div className="mt-6 sm:mt-8">
+          <Banner className="px-4 py-4 text-xs sm:text-base">
             Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
           </Banner>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-6 sm:mt-8">
           <WhatsAppButton />
           <p className="mt-3 text-center text-xs text-muted-foreground">
             Записаться на диагностику в WhatsApp
