@@ -304,15 +304,23 @@ const Index = () => {
 
       {/* 12. ВЫБОР — ДВЕ ДОРОГИ */}
       <Section tone="muted">
-        <h2 className="text-center text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">
+        <h2 className="text-center text-4xl font-black uppercase tracking-tight sm:text-5xl">
           Две дороги:
         </h2>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        {/* Развилка-эмодзи между заголовком и карточками */}
+        <div className="mt-4 flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
+          🛣️
+        </div>
+
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:gap-4">
           {/* Красная — первая дорога */}
-          <div className="rounded-2xl bg-road-bad p-6 text-road-bad-foreground shadow-lg">
-            <h3 className="text-xl font-extrabold uppercase leading-tight sm:text-2xl">
-              Первая дорога:
+          <div className="rounded-3xl bg-road-bad p-5 text-road-bad-foreground shadow-lg sm:p-6">
+            <div className="flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
+              🤷‍♂️
+            </div>
+            <h3 className="mt-3 text-center text-xl font-black uppercase leading-tight sm:text-2xl">
+              Первая<br />дорога:
             </h3>
             <ul className="mt-5 space-y-4 text-base sm:text-lg">
               {[
@@ -320,18 +328,21 @@ const Index = () => {
                 "Дальше сидеть без денег",
                 "Через год жалеть о потерянном времени",
               ].map((t) => (
-                <li key={t} className="flex gap-3">
-                  <X className="mt-0.5 h-5 w-5 shrink-0" strokeWidth={3} />
-                  <span>{t}</span>
+                <li key={t} className="flex gap-2">
+                  <X className="mt-1 h-4 w-4 shrink-0" strokeWidth={3} />
+                  <span className="leading-snug">{t}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Зелёная — для волков */}
-          <div className="rounded-2xl bg-road-good p-6 text-road-good-foreground shadow-lg">
-            <h3 className="text-xl font-extrabold uppercase leading-tight sm:text-2xl">
-              Вторая дорога <br className="hidden sm:block" />(для&nbsp;сильных):
+          <div className="rounded-3xl bg-road-good p-5 text-road-good-foreground shadow-lg sm:p-6">
+            <div className="flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
+              🐺
+            </div>
+            <h3 className="mt-3 text-center text-xl font-black uppercase leading-tight sm:text-2xl">
+              Вторая дорога<br />(для&nbsp;волков):
             </h3>
             <ul className="mt-5 space-y-4 text-base sm:text-lg">
               {[
@@ -339,11 +350,13 @@ const Index = () => {
                 "Узнать свои слабые места",
                 "Начать зарабатывать как босс",
               ].map((t, i) => (
-                <li key={t} className="flex gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold">
+                <li key={t} className="flex gap-2">
+                  <span
+                    className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/90 text-sm font-black text-road-good shadow-sm"
+                  >
                     {i + 1}
                   </span>
-                  <span>{t}</span>
+                  <span className="leading-snug">{t}</span>
                 </li>
               ))}
             </ul>
