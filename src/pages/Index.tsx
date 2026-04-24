@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X } from "lucide-react";
+import { ArrowRight, AlertTriangle, Phone, Square, X } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
