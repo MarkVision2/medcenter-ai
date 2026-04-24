@@ -104,94 +104,54 @@ const Index = () => {
 
       {/* 5. КЕЙС */}
       <Section>
-        <div className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent-deep">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-deep" />
-          Реальный кейс
-        </div>
-        <h2 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
-          Но почему я так уверен, что&nbsp;эта система{" "}
-          <span className="text-accent-deep">реально работает?</span>
+        <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+          Но почему я так уверен, что эта система реально работает?
         </h2>
 
-        <div className="relative mt-7 overflow-hidden rounded-3xl border bg-card shadow-xl">
-          {/* Декоративная полоса сверху */}
-          <div className="h-1.5 w-full bg-gradient-to-r from-accent via-banner to-accent-deep" />
+        <div className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+          <div className="flex items-center gap-2 text-sm font-medium text-accent-deep">
+            <MapPin className="h-4 w-4" />
+            Конкретный пример. Клиника из Астаны
+          </div>
 
-          <div className="p-6 sm:p-8">
-            <div className="flex items-center gap-2 text-sm font-semibold text-accent-deep">
-              <MapPin className="h-4 w-4" />
-              Клиника из&nbsp;Астаны
+          <p className="mt-4 text-base leading-relaxed sm:text-lg">
+            Работал один администратор, который не справлялся со звонками. Записывал всех подряд,
+            а приходило <span className="font-semibold">30%</span> от записанных.
+          </p>
+
+          <h3 className="mt-6 text-lg font-semibold">Что мы сделали?</h3>
+          <ul className="mt-3 space-y-2">
+            {[
+              "Вывели 2 девушек в отдельный колл-центр",
+              "Обучили скриптам продаж первичных консультаций",
+              "Поставили задачу: продать приём с предоплатой или полной оплатой",
+            ].map((item, i) => (
+              <li key={i} className="flex gap-3">
+                <Check className="mt-1 h-5 w-5 shrink-0 text-accent" strokeWidth={3} />
+                <span className="text-base sm:text-lg">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 rounded-xl bg-accent-soft p-5">
+            <div className="text-sm font-medium uppercase tracking-wide text-accent-deep">
+              Результат за 2 недели
             </div>
-
-            {/* Сцена: было */}
-            <div className="mt-5 rounded-2xl border border-destructive/30 bg-destructive/5 p-5">
-              <div className="text-xs font-bold uppercase tracking-wider text-destructive">
-                Было
-              </div>
-              <p className="mt-2 text-base leading-relaxed sm:text-lg">
-                Один администратор не&nbsp;справлялся со&nbsp;звонками. Записывал всех подряд,
-                а&nbsp;приходило <span className="font-extrabold text-destructive">всего 30%</span> от&nbsp;записанных.
-              </p>
-            </div>
-
-            {/* Что сделали */}
-            <h3 className="mt-7 text-lg font-bold sm:text-xl">Что&nbsp;мы&nbsp;сделали?</h3>
-            <ul className="mt-4 space-y-3">
-              {[
-                "Вывели 2 девушек в отдельный колл-центр",
-                "Обучили скриптам продаж первичных консультаций",
-                "Поставили задачу: продать приём с предоплатой или полной оплатой",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 rounded-xl bg-muted/60 p-3"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                    <Check className="h-4 w-4" strokeWidth={3.5} />
-                  </span>
-                  <span className="text-base leading-snug sm:text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Результат */}
-            <div className="mt-7 rounded-2xl bg-banner p-6 text-white shadow-lg sm:p-7">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-highlight">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-highlight" />
-                Результат за 2 недели
-              </div>
-
-              <div className="mt-4 grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-3xl font-black leading-none text-highlight sm:text-4xl">
-                    107
-                  </p>
-                  <p className="mt-1.5 text-xs leading-tight text-white/80 sm:text-sm">
-                    новых пациентов с&nbsp;оплатой
-                  </p>
-                </div>
-                <div className="border-l border-white/20 pl-4">
-                  <p className="text-3xl font-black leading-none text-highlight sm:text-4xl">
-                    +10 млн&nbsp;₸
-                  </p>
-                  <p className="mt-1.5 text-xs leading-tight text-white/80 sm:text-sm">
-                    в&nbsp;кассу клиники
-                  </p>
-                </div>
-              </div>
-
-              <p className="mt-5 border-t border-white/15 pt-4 text-sm text-white/80 sm:text-base">
-                ⚡ Без&nbsp;дополнительных трат на&nbsp;рекламу
-              </p>
-            </div>
-
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Тот&nbsp;же бюджет на&nbsp;рекламу, но&nbsp;в&nbsp;<span className="font-extrabold text-foreground">3&nbsp;раза больше</span> реально пришедших и&nbsp;оплативших пациентов.
+            <p className="mt-2 text-xl font-bold leading-tight sm:text-2xl">
+              107 новых пациентов с оплатой
             </p>
-            <p className="mt-3 rounded-xl border-l-4 border-accent bg-accent-soft px-4 py-3 text-base font-semibold leading-snug text-foreground sm:text-lg">
-              В&nbsp;чём разница? Правильные люди на&nbsp;правильных позициях.
+            <p className="mt-1 text-xl font-bold text-accent-deep sm:text-2xl">
+              +10 000 000 тенге в кассу
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              без дополнительных трат на рекламу
             </p>
           </div>
+
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Тот же бюджет на рекламу, но в 3 раза больше реально пришедших и оплативших пациентов.
+            В чём разница? <span className="font-semibold text-foreground">Правильные люди на правильных позициях.</span>
+          </p>
         </div>
       </Section>
 
