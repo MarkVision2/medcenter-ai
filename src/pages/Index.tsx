@@ -109,48 +109,43 @@ const Index = () => {
         </h2>
 
         <div className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
-          <div className="flex items-center justify-center gap-2 text-center font-medium text-accent-deep text-xl">
-            <MapPin className="h-4 w-4" />
-            Конкретный пример. Клиника из Астаны
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center rounded-xl bg-accent px-5 py-2 text-lg font-bold tracking-wide text-accent-foreground sm:text-xl">
+              MEDISA
+            </span>
+            <span className="text-base font-semibold text-muted-foreground sm:text-lg">
+              Центр эстетической стоматологии
+            </span>
           </div>
 
-          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Работал один администратор, который не справлялся со звонками. Записывал всех подряд,
-            а приходило <span className="font-semibold">30%</span> от записанных.
-          </p>
+          <div className="mt-5">
+            <span className="inline-flex items-center rounded-xl bg-foreground px-5 py-2 text-lg font-bold text-background sm:text-xl">
+              Результаты
+            </span>
+          </div>
 
-          <h3 className="mt-6 text-center text-lg font-semibold">Что мы сделали?</h3>
-          <ul className="mx-auto mt-3 max-w-md space-y-2">
+          <ul className="mt-5 space-y-3">
             {[
-              "Вывели 2 девушек в отдельный колл-центр",
-              "Обучили скриптам продаж первичных консультаций",
-              "Поставили задачу: продать приём с предоплатой или полной оплатой",
+              { label: "Заявок", value: "2593" },
+              { label: "Стоимость заявки", value: "1,22$" },
+              { label: "Потраченный бюджет", value: "3165$" },
+              { label: "Количество пациентов", value: "61" },
+              { label: "Средний чек", value: "1.000.000 ₸" },
+              { label: "Выручка", value: "62.000.000 ₸" },
+              { label: "Срок работы на момент создания кейса", value: "3 месяца" },
             ].map((item, i) => (
-              <li key={i} className="flex gap-3">
-                <Check className="mt-1 h-5 w-5 shrink-0 text-accent" strokeWidth={3} />
-                <span className="text-base sm:text-lg">{item}</span>
+              <li key={i} className="flex gap-3 text-base leading-snug sm:text-lg">
+                <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-accent" />
+                <span>
+                  {item.label} — <span className="font-bold text-accent-deep">{item.value}</span>
+                </span>
               </li>
             ))}
           </ul>
 
-          <div className="mt-6 rounded-xl bg-accent-soft p-5 text-center">
-            <div className="text-sm font-medium uppercase tracking-wide text-accent-deep">
-              Результат за 2 недели
-            </div>
-            <p className="mt-2 text-xl font-bold leading-tight sm:text-2xl">
-              107 новых пациентов с оплатой
-            </p>
-            <p className="mt-1 text-xl font-bold text-accent-deep sm:text-2xl">
-              +10 000 000 тенге в кассу
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              без дополнительных трат на рекламу
-            </p>
-          </div>
-
-          <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Тот же бюджет на рекламу, но в 3 раза больше реально пришедших и оплативших пациентов.
-            В чём разница? <span className="font-semibold text-foreground">Правильные люди на правильных позициях.</span>
+          <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Реальный кейс. Системный поток платежеспособных пациентов —{" "}
+            <span className="font-semibold text-foreground">без хаоса и выгорания.</span>
           </p>
         </div>
       </Section>
