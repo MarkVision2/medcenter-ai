@@ -2,6 +2,7 @@ import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X } from "luci
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
+import yuriPhoto from "@/assets/yuri.png";
 
 const Index = () => {
   return (
@@ -78,12 +79,11 @@ const Index = () => {
       {/* 4. ОБО МНЕ */}
       <Section tone="muted">
         <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
-          <div
-            className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full bg-background ring-4 ring-accent-soft sm:h-40 sm:w-40"
-            aria-label="Фото Юрия (плейсхолдер)"
-          >
-            <span className="text-xs text-muted-foreground">Фото Юрия</span>
-          </div>
+          <img
+            src={yuriPhoto}
+            alt="Юрий — автор системы «Врач на миллион»"
+            className="w-full max-w-sm shrink-0 rounded-2xl object-contain shadow-lg sm:w-64 sm:max-w-none"
+          />
 
           <div className="mt-5 sm:mt-0">
             <h2 className="text-2xl font-bold sm:text-3xl">Привет, меня зовут Юрий</h2>
