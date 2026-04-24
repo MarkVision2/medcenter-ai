@@ -70,7 +70,7 @@ const Index = () => {
           Я расскажу, как забыть о работе за копейки и начать зарабатывать как лучшие клиники
           Казахстана, имея больше свободного времени и энергии.
         </p>
-        <div className="mt-6 text-center text-3xl">👇</div>
+        <div className="mt-6 text-center text-3xl">​</div>
         <div className="mt-3">
           <WhatsAppButton />
         </div>
