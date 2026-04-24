@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
-      <Section className="flex min-h-[100svh] flex-col justify-center py-6 sm:py-10">
+      <Section className="pt-6 pb-8 sm:pt-10 sm:pb-12">
         <Banner className="px-4 py-4 text-xs sm:text-base">
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
