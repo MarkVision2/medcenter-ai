@@ -18,7 +18,7 @@ const Banner = ({ children, className, italic = true }: BannerProps) => {
       className={cn(
         "rounded-md bg-banner px-5 py-5 text-center sm:px-6 sm:py-6",
         "text-banner-foreground font-extrabold uppercase",
-        "text-lg leading-tight sm:text-xl md:text-2xl",
+        "text-sm leading-tight sm:text-xl md:text-2xl",
         italic && "italic",
         className,
       )}
