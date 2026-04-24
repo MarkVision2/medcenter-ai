@@ -13,12 +13,12 @@ const Index = () => {
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
 
-        <h1 className="mt-5 text-center text-lg font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
+        <h1 className="mt-5 text-center text-2xl font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
           ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ, И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ СВОИХ ДОКТОРОВ
         </h1>
 
         <div className="mt-5 sm:mt-8">
-          <Banner className="px-3 py-3 text-xs sm:px-4 sm:py-4 sm:text-base">
+          <Banner className="px-3 py-3 sm:px-4 sm:py-4 sm:text-base text-base">
             Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
           </Banner>
         </div>
@@ -34,11 +34,11 @@ const Index = () => {
       {/* 2. БОЛЬ */}
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7">
-          <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl">
+          <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
             Ответьте на вопросы — ответ на которые «ДА»:
           </h2>
 
-          <ul className="mt-6 space-y-5">
+          <ul className="mx-auto mt-6 max-w-md space-y-5">
             {[
               "Устали работать и нанимать разных таргетологов, SMMщиков, которые обещают результат, но пациентов нет и нет",
               "Видите, как ваши коллеги успешно зарабатывают и путешествуют, а вы смотрите на них и не понимаете «ЧТО ВЫ ДЕЛАЕТЕ НЕ ТАК»",
@@ -78,14 +78,14 @@ const Index = () => {
 
       {/* 4. ОБО МНЕ */}
       <Section tone="muted">
-        <div className="flex flex-col items-center text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
+        <div className="flex flex-col items-center text-center">
           <img
             src={yuriPhoto}
             alt="Юрий — автор системы «Врач на миллион»"
-            className="w-full max-w-sm shrink-0 rounded-2xl object-contain shadow-lg sm:w-64 sm:max-w-none"
+            className="w-full max-w-sm shrink-0 rounded-2xl object-contain shadow-lg"
           />
 
-          <div className="mt-5 sm:mt-0">
+          <div className="mt-5 max-w-2xl">
             <h2 className="text-2xl font-bold sm:text-3xl">Привет, меня зовут Юрий</h2>
             <p className="mt-4 text-base leading-relaxed sm:text-lg">
               Я прошёл путь от маркетолога, который запускает рекламу для стоматологий и
@@ -104,23 +104,23 @@ const Index = () => {
 
       {/* 5. КЕЙС */}
       <Section>
-        <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
           Но почему я так уверен, что эта система реально работает?
         </h2>
 
         <div className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
-          <div className="flex items-center gap-2 text-sm font-medium text-accent-deep">
+          <div className="flex items-center justify-center gap-2 text-center text-sm font-medium text-accent-deep">
             <MapPin className="h-4 w-4" />
             Конкретный пример. Клиника из Астаны
           </div>
 
-          <p className="mt-4 text-base leading-relaxed sm:text-lg">
+          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
             Работал один администратор, который не справлялся со звонками. Записывал всех подряд,
             а приходило <span className="font-semibold">30%</span> от записанных.
           </p>
 
-          <h3 className="mt-6 text-lg font-semibold">Что мы сделали?</h3>
-          <ul className="mt-3 space-y-2">
+          <h3 className="mt-6 text-center text-lg font-semibold">Что мы сделали?</h3>
+          <ul className="mx-auto mt-3 max-w-md space-y-2">
             {[
               "Вывели 2 девушек в отдельный колл-центр",
               "Обучили скриптам продаж первичных консультаций",
@@ -133,7 +133,7 @@ const Index = () => {
             ))}
           </ul>
 
-          <div className="mt-6 rounded-xl bg-accent-soft p-5">
+          <div className="mt-6 rounded-xl bg-accent-soft p-5 text-center">
             <div className="text-sm font-medium uppercase tracking-wide text-accent-deep">
               Результат за 2 недели
             </div>
@@ -148,7 +148,7 @@ const Index = () => {
             </p>
           </div>
 
-          <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
             Тот же бюджет на рекламу, но в 3 раза больше реально пришедших и оплативших пациентов.
             В чём разница? <span className="font-semibold text-foreground">Правильные люди на правильных позициях.</span>
           </p>
@@ -174,28 +174,28 @@ const Index = () => {
       {/* 7. СКЕПСИС */}
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-6 sm:p-8">
-          <h2 className="text-2xl font-extrabold sm:text-3xl">Никакого подвоха нет.</h2>
-          <p className="mt-4 text-base leading-relaxed sm:text-lg">
+          <h2 className="text-center text-2xl font-extrabold sm:text-3xl">Никакого подвоха нет.</h2>
+          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
             Мы проводим консультации, чтобы показать <span className="font-bold">вам свой</span> метод
             ежедневного привлечения премиум-пациентов на услуги имплантов, виниров и т.д.
           </p>
-          <p className="mt-4 text-base leading-relaxed sm:text-lg">
+          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
             Если после консультации вы захотите, <span className="font-bold">чтобы мы помогли</span> выйти на
             доход от 500 000 тенге в день с помощью моего метода — то сможете продолжить работу со мной
             на платной основе. Консультация вас ни к чему не обязывает.
           </p>
-          <p className="mt-5 text-lg font-bold sm:text-xl">Да-да, нет-нет.</p>
-          <p className="mt-2 text-lg font-bold sm:text-xl">ВСЁ по ЧЕСТНОМУ 🤝</p>
+          <p className="mt-5 text-center text-lg font-bold sm:text-xl">Да-да, нет-нет.</p>
+          <p className="mt-2 text-center text-lg font-bold sm:text-xl">ВСЁ по ЧЕСТНОМУ 🤝</p>
         </div>
       </Section>
 
       {/* 8. СУТЬ */}
       <Section tone="muted">
-        <h2 className="text-xl font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl">
+        <h2 className="text-center text-xl font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl">
           Если ты хочешь забыть о работе за копейки и начать зарабатывать как топовый медицинский центр,
           имея больше свободного времени и энергии —
         </h2>
-        <p className="mt-5 text-base leading-relaxed sm:text-lg">
+        <p className="mt-5 text-center text-base leading-relaxed sm:text-lg">
           это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
           и дальше терять пациентов и деньги.
         </p>
@@ -203,10 +203,10 @@ const Index = () => {
 
       {/* 9. ЧТО ПОЛУЧИТЕ */}
       <Section>
-        <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
           Что вы получите вместе с консультацией
         </h2>
-        <p className="mt-3 text-base text-muted-foreground sm:text-lg">
+        <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg">
           Найдём все дыры, через которые утекают ваши пациенты и деньги.
         </p>
 
@@ -255,18 +255,18 @@ const Index = () => {
           ))}
         </ul>
 
-        <div className="mt-8 rounded-2xl bg-foreground p-6 text-background sm:p-8">
+        <div className="mt-8 rounded-2xl bg-banner p-6 text-white sm:p-8">
           <div className="flex items-baseline justify-between gap-4">
             <span className="text-base sm:text-lg">Общая ценность:</span>
-            <span className="text-xl font-bold line-through opacity-70 sm:text-2xl">
+            <span className="text-xl font-bold line-through opacity-80 sm:text-2xl">
               340 000 тг
             </span>
           </div>
-          <div className="mt-4 border-t border-background/20 pt-4">
-            <p className="text-sm uppercase tracking-wide opacity-80">
+          <div className="mt-4 border-t border-white/20 pt-4 text-center">
+            <p className="text-sm uppercase tracking-wide text-white/80">
               Стоимость диагностики сегодня
             </p>
-            <p className="mt-2 text-4xl font-extrabold sm:text-5xl">9 900 ₸</p>
+            <p className="mt-2 text-4xl font-extrabold text-highlight sm:text-5xl">9 900 ₸</p>
           </div>
           <div className="mt-6">
             <WhatsAppButton label="Записаться на диагностику за 9 900 ₸" />
@@ -276,22 +276,22 @@ const Index = () => {
 
       {/* 10. УНИКАЛЬНОСТЬ */}
       <Section tone="muted">
-        <h2 className="text-2xl font-bold sm:text-3xl">
+        <h2 className="text-center text-2xl font-bold sm:text-3xl">
           На рынке я не видел, чтобы так кто-то делал
         </h2>
-        <p className="mt-4 text-base leading-relaxed sm:text-lg">
+        <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
           Обычно это: <span className="italic">«Давайте больше рекламы настроим…»</span>
         </p>
-        <p className="mt-3 text-base leading-relaxed sm:text-lg">
+        <p className="mt-3 text-center text-base leading-relaxed sm:text-lg">
           А мы сначала закроем все дыры в воронке. Нет смысла лить больше воды в дырявое ведро.
         </p>
       </Section>
 
       {/* 11. ОГРАНИЧЕНИЕ */}
       <Section>
-        <div className="flex gap-4 rounded-2xl border-l-4 border-accent bg-accent-soft p-5 sm:p-6">
+        <div className="flex items-center gap-4 rounded-2xl border-l-4 border-accent bg-accent-soft p-5 sm:p-6">
           <AlertTriangle className="h-6 w-6 shrink-0 text-accent-deep" />
-          <div>
+          <div className="flex-1 text-center">
             <p className="text-base font-semibold leading-snug sm:text-lg">
               Важно: делаем максимум 2 исследования в неделю.
             </p>
@@ -376,8 +376,7 @@ const Index = () => {
           </Banner>
         </div>
 
-        {/* Тёмная плашка-обводка с оранжевой кнопкой — как в референсе */}
-        <div className="mt-6 rounded-2xl bg-ink-deep p-4 sm:p-5">
+        <div className="mt-6">
           <WhatsAppButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
@@ -388,7 +387,7 @@ const Index = () => {
 
       {/* 14. ДОЖИМ */}
       <Section tone="muted">
-        <div className="space-y-4 text-base leading-relaxed sm:text-lg">
+        <div className="space-y-4 text-center text-base leading-relaxed sm:text-lg">
           <p>
             <span className="font-bold">P.S. Завтра свободных мест может не быть.</span>{" "}
             Я беру максимум 2 клиники в неделю и только одну в каждом городе.
@@ -398,7 +397,7 @@ const Index = () => {
             где будете через год, когда узнаете,{" "}
             <span className="font-bold">что мои клиенты уже делают по 20+ миллионов</span>.
           </p>
-          <div className="flex gap-3 rounded-xl border-l-4 border-banner bg-background p-4">
+          <div className="flex items-center gap-3 rounded-xl border-l-4 border-banner bg-background p-4 text-left">
             <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-banner" />
             <p className="font-medium">
               Помните: пока вы думаете, ваши конкуренты внедряют системы продаж и забирают
@@ -410,10 +409,10 @@ const Index = () => {
 
       {/* 15. ФИНАЛ */}
       <Section>
-        <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl">
+        <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
           В медицинском бизнесе есть два типа клиник
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
           Те, кто <span className="font-semibold text-foreground">растёт по системе</span>,
           и те, кто оправдывает стагнацию обстоятельствами.
         </p>
@@ -422,7 +421,7 @@ const Index = () => {
           <Banner>В какой категории хотите быть&nbsp;вы?</Banner>
         </div>
 
-        <div className="mt-6 rounded-2xl bg-ink-deep p-4 sm:p-5">
+        <div className="mt-6">
           <WhatsAppButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
