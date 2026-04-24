@@ -41,6 +41,27 @@ export default {
           soft: "hsl(var(--accent-soft))",
           deep: "hsl(var(--accent-deep))",
         },
+        banner: {
+          DEFAULT: "hsl(var(--banner))",
+          foreground: "hsl(var(--banner-foreground))",
+        },
+        highlight: {
+          DEFAULT: "hsl(var(--highlight))",
+          foreground: "hsl(var(--highlight-foreground))",
+        },
+        "road-bad": {
+          DEFAULT: "hsl(var(--road-bad))",
+          foreground: "hsl(var(--road-bad-foreground))",
+        },
+        "road-good": {
+          DEFAULT: "hsl(var(--road-good))",
+          foreground: "hsl(var(--road-good-foreground))",
+        },
+        "cta-orange": {
+          DEFAULT: "hsl(var(--cta-orange))",
+          foreground: "hsl(var(--cta-orange-foreground))",
+        },
+        "ink-deep": "hsl(var(--ink-deep))",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
