@@ -109,7 +109,7 @@ const Index = () => {
         </h2>
 
         <div className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
-          <div className="flex items-center justify-center gap-2 text-center text-sm font-medium text-accent-deep">
+          <div className="flex items-center justify-center gap-2 text-center font-medium text-accent-deep text-xl">
             <MapPin className="h-4 w-4" />
             Конкретный пример. Клиника из Астаны
           </div>
@@ -203,7 +203,7 @@ const Index = () => {
 
       {/* 9. ЧТО ПОЛУЧИТЕ */}
       <Section>
-        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
           Что вы получите вместе с консультацией
         </h2>
         <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg">
