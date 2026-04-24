@@ -13,8 +13,8 @@ const Index = () => {
           Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
         </Banner>
 
-        <h1 className="mt-5 text-center text-2xl font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl">
-          ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ, И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ СВОИХ ДОКТОРОВ
+        <h1 className="mt-5 text-center text-2xl font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl whitespace-pre-line">
+          ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ,{"\n"}И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ ДОКТОРОВ
         </h1>
 
         <div className="mt-5 sm:mt-8">
