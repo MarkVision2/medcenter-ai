@@ -12,11 +12,9 @@ const Index = () => {
       <Section className="pt-4 pb-6 sm:pt-10 sm:pb-12">
         {/* Красный баннер */}
         <div className="rounded-md bg-destructive px-5 py-5 sm:px-6 sm:py-6 text-center">
-          <p className="text-base font-bold italic text-highlight sm:text-xl md:text-2xl">
-            Проверенная методика:&nbsp; &nbsp;
-          </p>
-          <p className="mt-1 font-bold text-white sm:text-xl md:text-2xl text-sm">
-            Для&nbsp;владельцев медицинских центров
+          <p className="text-primary-foreground bg-destructive font-sans font-semibold sm:text-xl md:text-2xl whitespace-pre-line">
+            Проверенная методика&nbsp; &nbsp;{"\n"}
+            для владельцев медицинских центров
           </p>
         </div>
 
