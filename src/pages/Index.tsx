@@ -192,11 +192,10 @@ const Index = () => {
       {/* 8. СУТЬ */}
       <Section tone="muted">
         <h2 className="text-center text-xl font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl">
-          Если ты хочешь забыть о работе за копейки и начать зарабатывать как топовый медицинский центр,
-          имея больше свободного времени и энергии —
+          ЕСЛИ ТЫ ХОЧЕШЬ ЗАБЫТЬ О РАБОТЕ ЗА КОПЕЙКИ И НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР, ИМЕЯ БОЛЬШЕ СВОБОДНОГО ВРЕМЕНИ И ЭНЕРГИИ 
         </h2>
-        <p className="mt-5 text-center text-base leading-relaxed sm:text-lg">
-          это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
+        <p className="mt-5 text-center leading-relaxed sm:text-lg text-lg">
+          Это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
           и дальше терять пациентов и деньги.
         </p>
       </Section>
