@@ -212,13 +212,13 @@ const Index = () => {
         <ul className="mt-6 space-y-4">
           {[
             {
-              title: "Часовая консультация 1-на-1 со мной",
+              title: "Часовая консультация \n1-на-1 со мной",
               desc: "Покажу, как привлекать первичных пациентов с бюджетами от 500 000 тенге без бесконечного поиска и сарафанного радио",
               value: "150 000 тг",
             },
             {
               title: "Карта с пошаговым планом",
-              desc: "Как выйти на стабильный доход 300 000 – 600 000 тг в день, даже если сейчас зарабатываете в 5 раз меньше",
+              desc: "Как выйти на стабильный доход \n300 000 – 600 000 тг в день, даже если сейчас зарабатываете в 5 раз меньше",
               value: "80 000 тг",
             },
             {
@@ -241,8 +241,8 @@ const Index = () => {
                   {i + 1}
                 </span>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold leading-snug">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  <h3 className="text-lg font-semibold leading-snug whitespace-pre-line">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line">
                     {item.desc}
                   </p>
                   <p className="mt-3 text-sm font-semibold text-accent-deep">
