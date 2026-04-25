@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -104,54 +104,102 @@ const Index = () => {
 
       {/* 5. КЕЙС */}
       <Section>
+        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+          <Sparkles className="h-3.5 w-3.5" />
+          Реальный кейс
+        </div>
         <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
-          Но почему я так уверен, что эта система реально работает?
+          Но почему я так уверен,{"\n"}
+          <span className="text-accent-deep">что эта система реально работает?</span>
         </h2>
 
-        <div className="mt-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
-          <div className="flex items-center justify-center gap-2 text-center font-medium text-accent-deep text-xl">
-            <MapPin className="h-4 w-4" />
-            Конкретный пример. Клиника из Астаны
-          </div>
-
-          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Работал один администратор, который не справлялся со звонками. Записывал всех подряд,
-            а приходило <span className="font-semibold">30%</span> от записанных.
-          </p>
-
-          <h3 className="mt-6 text-center text-lg font-semibold">Что мы сделали?</h3>
-          <ul className="mx-auto mt-3 max-w-md space-y-2">
-            {[
-              "Вывели 2 девушек в отдельный колл-центр",
-              "Обучили скриптам продаж первичных консультаций",
-              "Поставили задачу: продать приём с предоплатой или полной оплатой",
-            ].map((item, i) => (
-              <li key={i} className="flex gap-3">
-                <Check className="mt-1 h-5 w-5 shrink-0 text-accent" strokeWidth={3} />
-                <span className="text-base sm:text-lg">{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6 rounded-xl bg-accent-soft p-5 text-center">
-            <div className="text-sm font-medium uppercase tracking-wide text-accent-deep">
-              Результат за 2 недели
+        <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
+          {/* Шапка карточки */}
+          <div className="border-b bg-accent-soft/40 px-6 py-4 sm:px-8">
+            <div className="flex items-center justify-center gap-2 text-center font-semibold text-accent-deep">
+              <MapPin className="h-5 w-5 shrink-0" />
+              <span className="text-lg sm:text-xl">Клиника из Астаны</span>
             </div>
-            <p className="mt-2 text-xl font-bold leading-tight sm:text-2xl">
-              107 новых пациентов с оплатой
-            </p>
-            <p className="mt-1 text-xl font-bold text-accent-deep sm:text-2xl">
-              +10 000 000 тенге в кассу
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              без дополнительных трат на рекламу
-            </p>
           </div>
 
-          <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Тот же бюджет на рекламу, но в 3 раза больше реально пришедших и оплативших пациентов.
-            В чём разница? <span className="font-semibold text-foreground">Правильные люди на правильных позициях.</span>
-          </p>
+          <div className="p-6 sm:p-8">
+            {/* Проблема */}
+            <div className="rounded-xl border-l-4 border-destructive bg-destructive/5 p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-destructive">
+                Было
+              </p>
+              <p className="mt-2 text-base leading-relaxed sm:text-lg">
+                Один администратор не справлялся со звонками. Записывал всех подряд —
+                приходило только <span className="font-bold text-destructive">30%</span> от записанных.
+              </p>
+            </div>
+
+            {/* Что сделали */}
+            <h3 className="mt-7 text-center text-lg font-bold sm:text-xl">
+              Что мы сделали?
+            </h3>
+            <ul className="mx-auto mt-4 max-w-md space-y-3">
+              {[
+                "Вывели 2 девушек в отдельный колл-центр",
+                "Обучили скриптам продаж первичных консультаций",
+                "Поставили задачу: продать приём с предоплатой или полной оплатой",
+              ].map((item, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-3 rounded-xl bg-muted/50 p-3"
+                >
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                    <Check className="h-4 w-4" strokeWidth={3} />
+                  </span>
+                  <span className="text-base leading-snug sm:text-lg">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Результат */}
+            <div className="mt-7 rounded-2xl bg-banner p-6 text-center text-white shadow-lg">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-highlight">
+                <TrendingUp className="h-3.5 w-3.5" />
+                Результат за 2 недели
+              </div>
+
+              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-xl bg-white/10 p-4">
+                  <Users className="mx-auto h-6 w-6 text-highlight" />
+                  <p className="mt-2 text-3xl font-extrabold leading-none sm:text-4xl">
+                    107
+                  </p>
+                  <p className="mt-2 text-sm text-white/80">
+                    новых пациентов с оплатой
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 p-4">
+                  <Wallet className="mx-auto h-6 w-6 text-highlight" />
+                  <p className="mt-2 text-2xl font-extrabold leading-none text-highlight sm:text-3xl">
+                    +10 млн ₸
+                  </p>
+                  <p className="mt-2 text-sm text-white/80">
+                    в кассу
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-sm text-white/70">
+                без дополнительных трат на рекламу
+              </p>
+            </div>
+
+            {/* Вывод */}
+            <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Тот же бюджет на рекламу — в{" "}
+              <span className="font-bold text-foreground">3 раза больше</span>{" "}
+              реально пришедших и оплативших пациентов.
+            </p>
+            <p className="mt-3 text-center text-base font-semibold leading-snug sm:text-lg">
+              В чём разница?{" "}
+              <span className="text-accent-deep">Правильные люди на правильных позициях.</span>
+            </p>
+          </div>
         </div>
       </Section>
 
