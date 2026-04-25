@@ -3,7 +3,7 @@ import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import yuriPhoto from "@/assets/yuri.png";
-import heroLaptop from "@/assets/hero-laptop.jpg";
+import heroLaptop from "@/assets/hero-laptop.png";
 
 const Index = () => {
   return (
@@ -32,19 +32,19 @@ const Index = () => {
           </Banner>
         </div>
 
-        {/* Картинка с ноутбуком — обрезаем лишний воздух сверху/снизу через scale + отрицательные отступы */}
-        <div className="-mt-2 sm:mt-4 overflow-hidden">
+        {/* Картинка с ноутбуком — прозрачный фон, естественно вписана */}
+        <div className="mt-2 sm:mt-4">
           <img
             src={heroLaptop}
             alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
             width={1024}
             height={1024}
-            className="mx-auto w-full max-w-[260px] sm:max-w-md scale-110 -my-6 sm:my-0 sm:scale-100"
+            className="mx-auto block w-full max-w-[320px] sm:max-w-md"
           />
         </div>
 
         {/* Кнопка */}
-        <div className="-mt-2 sm:mt-4">
+        <div className="mt-2 sm:mt-4">
           <WhatsAppButton />
           <p className="mt-2 text-center text-xs text-muted-foreground">
             ​Записаться на диагностику в WhatsApp
