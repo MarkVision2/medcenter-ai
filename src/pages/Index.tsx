@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
-      <Section className="pt-6 pb-8 sm:pt-10 sm:pb-12">
+      <Section className="pt-4 pb-6 sm:pt-10 sm:pb-12">
         {/* Красный баннер */}
         <div className="rounded-md bg-destructive px-5 py-5 sm:px-6 sm:py-6 text-center">
           <p className="text-base font-bold italic text-highlight sm:text-xl md:text-2xl">
@@ -21,32 +21,32 @@ const Index = () => {
         </div>
 
         {/* Главный заголовок */}
-        <h1 className="mt-8 text-center font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-10 sm:text-4xl md:text-5xl whitespace-pre-line text-xl">
+        <h1 className="mt-5 text-center font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-10 sm:text-4xl md:text-5xl whitespace-pre-line text-xl">
           ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ,{"\n"}И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ ДОКТОРОВ
         </h1>
 
         {/* Синий баннер */}
-        <div className="mt-8 sm:mt-10">
+        <div className="mt-5 sm:mt-10">
           <Banner className="px-3 py-4 sm:px-6 sm:py-6 text-base">
             Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
           </Banner>
         </div>
 
-        {/* Картинка с ноутбуком */}
-        <div className="mt-6 sm:mt-8">
+        {/* Картинка с ноутбуком — обрезаем лишний воздух сверху/снизу через scale + отрицательные отступы */}
+        <div className="-mt-2 sm:mt-4 overflow-hidden">
           <img
             src={heroLaptop}
             alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
             width={1024}
             height={1024}
-            className="mx-auto w-full max-w-md"
+            className="mx-auto w-full max-w-[260px] sm:max-w-md scale-110 -my-6 sm:my-0 sm:scale-100"
           />
         </div>
 
         {/* Кнопка */}
-        <div className="mt-2 sm:mt-4">
+        <div className="-mt-2 sm:mt-4">
           <WhatsAppButton />
-          <p className="mt-3 text-center text-xs text-muted-foreground">
+          <p className="mt-2 text-center text-xs text-muted-foreground">
             ​Записаться на диагностику в WhatsApp
           </p>
         </div>
