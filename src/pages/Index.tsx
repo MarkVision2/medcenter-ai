@@ -92,10 +92,10 @@ const Index = () => {
               медицинских центров, до эксперта, который создал систему, по которой мед. центры
               получают не просто заявки, а именно <span className="font-semibold">«платежеспособных» пациентов</span>.
             </p>
-            <p className="mt-4 text-base leading-relaxed sm:text-lg">
-              Я помогаю медицинским клиникам вырваться из замкнутого круга и выйти на доход
-              <span className="font-semibold"> от 500 000 тенге в день</span> через систему
-              «Врач на миллион» — ту самую систему, которая изменила жизнь уже{" "}
+            <p className="mt-4 text-base leading-relaxed sm:text-lg whitespace-pre-line">
+              Я помогаю медицинским клиникам вырваться из замкнутого круга и выйти на доход{" "}
+              <span className="font-semibold">от 500 000 тенге в день</span> через систему
+              «Врач на миллион» — ту самую систему, которая изменила жизнь уже{"\n"}
               <span className="font-semibold">25+ мед. центрам</span>.
             </p>
           </div>
@@ -192,11 +192,10 @@ const Index = () => {
       {/* 8. СУТЬ */}
       <Section tone="muted">
         <h2 className="text-center text-xl font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl">
-          Если ты хочешь забыть о работе за копейки и начать зарабатывать как топовый медицинский центр,
-          имея больше свободного времени и энергии —
+          ЕСЛИ ТЫ ХОЧЕШЬ ЗАБЫТЬ О РАБОТЕ ЗА КОПЕЙКИ И НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР, ИМЕЯ БОЛЬШЕ СВОБОДНОГО ВРЕМЕНИ И ЭНЕРГИИ 
         </h2>
-        <p className="mt-5 text-center text-base leading-relaxed sm:text-lg">
-          это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
+        <p className="mt-5 text-center leading-relaxed sm:text-lg text-lg">
+          Это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
           и дальше терять пациентов и деньги.
         </p>
       </Section>
@@ -213,13 +212,13 @@ const Index = () => {
         <ul className="mt-6 space-y-4">
           {[
             {
-              title: "Часовая консультация 1-на-1 со мной",
+              title: "Часовая консультация \n1-на-1 со мной",
               desc: "Покажу, как привлекать первичных пациентов с бюджетами от 500 000 тенге без бесконечного поиска и сарафанного радио",
               value: "150 000 тг",
             },
             {
               title: "Карта с пошаговым планом",
-              desc: "Как выйти на стабильный доход 300 000 – 600 000 тг в день, даже если сейчас зарабатываете в 5 раз меньше",
+              desc: "Как выйти на стабильный доход \n300 000 – 600 000 тг в день, даже если сейчас зарабатываете в 5 раз меньше",
               value: "80 000 тг",
             },
             {
@@ -242,8 +241,8 @@ const Index = () => {
                   {i + 1}
                 </span>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold leading-snug">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  <h3 className="text-lg font-semibold leading-snug whitespace-pre-line">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line">
                     {item.desc}
                   </p>
                   <p className="mt-3 text-sm font-semibold text-accent-deep">
