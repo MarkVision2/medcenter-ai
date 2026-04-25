@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -250,73 +250,104 @@ const Index = () => {
 
       {/* 9. ЧТО ПОЛУЧИТЕ */}
       <Section>
+        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+          <Gift className="h-3.5 w-3.5" />
+          4 шага диагностики
+        </div>
         <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
-          Что вы получите вместе с консультацией
+          Что вы получите вместе{"\n"}
+          <span className="text-accent-deep">с консультацией</span>
         </h2>
-        <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg">
-          Найдём все дыры, через которые утекают ваши пациенты и деньги.
+        <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg whitespace-pre-line">
+          Найдём все дыры, через которые утекают{"\n"}ваши пациенты и деньги.
         </p>
 
-        <ul className="mt-6 space-y-4">
+        <ul className="mt-7 space-y-4">
           {[
             {
-              title: "Часовая консультация \n1-на-1 со мной",
+              icon: MessageCircle,
+              title: "Часовая консультация 1-на-1 со мной",
               desc: "Покажу, как привлекать первичных пациентов с бюджетами от 500 000 тенге без бесконечного поиска и сарафанного радио",
-              value: "150 000 тг",
+              value: "150 000 ₸",
             },
             {
+              icon: Map,
               title: "Карта с пошаговым планом",
-              desc: "Как выйти на стабильный доход \n300 000 – 600 000 тг в день, даже если сейчас зарабатываете в 5 раз меньше",
-              value: "80 000 тг",
+              desc: "Как выйти на стабильный доход 300 000 – 600 000 ₸ в день, даже если сейчас зарабатываете в 5 раз меньше",
+              value: "80 000 ₸",
             },
             {
+              icon: BarChart3,
               title: "Анализ рекламы и каналов привлечения",
               desc: "Разберём текущие источники пациентов и точки утечки бюджета",
-              value: "60 000 тг",
+              value: "60 000 ₸",
             },
             {
+              icon: PhoneCall,
               title: "Тайный звонок",
               desc: "Прозвоним как пациент, запишем разговор, покажем, где администратор сливает заявки",
-              value: "50 000 тг",
+              value: "50 000 ₸",
             },
-          ].map((item, i) => (
-            <li
-              key={i}
-              className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6"
-            >
-              <div className="flex items-start gap-3">
-                <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground text-xs font-bold">
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <li
+                key={i}
+                className="group relative overflow-hidden rounded-2xl border bg-card p-5 shadow-sm transition-shadow hover:shadow-md sm:p-6"
+              >
+                <span className="absolute right-3 top-3 text-5xl font-black leading-none text-accent/10 sm:text-6xl">
                   {i + 1}
                 </span>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold leading-snug whitespace-pre-line">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line">
-                    {item.desc}
-                  </p>
-                  <p className="mt-3 text-sm font-semibold text-accent-deep">
-                    Ценность: {item.value}
-                  </p>
+                <div className="relative flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
+                    <Icon className="h-5 w-5" strokeWidth={2.5} />
+                  </span>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold leading-snug">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {item.desc}
+                    </p>
+                    <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-sm font-bold text-accent-deep">
+                      Ценность: {item.value}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
-        <div className="mt-8 rounded-2xl bg-banner p-6 text-white sm:p-8">
-          <div className="flex items-baseline justify-between gap-4">
-            <span className="text-base sm:text-lg">Общая ценность:</span>
-            <span className="text-xl font-bold line-through opacity-80 sm:text-2xl">
-              340 000 тг
-            </span>
+        <div className="mt-8 overflow-hidden rounded-2xl bg-banner text-white shadow-xl">
+          <div className="space-y-3 p-6 sm:p-8">
+            <div className="flex items-baseline justify-between gap-4">
+              <span className="text-base text-white/80 sm:text-lg">Общая ценность:</span>
+              <span className="text-xl font-bold line-through opacity-70 sm:text-2xl">
+                340 000 ₸
+              </span>
+            </div>
+            <div className="flex items-baseline justify-between gap-4">
+              <span className="text-base font-semibold text-highlight sm:text-lg">
+                Ваша экономия:
+              </span>
+              <span className="text-xl font-extrabold text-highlight sm:text-2xl">
+                −330 100 ₸
+              </span>
+            </div>
           </div>
-          <div className="mt-4 border-t border-white/20 pt-4 text-center">
-            <p className="text-sm uppercase tracking-wide text-white/80">
+
+          <div className="border-t border-white/20 bg-white/5 px-6 py-6 text-center sm:px-8">
+            <p className="text-xs font-semibold uppercase tracking-wider text-white/80">
               Стоимость диагностики сегодня
             </p>
-            <p className="mt-2 text-4xl font-extrabold text-highlight sm:text-5xl">9 900 ₸</p>
-          </div>
-          <div className="mt-6">
-            <WhatsAppButton label="Записаться на диагностику за 9 900 ₸" />
+            <p className="mt-2 text-5xl font-black leading-none text-highlight sm:text-6xl">
+              9 900 ₸
+            </p>
+            <p className="mt-3 text-sm text-white/70">
+              Окупится с первого пациента
+            </p>
+            <div className="mt-5">
+              <WhatsAppButton label="Записаться за 9 900 ₸" />
+            </div>
           </div>
         </div>
       </Section>
