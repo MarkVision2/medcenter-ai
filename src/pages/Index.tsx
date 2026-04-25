@@ -109,7 +109,7 @@ const Index = () => {
           Реальный кейс
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
-          Но почему я так уверен,{"\n"}
+          Но почему я так уверен,{" "}
           <span className="text-accent-deep">что эта система реально работает?</span>
         </h2>
 
