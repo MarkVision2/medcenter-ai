@@ -3,27 +3,48 @@ import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import yuriPhoto from "@/assets/yuri.png";
+import heroLaptop from "@/assets/hero-laptop.jpg";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO */}
       <Section className="pt-6 pb-8 sm:pt-10 sm:pb-12">
-        <Banner className="px-3 py-3 sm:px-4 sm:py-4 sm:text-base text-base">
-          Новая методика: для&nbsp;владельцев медицинских центров и&nbsp;врачей
-        </Banner>
+        {/* Красный баннер */}
+        <div className="rounded-md bg-destructive px-5 py-5 text-center sm:px-6 sm:py-6">
+          <p className="text-base font-bold italic text-highlight sm:text-xl md:text-2xl">
+            Проверенная методика:
+          </p>
+          <p className="mt-1 text-base font-bold text-white sm:text-xl md:text-2xl">
+            Для&nbsp;владельцев медицинских центров
+          </p>
+        </div>
 
-        <h1 className="mt-5 text-center text-2xl font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-8 sm:text-4xl md:text-5xl whitespace-pre-line">
+        {/* Главный заголовок */}
+        <h1 className="mt-8 text-center text-2xl font-extrabold uppercase leading-[1.15] tracking-tight sm:mt-10 sm:text-4xl md:text-5xl whitespace-pre-line">
           ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ,{"\n"}И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ ДОКТОРОВ
         </h1>
 
-        <div className="mt-5 sm:mt-8">
-          <Banner className="px-3 py-3 sm:px-4 sm:py-4 sm:text-base text-base">
+        {/* Синий баннер */}
+        <div className="mt-8 sm:mt-10">
+          <Banner className="px-3 py-4 sm:px-6 sm:py-6">
             Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
           </Banner>
         </div>
 
-        <div className="mt-5 sm:mt-8">
+        {/* Картинка с ноутбуком */}
+        <div className="mt-6 sm:mt-8">
+          <img
+            src={heroLaptop}
+            alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
+            width={1024}
+            height={1024}
+            className="mx-auto w-full max-w-md"
+          />
+        </div>
+
+        {/* Кнопка */}
+        <div className="mt-2 sm:mt-4">
           <WhatsAppButton />
           <p className="mt-3 text-center text-xs text-muted-foreground">
             ​Записаться на диагностику в WhatsApp
