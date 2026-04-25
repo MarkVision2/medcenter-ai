@@ -278,10 +278,10 @@ const Index = () => {
         <h2 className="text-center text-2xl font-bold sm:text-3xl">
           На рынке я не видел, чтобы так кто-то делал
         </h2>
-        <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
+        <p className="mt-4 text-center leading-relaxed sm:text-lg text-xl">
           Обычно это: <span className="italic">«Давайте больше рекламы настроим…»</span>
         </p>
-        <p className="mt-3 text-center text-base leading-relaxed sm:text-lg">
+        <p className="mt-3 text-center leading-relaxed sm:text-lg text-xl">
           А мы сначала закроем все дыры в воронке. Нет смысла лить больше воды в дырявое ведро.
         </p>
       </Section>
