@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "77472842595";
 const DEFAULT_MESSAGE =
@@ -31,10 +32,45 @@ const WhatsAppButton = ({
 }: WhatsAppButtonProps) => {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
+  const getCookie = (name: string): string | undefined => {
+    if (typeof document === "undefined") return undefined;
+    const match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+    return match ? decodeURIComponent(match[1]) : undefined;
+  };
+
   const handleClick = () => {
-    if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-      (window as any).fbq("track", "Lead");
+    if (typeof window === "undefined") return;
+
+    // Stable event_id so browser pixel and server CAPI events deduplicate.
+    const eventId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    // Browser Pixel (with eventID for deduplication)
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("track", "Lead", {}, { eventID: eventId });
     }
+
+    // Server-side Conversions API (fire-and-forget, must not block navigation)
+    const fbp = getCookie("_fbp");
+    const fbc = getCookie("_fbc");
+
+    supabase.functions
+      .invoke("meta-capi-lead", {
+        body: {
+          event_id: eventId,
+          event_name: "Lead",
+          event_source_url: window.location.href,
+          user_agent: navigator.userAgent,
+          fbp,
+          fbc,
+        },
+      })
+      .catch((err) => {
+        console.error("Meta CAPI invoke failed", err);
+      });
   };
 
   return (
