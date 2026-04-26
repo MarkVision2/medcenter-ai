@@ -67,15 +67,31 @@ Deno.serve(async (req) => {
 
     const eventTime = Math.floor(Date.now() / 1000);
 
+    const eventName = body.event_name || "Lead";
+
     const payload = {
       data: [
         {
-          event_name: body.event_name || "Lead",
+          event_name: eventName,
           event_time: eventTime,
           event_id: body.event_id,
           action_source: "website",
           event_source_url: body.event_source_url,
           user_data: userData,
+          attribution_data: {
+            attribution_share: "0.3",
+          },
+          custom_data: {
+            currency: "KZT",
+            value: "0",
+            lead_event_source: "whatsapp_button",
+            content_name: "Диагностика медцентра",
+            content_category: "lead",
+          },
+          original_event_data: {
+            event_name: eventName,
+            event_time: eventTime,
+          },
         },
       ],
     };
