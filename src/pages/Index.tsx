@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2 } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -99,26 +99,75 @@ const Index = () => {
 
       {/* 4. ОБО МНЕ */}
       <Section tone="muted">
-        <div className="flex flex-col items-center text-center">
-          <img
-            src={yuriPhoto}
-            alt="Юрий — автор системы «Врач на миллион»"
-            className="w-full max-w-sm shrink-0 rounded-2xl object-contain shadow-lg"
-          />
+        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+          <BadgeCheck className="h-3.5 w-3.5" />
+          Знакомство
+        </div>
 
-          <div className="mt-5 max-w-2xl">
-            <h2 className="text-2xl font-bold sm:text-3xl">Привет, меня зовут Юрий</h2>
+        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10">
+          {/* Фото + подпись */}
+          <div className="relative mx-auto w-full max-w-sm md:mx-0">
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-accent-deep/20 blur-xl" aria-hidden="true" />
+            <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
+              <img
+                src={yuriPhoto}
+                alt="Юрий — автор системы «Врач на миллион»"
+                className="block w-full object-cover"
+              />
+              <div className="border-t bg-card px-4 py-3">
+                <p className="text-sm font-bold leading-tight">Юрий</p>
+                <p className="text-xs text-muted-foreground">
+                  Автор системы «Врач на миллион»
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Текст */}
+          <div>
+            <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left">
+              Привет, меня зовут{" "}
+              <span className="text-accent-deep">Юрий</span>
+            </h2>
+
             <p className="mt-4 text-base leading-relaxed sm:text-lg">
               Я прошёл путь от маркетолога, который запускает рекламу для стоматологий и
               медицинских центров, до эксперта, который создал систему, по которой мед. центры
-              получают не просто заявки, а именно <span className="font-semibold">«платежеспособных» пациентов</span>.
+              получают не просто заявки, а именно{" "}
+              <span className="font-semibold">«платежеспособных» пациентов</span>.
             </p>
-            <p className="mt-4 text-base leading-relaxed sm:text-lg whitespace-pre-line">
+
+            <p className="mt-4 text-base leading-relaxed sm:text-lg">
               Я помогаю медицинским клиникам вырваться из замкнутого круга и выйти на доход{" "}
-              <span className="font-semibold">от 500 000 тенге в день</span> через систему
-              «Врач на миллион» — ту самую систему, которая изменила жизнь уже{"\n"}
+              <span className="font-semibold text-accent-deep">от 500 000 тенге в день</span>{" "}
+              через систему «Врач на миллион» — ту самую систему, которая изменила жизнь уже{" "}
               <span className="font-semibold">25+ мед. центрам</span>.
             </p>
+
+            {/* Метрики */}
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
+                <Building2 className="mx-auto h-5 w-5 text-accent-deep" />
+                <p className="mt-2 text-xl font-extrabold sm:text-2xl">25+</p>
+                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
+                  мед. центров
+                </p>
+              </div>
+              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
+                <TrendingUp className="mx-auto h-5 w-5 text-accent-deep" />
+                <p className="mt-2 text-xl font-extrabold sm:text-2xl">500к+</p>
+                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
+                  тг в день
+                </p>
+              </div>
+              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
+                <Award className="mx-auto h-5 w-5 text-accent-deep" />
+                <p className="mt-2 text-xl font-extrabold sm:text-2xl">7+</p>
+                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
+                  лет в нише
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
