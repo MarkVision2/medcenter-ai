@@ -31,6 +31,12 @@ const WhatsAppButton = ({
 }: WhatsAppButtonProps) => {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
 
+  const handleClick = () => {
+    if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+      (window as any).fbq("track", "Lead");
+    }
+  };
+
   return (
     <Button
       asChild
@@ -42,7 +48,7 @@ const WhatsAppButton = ({
         className,
       )}
     >
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a href={href} target="_blank" rel="noopener noreferrer" onClick={handleClick}>
         <WhatsAppIcon />
         <span>{label}</span>
       </a>
