@@ -1,34 +1,27 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Phone, Building2, Stethoscope, ArrowRight, Loader2 } from "lucide-react";
+import { User, Phone, Building2, ArrowRight, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
-const NICHES = [
+const NICHES: string[] = [
   "Многопрофильная клиника",
   "Стоматология",
   "Косметология / эстетическая медицина",
   "Гинекология / репродуктология",
-  "Педиатрия",
   "Урология / андрология",
   "Ортопедия / травматология",
   "Реабилитация / физиотерапия",
-  "Диагностика (УЗИ, МРТ, КТ)",
-  "Другое",
+  "Диагностика (УЗИ / МРТ / КТ)",
 ];
+const OTHER_VALUE = "Другое";
 
 const formSchema = z.object({
   name: z
