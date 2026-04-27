@@ -11,6 +11,7 @@ interface LeadInput {
   phone?: string;
   clinic?: string;
   niche?: string;
+  project_id?: string;
   event_id?: string;
   fbp?: string;
   fbc?: string;
@@ -56,6 +57,7 @@ Deno.serve(async (req) => {
 
     const body = (await req.json().catch(() => ({}))) as LeadInput;
 
+    const project_id = body.project_id || "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
     const name = (body.name ?? "").trim();
     const phone = (body.phone ?? "").trim();
     const clinic = (body.clinic ?? "").trim();
@@ -82,17 +84,23 @@ Deno.serve(async (req) => {
     const userAgent = body.user_agent || req.headers.get("user-agent") || "";
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-    const { error: dbError } = await supabase.from("diagnostic_leads").insert({
+    
+    // Вставляем лид в основную таблицу CRM 'leads'
+    const { error: dbError } = await supabase.from("leads").insert({
+      project_id,
       name,
       phone,
-      clinic,
-      niche,
-      source: "landing",
-      user_agent: userAgent || null,
-      referrer: body.referrer || null,
-      fbp: body.fbp || null,
-      fbc: body.fbc || null,
-      meta_event_id: eventId,
+      source: "landing_diagnostic",
+      status: "new",
+      metadata: {
+        clinic,
+        niche,
+        user_agent: userAgent || null,
+        referrer: body.referrer || null,
+        fbp: body.fbp || null,
+        fbc: body.fbc || null,
+        meta_event_id: eventId,
+      },
     });
 
     if (dbError) {

@@ -149,6 +149,7 @@ const DiagnosticForm = () => {
             phone: parsed.data.phone,
             clinic: parsed.data.clinic,
             niche: parsed.data.niche,
+            project_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
             event_id: eventId,
             fbp,
             fbc,
