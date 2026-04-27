@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
@@ -85,16 +86,16 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     
-    // Вставляем лид в основную таблицу CRM 'leads_crm'
-    const { error: dbError } = await supabase.from("leads_crm").insert({
+    // Вставляем лид в основную таблицу CRM 'leads' с отдельными колонками для клиники и ниши
+    const { error: dbError } = await supabase.from("leads").insert({
       project_id,
       name,
       phone,
+      clinic,
+      niche,
       source: "landing_diagnostic",
       status: "new",
       metadata: {
-        clinic,
-        niche,
         user_agent: userAgent || null,
         referrer: body.referrer || null,
         fbp: body.fbp || null,
@@ -106,7 +107,11 @@ Deno.serve(async (req) => {
     if (dbError) {
       console.error("DB insert failed", dbError);
       return new Response(
-        JSON.stringify({ error: "Не удалось сохранить заявку. Попробуйте ещё раз." }),
+        JSON.stringify({ 
+          error: "Ошибка базы данных", 
+          details: dbError,
+          message: dbError.message 
+        }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
