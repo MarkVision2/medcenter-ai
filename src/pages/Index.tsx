@@ -46,9 +46,9 @@ const Index = () => {
 
         {/* Кнопка */}
         <div className="mt-1 sm:mt-4">
-          <WhatsAppButton />
+          <ScrollToFormButton />
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            ​Записаться на диагностику в WhatsApp
+            Заполните форму ниже — это займёт 30 секунд
           </p>
         </div>
       </Section>
