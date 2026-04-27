@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -289,50 +289,49 @@ const DiagnosticForm = () => {
         <Label className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
           Ваше направление (основной источник дохода) <span className="text-destructive">*</span>
         </Label>
-        <RadioGroup
+        
+        <Select
           value={niche}
           onValueChange={(v) => {
             setNiche(v);
             if (v !== OTHER_VALUE) setNicheOther("");
           }}
-          className={cn(
-            "rounded-xl border bg-muted/30 p-3 space-y-1",
-            errors.niche ? "border-destructive" : "border-input",
-          )}
-          aria-invalid={!!errors.niche}
-          aria-describedby={errors.niche ? "lead-niche-err" : undefined}
         >
-          {NICHES.map((n) => {
-            const id = `niche-${n}`;
-            return (
-              <div key={n} className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
-                <RadioGroupItem id={id} value={n} />
-                <Label htmlFor={id} className="cursor-pointer text-sm font-normal leading-snug flex-1">
-                  {n}
-                </Label>
-              </div>
-            );
-          })}
-          <div className="flex items-start gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
-            <RadioGroupItem id="niche-other" value={OTHER_VALUE} className="mt-2.5" />
-            <div className="flex-1 space-y-2">
-              <Label htmlFor="niche-other" className="cursor-pointer text-sm font-normal leading-snug">
-                Другое
-              </Label>
-              {niche === OTHER_VALUE && (
-                <Input
-                  type="text"
-                  placeholder="Укажите ваше направление"
-                  value={nicheOther}
-                  onChange={(e) => setNicheOther(e.target.value)}
-                  maxLength={100}
-                  className="h-10 rounded-lg bg-background"
-                  aria-label="Укажите направление"
-                />
-              )}
-            </div>
+          <SelectTrigger 
+            className={cn(
+              inputBase, 
+              "w-full bg-background",
+              errors.niche && "border-destructive focus:ring-destructive"
+            )}
+            aria-invalid={!!errors.niche}
+            aria-describedby={errors.niche ? "lead-niche-err" : undefined}
+          >
+            <SelectValue placeholder="Выберите направление" />
+          </SelectTrigger>
+          <SelectContent>
+            {NICHES.map((n) => (
+              <SelectItem key={n} value={n}>
+                {n}
+              </SelectItem>
+            ))}
+            <SelectItem value={OTHER_VALUE}>Другое</SelectItem>
+          </SelectContent>
+        </Select>
+
+        {niche === OTHER_VALUE && (
+          <div className="mt-3 animate-fade-in">
+            <Input
+              type="text"
+              placeholder="Укажите ваше направление"
+              value={nicheOther}
+              onChange={(e) => setNicheOther(e.target.value)}
+              maxLength={100}
+              className={cn(inputBase, "w-full bg-background")}
+              aria-label="Укажите направление"
+            />
           </div>
-        </RadioGroup>
+        )}
+
         {errors.niche && (
           <p id="lead-niche-err" className="text-xs text-destructive">{errors.niche}</p>
         )}

@@ -16,14 +16,17 @@ const Banner = ({ children, className, italic = true }: BannerProps) => {
   return (
     <div
       className={cn(
-        "rounded-md bg-banner px-5 py-5 text-center sm:px-6 sm:py-6",
+        "relative overflow-hidden rounded-xl bg-banner px-5 py-5 text-center sm:px-6 sm:py-6",
         "text-banner-foreground font-extrabold uppercase",
         "text-sm leading-tight sm:text-xl md:text-2xl",
+        "shadow-lg shadow-banner/20",
         italic && "italic",
         className,
       )}
     >
-      {children}
+      {/* Shimmer overlay for attention */}
+      <div className="absolute inset-0 animate-shimmer pointer-events-none" aria-hidden="true" />
+      <span className="relative">{children}</span>
     </div>
   );
 };

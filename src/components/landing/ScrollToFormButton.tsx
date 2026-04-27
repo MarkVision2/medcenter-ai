@@ -33,12 +33,15 @@ const ScrollToFormButton = ({
           variant={variant}
           size="cta"
           className={cn(
-            "font-semibold leading-tight whitespace-normal text-center w-full",
+            "font-semibold leading-tight whitespace-normal text-center w-full group relative overflow-hidden",
+            "animate-pulse-soft hover:animate-none",
             className,
           )}
         >
-          <span>{label}</span>
-          <ArrowRight className="h-5 w-5" />
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            <span>{label}</span>
+            <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+          </span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg max-h-[92vh] overflow-y-auto p-5 sm:p-7 rounded-2xl">
