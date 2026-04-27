@@ -1,34 +1,27 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Phone, Building2, Stethoscope, ArrowRight, Loader2 } from "lucide-react";
+import { User, Phone, Building2, ArrowRight, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
-const NICHES = [
+const NICHES: string[] = [
   "Многопрофильная клиника",
   "Стоматология",
   "Косметология / эстетическая медицина",
   "Гинекология / репродуктология",
-  "Педиатрия",
   "Урология / андрология",
   "Ортопедия / травматология",
   "Реабилитация / физиотерапия",
-  "Диагностика (УЗИ, МРТ, КТ)",
-  "Другое",
+  "Диагностика (УЗИ / МРТ / КТ)",
 ];
+const OTHER_VALUE = "Другое";
 
 const formSchema = z.object({
   name: z
@@ -88,6 +81,7 @@ const DiagnosticForm = () => {
   const [phone, setPhone] = useState("");
   const [clinic, setClinic] = useState("");
   const [niche, setNiche] = useState("");
+  const [nicheOther, setNicheOther] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -96,7 +90,20 @@ const DiagnosticForm = () => {
     e.preventDefault();
     if (submitting) return;
 
-    const parsed = formSchema.safeParse({ name, phone, clinic, niche, agreement });
+    const finalNiche =
+      niche === OTHER_VALUE
+        ? nicheOther.trim()
+          ? `Другое: ${nicheOther.trim()}`
+          : ""
+        : niche;
+
+    const parsed = formSchema.safeParse({
+      name,
+      phone,
+      clinic,
+      niche: finalNiche,
+      agreement,
+    });
     if (!parsed.success) {
       const fieldErrors: FieldErrors = {};
       for (const issue of parsed.error.issues) {
@@ -279,31 +286,53 @@ const DiagnosticForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="lead-niche" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Ниша / направление <span className="text-destructive">*</span>
+        <Label className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+          Ваше направление (основной источник дохода) <span className="text-destructive">*</span>
         </Label>
-        <Select value={niche} onValueChange={setNiche}>
-          <SelectTrigger
-            id="lead-niche"
-            className={cn(
-              "h-12 rounded-xl bg-muted/50 border-input pl-11 text-base relative",
-              !niche && "text-muted-foreground/70",
-              errors.niche && "border-destructive focus:ring-destructive",
-            )}
-            aria-invalid={!!errors.niche}
-            aria-describedby={errors.niche ? "lead-niche-err" : undefined}
-          >
-            <Stethoscope className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-            <SelectValue placeholder="Выберите направление" />
-          </SelectTrigger>
-          <SelectContent>
-            {NICHES.map((n) => (
-              <SelectItem key={n} value={n}>
-                {n}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <RadioGroup
+          value={niche}
+          onValueChange={(v) => {
+            setNiche(v);
+            if (v !== OTHER_VALUE) setNicheOther("");
+          }}
+          className={cn(
+            "rounded-xl border bg-muted/30 p-3 space-y-1",
+            errors.niche ? "border-destructive" : "border-input",
+          )}
+          aria-invalid={!!errors.niche}
+          aria-describedby={errors.niche ? "lead-niche-err" : undefined}
+        >
+          {NICHES.map((n) => {
+            const id = `niche-${n}`;
+            return (
+              <div key={n} className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
+                <RadioGroupItem id={id} value={n} />
+                <Label htmlFor={id} className="cursor-pointer text-sm font-normal leading-snug flex-1">
+                  {n}
+                </Label>
+              </div>
+            );
+          })}
+          <div className="flex items-start gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
+            <RadioGroupItem id="niche-other" value={OTHER_VALUE} className="mt-2.5" />
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="niche-other" className="cursor-pointer text-sm font-normal leading-snug">
+                Другое
+              </Label>
+              {niche === OTHER_VALUE && (
+                <Input
+                  type="text"
+                  placeholder="Укажите ваше направление"
+                  value={nicheOther}
+                  onChange={(e) => setNicheOther(e.target.value)}
+                  maxLength={100}
+                  className="h-10 rounded-lg bg-background"
+                  aria-label="Укажите направление"
+                />
+              )}
+            </div>
+          </div>
+        </RadioGroup>
         {errors.niche && (
           <p id="lead-niche-err" className="text-xs text-destructive">{errors.niche}</p>
         )}
@@ -319,7 +348,7 @@ const DiagnosticForm = () => {
         />
         <div>
           <Label htmlFor="lead-agreement" className="cursor-pointer text-sm leading-snug font-normal">
-            Я подтверждаю, что являюсь владельцем или руководителем клиники
+            Я владелец / принимаю решения в клинике
             <span className="text-destructive"> *</span>
           </Label>
           {errors.agreement && (
