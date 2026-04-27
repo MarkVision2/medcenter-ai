@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      diagnostic_leads: {
+        Row: {
+          clinic: string
+          created_at: string
+          fbc: string | null
+          fbp: string | null
+          id: string
+          meta_event_id: string | null
+          name: string
+          niche: string
+          phone: string
+          referrer: string | null
+          source: string
+          user_agent: string | null
+        }
+        Insert: {
+          clinic: string
+          created_at?: string
+          fbc?: string | null
+          fbp?: string | null
+          id?: string
+          meta_event_id?: string | null
+          name: string
+          niche: string
+          phone: string
+          referrer?: string | null
+          source?: string
+          user_agent?: string | null
+        }
+        Update: {
+          clinic?: string
+          created_at?: string
+          fbc?: string | null
+          fbp?: string | null
+          id?: string
+          meta_event_id?: string | null
+          name?: string
+          niche?: string
+          phone?: string
+          referrer?: string | null
+          source?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
