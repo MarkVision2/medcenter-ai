@@ -1,8 +1,7 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, ClipboardCheck } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2 } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
-import DiagnosticForm from "@/components/landing/DiagnosticForm";
 import yuriPhoto from "@/assets/yuri.png";
 import heroLaptop from "@/assets/hero-laptop.png";
 
@@ -556,32 +555,7 @@ const Index = () => {
         </div>
       </Section>
 
-      {/* 15. БРОНИРОВАНИЕ ДИАГНОСТИКИ — ФОРМА */}
-      <Section tone="muted" className="scroll-mt-4" id="diagnostic-form">
-        <div className="mx-auto max-w-2xl">
-          <div className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-accent-deep">
-              <ClipboardCheck className="h-3.5 w-3.5" />
-              Бронирование диагностики
-            </span>
-            <h2 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">
-              Запишитесь на диагностику медцентра
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Если вы руководитель медицинской клиники и хотите{" "}
-              <span className="font-semibold text-foreground">увеличить выручку</span>{" "}
-              и обойти конкурентов — записывайтесь на диагностику. Разберём вашу клинику
-              и покажем, где вы теряете деньги.
-            </p>
-          </div>
-
-          <div className="mt-7 rounded-3xl border bg-background p-5 shadow-sm sm:p-7">
-            <DiagnosticForm />
-          </div>
-        </div>
-      </Section>
-
-      {/* 16. ФИНАЛ */}
+      {/* 15. ФИНАЛ */}
       <Section>
         <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
           В медицинском бизнесе есть два типа клиник
