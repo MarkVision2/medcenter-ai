@@ -81,6 +81,7 @@ const DiagnosticForm = () => {
   const [phone, setPhone] = useState("");
   const [clinic, setClinic] = useState("");
   const [niche, setNiche] = useState("");
+  const [nicheOther, setNicheOther] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -89,7 +90,20 @@ const DiagnosticForm = () => {
     e.preventDefault();
     if (submitting) return;
 
-    const parsed = formSchema.safeParse({ name, phone, clinic, niche, agreement });
+    const finalNiche =
+      niche === OTHER_VALUE
+        ? nicheOther.trim()
+          ? `Другое: ${nicheOther.trim()}`
+          : ""
+        : niche;
+
+    const parsed = formSchema.safeParse({
+      name,
+      phone,
+      clinic,
+      niche: finalNiche,
+      agreement,
+    });
     if (!parsed.success) {
       const fieldErrors: FieldErrors = {};
       for (const issue of parsed.error.issues) {
