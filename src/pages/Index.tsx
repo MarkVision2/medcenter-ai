@@ -1,7 +1,8 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2 } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, ClipboardCheck } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
-import WhatsAppButton from "@/components/landing/WhatsAppButton";
+import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
+import DiagnosticForm from "@/components/landing/DiagnosticForm";
 import yuriPhoto from "@/assets/yuri.png";
 import heroLaptop from "@/assets/hero-laptop.png";
 
