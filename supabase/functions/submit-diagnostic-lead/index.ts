@@ -85,8 +85,8 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     
-    // Вставляем лид в основную таблицу CRM 'leads'
-    const { error: dbError } = await supabase.from("leads").insert({
+    // Вставляем лид в основную таблицу CRM 'leads_crm'
+    const { error: dbError } = await supabase.from("leads_crm").insert({
       project_id,
       name,
       phone,
