@@ -94,7 +94,7 @@ const Index = () => {
         </p>
         <div className="mt-6 text-center text-3xl">​</div>
         <div className="mt-3">
-          <WhatsAppButton />
+          <ScrollToFormButton />
         </div>
       </Section>
 
@@ -417,7 +417,7 @@ const Index = () => {
               Окупится с первого пациента
             </p>
             <div className="mt-5">
-              <WhatsAppButton label="Записаться за 9 900 ₸" />
+              <ScrollToFormButton label="Записаться за 9 900 ₸" />
             </div>
           </div>
         </div>
@@ -526,7 +526,7 @@ const Index = () => {
         </div>
 
         <div className="mt-6">
-          <WhatsAppButton
+          <ScrollToFormButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
             className="uppercase"
