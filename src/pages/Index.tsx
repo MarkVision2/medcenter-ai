@@ -217,10 +217,10 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Target className="mx-auto h-5 w-5 text-highlight" />
                   <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
-                    830 000 ₸
+                    830 000
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Расходы на рекламу
+                    Расходы на рекламу, тг.
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-4">
@@ -253,19 +253,19 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Coins className="mx-auto h-5 w-5 text-highlight" />
                   <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
-                    350 000 ₸
+                    350 000
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Средний чек
+                    Средний чек, тг.
                   </p>
                 </div>
-                <div className="rounded-xl bg-white/20 p-4 border border-white/20 col-span-2 sm:col-span-1">
+                <div className="rounded-xl bg-white/20 p-4 border border-white/20">
                   <Wallet className="mx-auto h-5 w-5 text-highlight" />
                   <p className="mt-2 text-xl font-extrabold leading-none text-highlight sm:text-2xl">
-                    +13 000 000 ₸
+                    +13 000 000
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Выручка в кассу
+                    Выручка в кассу, тг.
                   </p>
                 </div>
               </div>
@@ -296,8 +296,9 @@ const Index = () => {
             За 3 месяца
           </p>
           <p className="mt-4 text-4xl font-extrabold leading-none text-highlight sm:text-6xl">
-            60 000 000 ₸
+            60 000 000
           </p>
+          <p className="mt-1 text-sm font-semibold text-highlight/80">тенге</p>
           <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
             Выстроили стабильную систему привлечения первичных пациентов и их удержания -{" "}
             <span className="font-semibold text-white">без участия собственника клиники</span>.
@@ -373,25 +374,25 @@ const Index = () => {
               icon: MessageCircle,
               title: "Часовая диагностика 1-на-1 со мной",
               desc: "Покажу, как привлекать первичных пациентов на платную диагностику и дорогостоящие процедуры без бесконечного поиска и сарафанного радио",
-              value: "150 000 ₸",
+              value: "150 000 тг.",
             },
             {
               icon: Map,
               title: "Карта с пошаговым планом",
               desc: "Как выйти на стабильный доход от 300 000 тенге в день, даже если сейчас зарабатываете в 5 раз меньше",
-              value: "80 000 ₸",
+              value: "80 000 тг.",
             },
             {
               icon: BarChart3,
               title: "Анализ рекламы и каналов",
               desc: "Разберём текущие источники и каналы привлечения пациентов и найдем точки потери вашего рекламного бюджета",
-              value: "60 000 ₸",
+              value: "60 000 тг.",
             },
             {
               icon: PhoneCall,
               title: "Тайный звонок",
               desc: "Прозвоним как пациент, запишем разговор, покажем, где администратор теряет заявки",
-              value: "50 000 ₸",
+              value: "50 000 тг.",
             },
           ].map((item, i) => {
             const Icon = item.icon;
@@ -435,7 +436,7 @@ const Index = () => {
             {/* Header */}
             <div className="bg-road-good px-6 py-4 text-center">
               <p className="flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest text-white sm:text-base">
-                <span>👈</span> РАБОТАЕМ ТОЛЬКО С 1 МЕДЦЕНТРОМ В ГОРОДЕ
+                РАБОТАЕМ ТОЛЬКО С 1 МЕДЦЕНТРОМ В ГОРОДЕ
               </p>
             </div>
 
@@ -450,11 +451,11 @@ const Index = () => {
 
                 <ul className="space-y-4">
                   {[
-                    { label: "60-90 минут плотной работы над бизнесом", price: "35 000 ₸" },
-                    { label: "Пошаговый план роста вашего центра", price: "15 000 ₸" },
-                    { label: "Разбор всех каналов привлечения пациентов", price: "10 000 ₸" },
-                    { label: "Скрипты продаж для администраторов", price: "15 000 ₸" },
-                    { label: "Расчёт - сколько вы теряете и как это исправить", price: "5 000 ₸" },
+                    { label: "60-90 минут плотной работы над бизнесом", price: "35 000 тг." },
+                    { label: "Пошаговый план роста вашего центра", price: "15 000 тг." },
+                    { label: "Разбор всех каналов привлечения пациентов", price: "10 000 тг." },
+                    { label: "Скрипты продаж для администраторов", price: "15 000 тг." },
+                    { label: "Расчёт - сколько вы теряете и как это исправить", price: "5 000 тг." },
                   ].map((item, i) => (
                     <li key={i} className="flex items-center justify-between gap-4 border-b border-dashed pb-3 last:border-0">
                       <div className="flex items-center gap-3">
@@ -470,7 +471,7 @@ const Index = () => {
 
                 <div className="flex items-center justify-between border-t-2 pt-6">
                   <span className="text-lg font-black uppercase tracking-widest">ОБЩАЯ ЦЕННОСТЬ:</span>
-                  <span className="text-xl font-bold text-muted-foreground/50 line-through">80 000 ₸</span>
+                  <span className="text-xl font-bold text-muted-foreground/50 line-through">80 000 тг.</span>
                 </div>
               </div>
             </div>
@@ -480,7 +481,7 @@ const Index = () => {
               <p className="text-base font-medium text-muted-foreground sm:text-lg">Ваша инвестиция сегодня:</p>
               <div className="mt-4 flex items-center justify-center gap-3">
                 <span className="text-6xl font-black leading-none text-banner sm:text-8xl">9 900</span>
-                <span className="text-3xl font-bold text-banner sm:text-5xl">₸</span>
+                <span className="text-3xl font-bold text-banner sm:text-5xl ml-1">тг.</span>
               </div>
 
               <div className="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-orange-100 px-6 py-2.5 text-sm font-bold text-orange-700 ring-1 ring-orange-200">
@@ -509,16 +510,6 @@ const Index = () => {
                   label="Записаться на диагностику"
                   className="py-8 text-lg rounded-2xl shadow-2xl shadow-orange-500/20"
                 />
-                <div className="mt-4 flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60 sm:text-xs">
-                  <div className="flex items-center gap-1.5">
-                    <Check className="h-3.5 w-3.5 text-road-good" strokeWidth={3} />
-                    Осталось 3 места
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <MessageCircle className="h-3.5 w-3.5 text-road-good" />
-                    Ответ в WhatsApp за 10 минут
-                  </div>
-                </div>
               </div>
             </div>
           </div>
