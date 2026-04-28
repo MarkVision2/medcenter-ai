@@ -1,12 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Phone, Building2, ArrowRight, Loader2 } from "lucide-react";
+import { User, Phone, Building2, ArrowRight, Loader2, ChevronDown } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -83,6 +84,7 @@ const DiagnosticForm = () => {
   const [niche, setNiche] = useState("");
   const [nicheOther, setNicheOther] = useState("");
   const [agreement, setAgreement] = useState(false);
+  const [nicheOpen, setNicheOpen] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -291,33 +293,65 @@ const DiagnosticForm = () => {
           Ваше направление (основной источник дохода) <span className="text-destructive">*</span>
         </Label>
         
-        <Select
-          value={niche}
-          onValueChange={(v) => {
-            setNiche(v);
-            if (v !== OTHER_VALUE) setNicheOther("");
-          }}
-        >
-          <SelectTrigger 
-            className={cn(
-              inputBase, 
-              "w-full bg-background",
-              errors.niche && "border-destructive focus:ring-destructive"
-            )}
-            aria-invalid={!!errors.niche}
-            aria-describedby={errors.niche ? "lead-niche-err" : undefined}
-          >
-            <SelectValue placeholder="Выберите направление" />
-          </SelectTrigger>
-          <SelectContent>
-            {NICHES.map((n) => (
-              <SelectItem key={n} value={n}>
-                {n}
-              </SelectItem>
-            ))}
-            <SelectItem value={OTHER_VALUE}>Другое</SelectItem>
-          </SelectContent>
-        </Select>
+        <Popover open={nicheOpen} onOpenChange={setNicheOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              role="combobox"
+              className={cn(
+                inputBase,
+                "w-full bg-background flex items-center justify-between pl-11 pr-4 font-normal",
+                !niche && "text-muted-foreground/70",
+                errors.niche && "border-destructive focus:ring-destructive"
+              )}
+              aria-invalid={!!errors.niche}
+              aria-describedby={errors.niche ? "lead-niche-err" : undefined}
+            >
+              <span className="truncate">
+                {niche || "Выберите направление"}
+              </span>
+              <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-2 rounded-2xl shadow-xl border-accent-soft" align="start">
+            <RadioGroup
+              value={niche}
+              onValueChange={(v) => {
+                setNiche(v);
+                if (v !== OTHER_VALUE) {
+                  setNicheOther("");
+                  setNicheOpen(false);
+                }
+              }}
+              className="gap-0"
+            >
+              {NICHES.map((n) => (
+                <Label
+                  key={n}
+                  htmlFor={`niche-${n}`}
+                  className={cn(
+                    "flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-colors hover:bg-muted/50",
+                    niche === n && "bg-accent-soft/50"
+                  )}
+                >
+                  <RadioGroupItem value={n} id={`niche-${n}`} className="border-accent" />
+                  <span className="text-sm font-medium leading-none">{n}</span>
+                </Label>
+              ))}
+              <Label
+                htmlFor={`niche-${OTHER_VALUE}`}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-colors hover:bg-muted/50",
+                  niche === OTHER_VALUE && "bg-accent-soft/50"
+                )}
+              >
+                <RadioGroupItem value={OTHER_VALUE} id={`niche-${OTHER_VALUE}`} className="border-accent" />
+                <span className="text-sm font-medium leading-none">Другое</span>
+              </Label>
+            </RadioGroup>
+          </PopoverContent>
+        </Popover>
 
         {niche === OTHER_VALUE && (
           <div className="mt-3 animate-fade-in">

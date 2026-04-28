@@ -111,6 +111,14 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "count-bounce": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.12)" },
+        },
+        "float-badge": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -119,6 +127,8 @@ export default {
         "fade-in": "fade-in 0.5s ease-out both",
         "pulse-soft": "pulse-soft 2.5s ease-in-out infinite",
         shimmer: "shimmer 2.5s ease-in-out infinite",
+        "count-bounce": "count-bounce 0.6s ease-out",
+        "float-badge": "float-badge 3s ease-in-out infinite",
       },
     },
   },
