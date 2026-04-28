@@ -46,9 +46,6 @@ const Index = () => {
         {/* Кнопка */}
         <div className="mt-1 sm:mt-4">
           <ScrollToFormButton />
-          <p className="mt-2 text-center text-xs text-muted-foreground">
-            Заполните форму ниже — это займёт 30 секунд
-          </p>
         </div>
       </Section>
 
