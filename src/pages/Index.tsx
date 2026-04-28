@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Check, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Clock, Target, Zap, HeartPulse, Coins } from "lucide-react";
+import { Check, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Clock, Target, Zap, HeartPulse, Coins, ShieldCheck, Flame, ArrowRight } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
@@ -220,7 +220,7 @@ const Index = () => {
                     830 000 ₸
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Бюджет на рекламу
+                    Расходы на рекламу
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-4">
@@ -229,7 +229,7 @@ const Index = () => {
                     415
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Лидов с рекламы
+                    Заявок с рекламы
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-4">
@@ -244,19 +244,10 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Users className="mx-auto h-5 w-5 text-highlight" />
                   <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
-                    112
-                  </p>
-                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Новых пациентов
-                  </p>
-                </div>
-                <div className="rounded-xl bg-white/10 p-4">
-                  <BadgeCheck className="mx-auto h-5 w-5 text-highlight" />
-                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
                     29
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
-                    Продажи лечения
+                    Новых пациентов
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-4">
@@ -268,13 +259,13 @@ const Index = () => {
                     Средний чек
                   </p>
                 </div>
-                <div className="col-span-2 sm:col-span-3 rounded-xl bg-white/20 p-4 border border-white/20">
-                  <Wallet className="mx-auto h-6 w-6 text-highlight" />
-                  <p className="mt-2 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
+                <div className="rounded-xl bg-white/20 p-4 border border-white/20 col-span-2 sm:col-span-1">
+                  <Wallet className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none text-highlight sm:text-2xl">
                     +13 000 000 ₸
                   </p>
-                  <p className="mt-2 text-sm font-bold text-white uppercase tracking-widest">
-                    Чистая выручка в кассу
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Выручка в кассу
                   </p>
                 </div>
               </div>
@@ -319,13 +310,13 @@ const Index = () => {
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-6 sm:p-8 shadow-lg shadow-destructive/5">
           <h2 className="text-center text-2xl font-extrabold sm:text-3xl">Никакого подвоха нет.</h2>
           <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Мы проводим консультации, чтобы показать <span className="font-bold">вам свой</span> метод
+            Мы проводим диагностики, чтобы показать <span className="font-bold">вам свой</span> метод
             ежедневного привлечения премиум-пациентов на услуги имплантов, виниров и т.д.
           </p>
           <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Если после консультации вы захотите, <span className="font-bold">чтобы мы помогли</span> выйти на
+            Если после диагностики вы захотите, <span className="font-bold">чтобы мы помогли</span> выйти на
             доход от 500 000 тенге в день с помощью моего метода - то сможете продолжить работу со мной
-            на платной основе. Консультация вас ни к чему не обязывает.
+            на платной основе. Диагностика вас ни к чему не обязывает.
           </p>
           <p className="mt-5 text-center text-lg font-bold sm:text-xl">Да-да, нет-нет.</p>
           <p className="mt-2 text-center text-lg font-bold sm:text-xl">ВСЁ по ЧЕСТНОМУ 🤝</p>
@@ -370,7 +361,7 @@ const Index = () => {
         </div>
         <h2 className="text-center text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
           Что вы получите вместе <br className="hidden sm:block" />
-          <span className="bg-gradient-to-r from-accent-deep to-accent bg-clip-text text-transparent">с консультацией</span>
+          <span className="bg-gradient-to-r from-accent-deep to-accent bg-clip-text text-transparent">с диагностикой</span>
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-base text-muted-foreground sm:text-lg">
           Найдём все дыры, через которые утекают ваши пациенты и деньги, и составим персональную стратегию роста.
@@ -380,7 +371,7 @@ const Index = () => {
           {[
             {
               icon: MessageCircle,
-              title: "Часовая консультация 1-на-1 со мной",
+              title: "Часовая диагностика 1-на-1 со мной",
               desc: "Покажу, как привлекать первичных пациентов на платную диагностику и дорогостоящие процедуры без бесконечного поиска и сарафанного радио",
               value: "150 000 ₸",
             },
@@ -432,44 +423,103 @@ const Index = () => {
           })}
         </div>
 
-        <div className="relative mt-12 overflow-hidden rounded-3xl bg-gradient-to-br from-banner via-banner/95 to-banner text-white shadow-2xl shadow-banner/30 ring-1 ring-white/10">
-          {/* Subtle bg glow */}
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-highlight/20 blur-3xl" aria-hidden="true" />
+        <div className="mt-12 space-y-10">
+          <h2 className="text-center text-4xl font-black uppercase tracking-tight sm:text-5xl">
+            Сколько стоит диагностика?
+          </h2>
+          <p className="mx-auto max-w-2xl text-center text-lg text-muted-foreground sm:text-xl">
+            А сколько денег вы сейчас тратите впустую на рекламу, которая не приводит платящих пациентов?
+          </p>
 
-          <div className="relative z-10 space-y-4 p-6 sm:p-8">
-            <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-              <span className="text-base text-white/80 sm:text-lg">Общая ценность:</span>
-              <span className="text-xl font-bold line-through opacity-70 sm:text-2xl">
-                340 000 ₸
-              </span>
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-[2rem] border bg-card shadow-2xl shadow-accent/5">
+            {/* Header */}
+            <div className="bg-road-good px-6 py-4 text-center">
+              <p className="flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest text-white sm:text-base">
+                <span>👈</span> РАБОТАЕМ ТОЛЬКО С 1 МЕДЦЕНТРОМ В ГОРОДЕ
+              </p>
             </div>
-            <div className="flex items-center justify-between gap-4 pt-2">
-              <span className="text-base font-semibold text-highlight sm:text-lg">
-                Ваша экономия:
-              </span>
-              <span className="text-xl font-extrabold text-highlight sm:text-2xl">
-                −330 100 ₸
-              </span>
-            </div>
-          </div>
 
-          <div className="relative z-10 border-t border-white/10 bg-black/10 px-6 py-8 text-center backdrop-blur-sm sm:px-10">
-            <div className="absolute inset-0 animate-shimmer pointer-events-none opacity-50" aria-hidden="true" />
-            <div className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90 shadow-sm backdrop-blur-md">
-              Стоимость диагностики сегодня
+            <div className="p-6 sm:p-10">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="h-0.5 w-6 bg-accent-deep" />
+                  <h3 className="text-sm font-black uppercase tracking-widest text-muted-foreground">
+                    СОСТАВ И ЦЕННОСТЬ РАЗБОРА:
+                  </h3>
+                </div>
+
+                <ul className="space-y-4">
+                  {[
+                    { label: "60-90 минут плотной работы над бизнесом", price: "35 000 ₸" },
+                    { label: "Пошаговый план роста вашего центра", price: "15 000 ₸" },
+                    { label: "Разбор всех каналов привлечения пациентов", price: "10 000 ₸" },
+                    { label: "Скрипты продаж для администраторов", price: "15 000 ₸" },
+                    { label: "Расчёт - сколько вы теряете и как это исправить", price: "5 000 ₸" },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center justify-between gap-4 border-b border-dashed pb-3 last:border-0">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-road-good/10 text-road-good">
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                        </div>
+                        <span className="text-base font-medium sm:text-lg">{item.label}</span>
+                      </div>
+                      <span className="shrink-0 text-sm font-bold text-muted-foreground/60">{item.price}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex items-center justify-between border-t-2 pt-6">
+                  <span className="text-lg font-black uppercase tracking-widest">ОБЩАЯ ЦЕННОСТЬ:</span>
+                  <span className="text-xl font-bold text-muted-foreground/50 line-through">80 000 ₸</span>
+                </div>
+              </div>
             </div>
-            <div className="mt-4 flex items-baseline justify-center gap-2">
-              <span className="text-5xl font-black leading-none text-highlight sm:text-7xl">
-                9 900
-              </span>
-              <span className="text-2xl font-bold text-highlight/90 sm:text-3xl">₸</span>
-            </div>
-            <p className="mt-4 text-sm font-medium text-white/80">
-              Окупится с первого пациента
-            </p>
-            <div className="mt-6">
-              <ScrollToFormButton label="Записаться за 9 900 ₸" />
+
+            {/* Price Footer */}
+            <div className="bg-muted/30 p-8 text-center sm:p-12">
+              <p className="text-base font-medium text-muted-foreground sm:text-lg">Ваша инвестиция сегодня:</p>
+              <div className="mt-4 flex items-center justify-center gap-3">
+                <span className="text-6xl font-black leading-none text-banner sm:text-8xl">9 900</span>
+                <span className="text-3xl font-bold text-banner sm:text-5xl">₸</span>
+              </div>
+
+              <div className="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-orange-100 px-6 py-2.5 text-sm font-bold text-orange-700 ring-1 ring-orange-200">
+                <Flame className="h-4 w-4 animate-pulse" />
+                Предложение действует, пока вы на этой странице
+              </div>
+
+              {/* Guarantee */}
+              <div className="mt-10 rounded-2xl bg-road-good/5 p-6 text-left ring-1 ring-road-good/20">
+                <div className="flex gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-road-good/10 text-road-good">
+                    <ShieldCheck className="h-7 w-7" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-foreground">Гарантия возврата</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      Если разбор вам не понравится - я верну деньги. Без вопросов.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10">
+                <ScrollToFormButton
+                  variant="cta-orange"
+                  label="Записаться на диагностику"
+                  className="py-8 text-lg rounded-2xl shadow-2xl shadow-orange-500/20"
+                />
+                <div className="mt-4 flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60 sm:text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <Check className="h-3.5 w-3.5 text-road-good" strokeWidth={3} />
+                    Осталось 3 места
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <MessageCircle className="h-3.5 w-3.5 text-road-good" />
+                    Ответ в WhatsApp за 10 минут
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
