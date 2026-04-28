@@ -223,7 +223,7 @@ const Index = () => {
           <Sparkles className="h-3.5 w-3.5" />
           Реальный кейс
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
           Но почему я так уверен,{" "}
           <span className="text-accent-deep">что эта система реально работает?</span>
         </h2>
@@ -244,7 +244,7 @@ const Index = () => {
                 Было
               </p>
               <p className="mt-2 text-base leading-relaxed sm:text-lg">
-                Один администратор не справлялся со звонками. Записывал всех подряд —
+                Один администратор не справлялся со звонками. Записывал всех подряд&nbsp;
                 приходило только <span className="font-bold text-destructive">30%</span> от записанных.
               </p>
             </div>
@@ -282,7 +282,7 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Users className="mx-auto h-6 w-6 text-highlight" />
                   <p className="mt-2 text-3xl font-extrabold leading-none sm:text-4xl">
-                    107
+                    117
                   </p>
                   <p className="mt-2 text-sm text-white/80">
                     новых пациентов с оплатой
@@ -291,7 +291,7 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Wallet className="mx-auto h-6 w-6 text-highlight" />
                   <p className="mt-2 text-2xl font-extrabold leading-none text-highlight sm:text-3xl">
-                    +10 млн ₸
+                    +12 млн ₸
                   </p>
                   <p className="mt-2 text-sm text-white/80">
                     в кассу
@@ -299,8 +299,8 @@ const Index = () => {
                 </div>
               </div>
 
-              <p className="mt-4 text-sm text-white/70">
-                без дополнительных трат на рекламу
+              <p className="mt-4 text-sm text-white/70 whitespace-pre-line">
+                без дополнительных расходов&nbsp;{"\n"}&nbsp;на рекламу
               </p>
             </div>
 
