@@ -22,7 +22,7 @@ const Section = ({ children, className, tone = "default", containerClassName, ..
     const el = ref.current;
     if (!el) return;
 
-    // If element is already in viewport on mount — show instantly
+    // If element is already in viewport on mount - show instantly
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight) {
       setAnimated(true);

@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 interface BannerProps {
   children: ReactNode;
   className?: string;
-  /** italic + жёлтый текст на синем — как в референсе */
+  /** italic + жёлтый текст на синем - как в референсе */
   italic?: boolean;
 }
 

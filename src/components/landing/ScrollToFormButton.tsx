@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,13 +33,11 @@ const ScrollToFormButton = ({
           size="cta"
           className={cn(
             "font-semibold leading-tight whitespace-normal text-center w-full group relative overflow-hidden",
-            "animate-pulse-soft hover:animate-none",
             className,
           )}
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             <span>{label}</span>
-            <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
           </span>
         </Button>
       </DialogTrigger>
@@ -52,7 +49,7 @@ const ScrollToFormButton = ({
           <DialogDescription className="text-sm leading-relaxed">
             Если вы руководитель медицинской клиники и хотите{" "}
             <span className="font-semibold text-foreground">увеличить выручку</span>{" "}
-            и обойти конкурентов — оставьте заявку, разберём вашу клинику.
+            и обойти конкурентов - оставьте заявку, разберём вашу клинику.
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4">

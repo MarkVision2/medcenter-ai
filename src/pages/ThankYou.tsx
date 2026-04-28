@@ -24,7 +24,7 @@ const ThankYou = () => {
   const [lead, setLead] = useState<LeadData | null>(null);
 
   useEffect(() => {
-    document.title = "Заявка принята — Система «Врач на миллион»";
+    document.title = "Заявка принята - Система «Врач на миллион»";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
@@ -103,7 +103,7 @@ const ThankYou = () => {
         <div className="mt-8 w-full rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
           <p className="text-base font-semibold">Хотите ускорить запись?</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Напишите нам в WhatsApp — данные заявки уже подставлены в сообщение,
+            Напишите нам в WhatsApp - данные заявки уже подставлены в сообщение,
             достаточно нажать «Отправить».
           </p>
           <Button

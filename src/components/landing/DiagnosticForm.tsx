@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Phone, Building2, ArrowRight, Loader2, ChevronDown } from "lucide-react";
+import { User, Phone, Building2, Loader2, ChevronDown } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -404,10 +404,7 @@ const DiagnosticForm = () => {
             <span>Отправляем…</span>
           </>
         ) : (
-          <>
-            <span>Получить диагностику</span>
-            <ArrowRight className="h-5 w-5" />
-          </>
+          <span>Получить диагностику</span>
         )}
       </Button>
 

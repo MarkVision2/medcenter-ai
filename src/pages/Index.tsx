@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Clock } from "lucide-react";
+import { Check, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Clock, Target, Zap, HeartPulse, Coins } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
@@ -32,15 +32,15 @@ const Index = () => {
         {/* Синий баннер */}
         <div className="mt-3 sm:mt-10">
           <Banner className="px-3 py-4 sm:px-6 sm:py-6 text-base">
-            Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
+            Которые устали работать за копейки и хотят выйти на доход от 300 000 тенге в день, имея больше свободного времени и меньше стресса
           </Banner>
         </div>
 
-        {/* Картинка с ноутбуком — прозрачный фон, естественно вписана */}
+        {/* Картинка с ноутбуком - прозрачный фон, естественно вписана */}
         <div className="mt-1 sm:mt-4">
           <img
             src={heroLaptop}
-            alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
+            alt="Система «Врач на миллион» - превращение первичных заявок в пациентов"
             width={1024}
             height={1024}
             className="mx-auto block w-full max-w-[250px] sm:max-w-md"
@@ -51,7 +51,7 @@ const Index = () => {
         <div className="mt-1 sm:mt-4">
           <ScrollToFormButton />
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Заполните форму ниже — это займёт 30 секунд
+            Заполните форму ниже - это займёт 30 секунд
           </p>
         </div>
       </Section>
@@ -60,7 +60,7 @@ const Index = () => {
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7 shadow-xl shadow-destructive/5">
           <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
-            Ответьте на вопросы — ответ на которые «ДА»:
+            Ответьте на вопросы - ответ на которые «ДА»:
           </h2>
 
           <ul className="mx-auto mt-6 max-w-md space-y-5 stagger-children">
@@ -89,7 +89,7 @@ const Index = () => {
       {/* 3. ПЕРЕХОД */}
       <Section>
         <Banner>
-          Если ответили «ДА» хотя&nbsp;бы на&nbsp;1&nbsp;вопрос — записывайтесь на&nbsp;диагностику
+          Если ответили «ДА» хотя&nbsp;бы на&nbsp;1&nbsp;вопрос - записывайтесь на&nbsp;диагностику
         </Banner>
         <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
           Я расскажу, как забыть о работе за копейки и начать зарабатывать как лучшие клиники
@@ -115,13 +115,13 @@ const Index = () => {
             <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
               <img
                 src={yuriPhoto}
-                alt="Юрий — автор системы «Врач на миллион»"
+                alt="Юрий - автор системы «Врач на миллион»"
                 className="block w-full object-cover"
               />
               <div className="border-t bg-card px-4 py-3">
                 <p className="text-sm font-bold leading-tight">Юрий</p>
                 <p className="text-xs text-muted-foreground">
-                  Автор системы «Врач на миллион»
+                  Работаю по системе «Врач на миллион»
                 </p>
               </div>
             </div>
@@ -144,34 +144,10 @@ const Index = () => {
             <p className="mt-4 text-base leading-relaxed sm:text-lg">
               Я помогаю медицинским клиникам вырваться из замкнутого круга и выйти на доход{" "}
               <span className="font-semibold text-accent-deep">от 500 000 тенге в день</span>{" "}
-              через систему «Врач на миллион» — ту самую систему, которая изменила жизнь уже{" "}
+              через систему «Врач на миллион» - ту самую систему, которая изменила жизнь уже{" "}
               <span className="font-semibold">25+ мед. центрам</span>.
             </p>
 
-            {/* Метрики */}
-            <div className="mt-6 grid grid-cols-3 gap-3 stagger-children">
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4 hover:shadow-md transition-shadow duration-200">
-                <Building2 className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">25+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  мед. центров
-                </p>
-              </div>
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4 hover:shadow-md transition-shadow duration-200">
-                <TrendingUp className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">500к+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  тг в день
-                </p>
-              </div>
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4 hover:shadow-md transition-shadow duration-200">
-                <Award className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">7+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  лет в нише
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </Section>
@@ -203,7 +179,7 @@ const Index = () => {
                 Было
               </p>
               <p className="mt-2 text-base leading-relaxed sm:text-lg">
-                Один администратор не справлялся со звонками. Записывал всех подряд —
+                Один администратор не справлялся со звонками. Записывал всех подряд -
                 приходило только <span className="font-bold text-destructive">30%</span> от записанных.
               </p>
             </div>
@@ -237,23 +213,68 @@ const Index = () => {
                 Результат за 2 недели
               </div>
 
-              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
                 <div className="rounded-xl bg-white/10 p-4">
-                  <Users className="mx-auto h-6 w-6 text-highlight" />
-                  <p className="mt-2 text-3xl font-extrabold leading-none sm:text-4xl">
-                    107
+                  <Target className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    830 000 ₸
                   </p>
-                  <p className="mt-2 text-sm text-white/80">
-                    новых пациентов с оплатой
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Бюджет на рекламу
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-4">
-                  <Wallet className="mx-auto h-6 w-6 text-highlight" />
-                  <p className="mt-2 text-2xl font-extrabold leading-none text-highlight sm:text-3xl">
-                    +10 млн ₸
+                  <Zap className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    415
                   </p>
-                  <p className="mt-2 text-sm text-white/80">
-                    в кассу
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Лидов с рекламы
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 p-4">
+                  <HeartPulse className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    83
+                  </p>
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Платных диагностик
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 p-4">
+                  <Users className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    112
+                  </p>
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Новых пациентов
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 p-4">
+                  <BadgeCheck className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    29
+                  </p>
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Продажи лечения
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 p-4">
+                  <Coins className="mx-auto h-5 w-5 text-highlight" />
+                  <p className="mt-2 text-xl font-extrabold leading-none sm:text-2xl">
+                    350 000 ₸
+                  </p>
+                  <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
+                    Средний чек
+                  </p>
+                </div>
+                <div className="col-span-2 sm:col-span-3 rounded-xl bg-white/20 p-4 border border-white/20">
+                  <Wallet className="mx-auto h-6 w-6 text-highlight" />
+                  <p className="mt-2 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
+                    +13 000 000 ₸
+                  </p>
+                  <p className="mt-2 text-sm font-bold text-white uppercase tracking-widest">
+                    Чистая выручка в кассу
                   </p>
                 </div>
               </div>
@@ -265,7 +286,7 @@ const Index = () => {
 
             {/* Вывод */}
             <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Тот же бюджет на рекламу — в{" "}
+              Тот же бюджет на рекламу - в{" "}
               <span className="font-bold text-foreground">3 раза больше</span>{" "}
               реально пришедших и оплативших пациентов.
             </p>
@@ -287,7 +308,7 @@ const Index = () => {
             60 000 000 ₸
           </p>
           <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
-            Выстроили стабильную систему привлечения первичных пациентов и их удержания —{" "}
+            Выстроили стабильную систему привлечения первичных пациентов и их удержания -{" "}
             <span className="font-semibold text-white">без участия собственника клиники</span>.
           </p>
         </div>
@@ -303,7 +324,7 @@ const Index = () => {
           </p>
           <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
             Если после консультации вы захотите, <span className="font-bold">чтобы мы помогли</span> выйти на
-            доход от 500 000 тенге в день с помощью моего метода — то сможете продолжить работу со мной
+            доход от 500 000 тенге в день с помощью моего метода - то сможете продолжить работу со мной
             на платной основе. Консультация вас ни к чему не обязывает.
           </p>
           <p className="mt-5 text-center text-lg font-bold sm:text-xl">Да-да, нет-нет.</p>
@@ -360,25 +381,25 @@ const Index = () => {
             {
               icon: MessageCircle,
               title: "Часовая консультация 1-на-1 со мной",
-              desc: "Покажу, как привлекать первичных пациентов с бюджетами от 500 000 тенге без бесконечного поиска и сарафанного радио",
+              desc: "Покажу, как привлекать первичных пациентов на платную диагностику и дорогостоящие процедуры без бесконечного поиска и сарафанного радио",
               value: "150 000 ₸",
             },
             {
               icon: Map,
               title: "Карта с пошаговым планом",
-              desc: "Как выйти на стабильный доход 300 000 – 600 000 ₸ в день, даже если сейчас зарабатываете в 5 раз меньше",
+              desc: "Как выйти на стабильный доход от 300 000 тенге в день, даже если сейчас зарабатываете в 5 раз меньше",
               value: "80 000 ₸",
             },
             {
               icon: BarChart3,
               title: "Анализ рекламы и каналов",
-              desc: "Разберём текущие источники пациентов и найдем точки утечки вашего рекламного бюджета",
+              desc: "Разберём текущие источники и каналы привлечения пациентов и найдем точки потери вашего рекламного бюджета",
               value: "60 000 ₸",
             },
             {
               icon: PhoneCall,
               title: "Тайный звонок",
-              desc: "Прозвоним как пациент, запишем разговор, покажем, где администратор сливает заявки",
+              desc: "Прозвоним как пациент, запишем разговор, покажем, где администратор теряет заявки",
               value: "50 000 ₸",
             },
           ].map((item, i) => {
@@ -526,7 +547,7 @@ const Index = () => {
         </div>
       </Section>
 
-      {/* 12. ВЫБОР — ДВЕ ДОРОГИ */}
+      {/* 12. ВЫБОР - ДВЕ ДОРОГИ */}
       <Section tone="muted" containerClassName="max-w-6xl">
         <h2 className="text-center text-4xl font-black uppercase tracking-tight sm:text-5xl drop-shadow-sm">
           Две дороги:
@@ -538,7 +559,7 @@ const Index = () => {
         </div>
 
         <div className="mx-auto mt-6 grid max-w-5xl gap-6 sm:grid-cols-2">
-          {/* Красная — первая дорога */}
+          {/* Красная - первая дорога */}
           <div className="group relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-road-bad to-road-bad/80 p-8 text-road-bad-foreground shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-road-bad/30 ring-1 ring-black/5">
             <div className="absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <div className="relative z-10">
@@ -565,7 +586,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Зелёная — для волков */}
+          {/* Зелёная - для волков */}
           <div className="group relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-road-good to-road-good/90 p-8 text-road-good-foreground shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-road-good/30 ring-2 ring-white/30">
             {/* Glow effect */}
             <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-white/20 blur-3xl transition-transform duration-500 group-hover:scale-150" aria-hidden="true" />
@@ -597,7 +618,7 @@ const Index = () => {
         </div>
       </Section>
 
-      {/* 13. CTA — ВРЕМЯ ДЕЙСТВОВАТЬ */}
+      {/* 13. CTA - ВРЕМЯ ДЕЙСТВОВАТЬ */}
       <Section>
         <h2 className="text-center text-4xl font-extrabold uppercase leading-none tracking-tight sm:text-5xl">
           Время действовать
@@ -605,7 +626,7 @@ const Index = () => {
 
         <div className="mt-7">
           <Banner>
-            Если хотите понять как&nbsp;вырасти — нажимайте на&nbsp;кнопку ниже
+            Если хотите понять как&nbsp;вырасти - нажимайте на&nbsp;кнопку ниже
           </Banner>
         </div>
 
