@@ -143,30 +143,6 @@ const Index = () => {
               <span className="font-semibold">25+ мед. центрам</span>.
             </p>
 
-            {/* Метрики */}
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
-                <Building2 className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">25+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  мед. центров
-                </p>
-              </div>
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
-                <TrendingUp className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">500к+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  тг в день
-                </p>
-              </div>
-              <div className="rounded-xl border bg-card p-3 text-center shadow-sm sm:p-4">
-                <Award className="mx-auto h-5 w-5 text-accent-deep" />
-                <p className="mt-2 text-xl font-extrabold sm:text-2xl">7+</p>
-                <p className="mt-1 text-[11px] leading-tight text-muted-foreground sm:text-xs">
-                  лет в нише
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </Section>
