@@ -32,19 +32,67 @@ const Index = () => {
           </Banner>
         </div>
 
-        {/* Картинка с ноутбуком — прозрачный фон, естественно вписана */}
-        <div className="mt-1 sm:mt-4">
-          <img
-            src={heroLaptop}
-            alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
-            width={1024}
-            height={1024}
-            className="mx-auto block w-full max-w-[360px] sm:max-w-md"
-          />
+        {/* Картинка с ноутбуком — оформленная сцена */}
+        <div className="mt-6 sm:mt-10">
+          <div className="relative mx-auto w-full max-w-[420px] sm:max-w-xl">
+            {/* Радиальный фон */}
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.18),transparent_65%)] blur-2xl"
+            />
+            {/* Бейдж сверху */}
+            <div className="mb-3 flex justify-center sm:mb-5">
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary sm:text-xs">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                Авторская система
+              </span>
+            </div>
+
+            {/* Карточка со сценой */}
+            <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-b from-muted/60 to-background px-4 pt-6 pb-4 shadow-[0_20px_60px_-25px_hsl(var(--primary)/0.35)] sm:px-8 sm:pt-10 sm:pb-6">
+              {/* Тонкая сетка на фоне */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(hsl(var(--foreground))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--foreground))_1px,transparent_1px)] [background-size:28px_28px]"
+              />
+              <img
+                src={heroLaptop}
+                alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
+                width={1024}
+                height={1024}
+                loading="eager"
+                className="relative mx-auto block w-full max-w-[360px] drop-shadow-[0_18px_24px_rgba(0,0,0,0.18)] sm:max-w-lg"
+              />
+              {/* Тень-блик под ноутбуком */}
+              <div
+                aria-hidden
+                className="relative mx-auto -mt-2 h-3 w-[70%] rounded-[50%] bg-foreground/20 blur-md"
+              />
+            </div>
+
+            {/* Подпись-фичи */}
+            <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-6 sm:gap-3">
+              {[
+                { icon: BarChart3, label: "Поток заявок" },
+                { icon: Users, label: "Запись докторов" },
+                { icon: TrendingUp, label: "Рост выручки" },
+              ].map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex flex-col items-center gap-1 rounded-xl border border-border/60 bg-card/60 px-2 py-2 text-center backdrop-blur-sm sm:flex-row sm:justify-center sm:gap-2 sm:py-3"
+                >
+                  <Icon className="h-4 w-4 text-primary" aria-hidden />
+                  <span className="text-[11px] font-medium leading-tight text-foreground/80 sm:text-sm">
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Кнопка */}
-        <div className="mt-1 sm:mt-4">
+        <div className="mt-6 sm:mt-8">
           <ScrollToFormButton />
         </div>
       </Section>
