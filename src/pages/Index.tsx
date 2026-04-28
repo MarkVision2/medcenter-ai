@@ -260,7 +260,7 @@ const Index = () => {
 
             {/* Вывод */}
             <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Тот же бюджет на рекламу — в{" "}
+              Тот же бюджет на рекламу в{" "}
               <span className="font-bold text-foreground">3 раза больше</span>{" "}
               реально пришедших и оплативших пациентов.
             </p>
