@@ -541,7 +541,7 @@ const Index = () => {
               <p className="text-sm font-bold uppercase tracking-wider text-destructive/80">
                 Обычно это:
               </p>
-              <p className="mt-2 text-xl font-bold italic text-foreground">
+              <p className="mt-2 text-xl font-bold text-foreground">
                 «Давайте просто настроим больше рекламы…»
               </p>
             </div>
