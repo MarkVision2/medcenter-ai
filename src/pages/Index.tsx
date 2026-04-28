@@ -236,7 +236,7 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Users className="mx-auto h-6 w-6 text-highlight" />
                   <p className="mt-2 text-3xl font-extrabold leading-none sm:text-4xl">
-                    107
+                    113
                   </p>
                   <p className="mt-2 text-sm text-white/80">
                     новых пациентов с оплатой
@@ -245,7 +245,7 @@ const Index = () => {
                 <div className="rounded-xl bg-white/10 p-4">
                   <Wallet className="mx-auto h-6 w-6 text-highlight" />
                   <p className="mt-2 text-2xl font-extrabold leading-none text-highlight sm:text-3xl">
-                    +10 млн ₸
+                    +12 млн ₸
                   </p>
                   <p className="mt-2 text-sm text-white/80">
                     в кассу
@@ -254,7 +254,7 @@ const Index = () => {
               </div>
 
               <p className="mt-4 text-sm text-white/70">
-                без дополнительных трат на рекламу
+                без дополнительных расходов&nbsp;{"\n"}на рекламный бюджет
               </p>
             </div>
 
