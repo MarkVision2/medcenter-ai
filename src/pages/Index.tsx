@@ -282,7 +282,7 @@ const Index = () => {
             60 000 000 ₸
           </p>
           <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
-            Выстроили стабильную систему привлечения первичных пациентов и их удержания —{" "}
+            Выстроили стабильную систему привлечения первичных пациентов и их удержания&nbsp;
             <span className="font-semibold text-white">без участия собственника клиники</span>.
           </p>
         </div>
