@@ -87,13 +87,59 @@ const Index = () => {
         <Banner>
           Если ответили «ДА» хотя&nbsp;бы на&nbsp;1&nbsp;вопрос — записывайтесь на&nbsp;диагностику
         </Banner>
-        <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Я расскажу, как забыть о работе за копейки и начать зарабатывать как лучшие клиники
-          Казахстана, имея больше свободного времени и энергии.
-        </p>
-        <div className="mt-6 text-center text-3xl">​</div>
-        <div className="mt-3">
-          <ScrollToFormButton />
+
+        <div className="mt-6 rounded-2xl border bg-card p-5 shadow-sm sm:p-7">
+          <p className="text-center text-base leading-relaxed text-foreground sm:text-lg">
+            На&nbsp;диагностике я&nbsp;разберу вашу клинику и&nbsp;покажу, как{" "}
+            <span className="font-semibold text-accent-deep">забыть о&nbsp;работе за&nbsp;копейки</span>{" "}
+            и&nbsp;начать зарабатывать как лучшие клиники Казахстана&nbsp;— имея{" "}
+            <span className="font-semibold text-accent-deep">больше свободного времени</span> и&nbsp;энергии.
+          </p>
+
+          <ul className="mx-auto mt-5 grid max-w-md gap-3 sm:mt-6">
+            {[
+              "Найдём, где клиника теряет деньги прямо сейчас",
+              "Составим план выхода на 300 000–600 000 ₸ в день",
+              "Покажем систему привлечения первичных пациентов",
+            ].map((item, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 rounded-xl bg-accent-soft/60 px-4 py-3"
+              >
+                <Check
+                  className="mt-0.5 h-5 w-5 shrink-0 text-accent-deep"
+                  strokeWidth={3}
+                />
+                <span className="text-sm font-medium leading-snug text-foreground sm:text-base">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:text-sm">
+            <span className="flex items-center gap-1.5">
+              <BadgeCheck className="h-4 w-4 text-accent-deep" />
+              40&nbsp;минут
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-muted-foreground/40 sm:block" />
+            <span className="flex items-center gap-1.5">
+              <BadgeCheck className="h-4 w-4 text-accent-deep" />
+              лично с&nbsp;Юрием
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-muted-foreground/40 sm:block" />
+            <span className="flex items-center gap-1.5">
+              <BadgeCheck className="h-4 w-4 text-accent-deep" />
+              без воды
+            </span>
+          </div>
+
+          <div className="mt-6">
+            <ScrollToFormButton />
+          </div>
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Осталось ограниченное число мест в&nbsp;этом месяце
+          </p>
         </div>
       </Section>
 
