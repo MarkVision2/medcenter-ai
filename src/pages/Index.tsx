@@ -262,7 +262,7 @@ const Index = () => {
                 <div className="rounded-xl bg-white/20 p-4 border border-white/20">
                   <Wallet className="mx-auto h-5 w-5 text-highlight" />
                   <p className="mt-2 text-xl font-extrabold leading-none text-highlight sm:text-2xl">
-                    +13 000 000
+                    +13 млн
                   </p>
                   <p className="mt-1 text-[10px] text-white/80 uppercase tracking-wider">
                     Выручка в кассу, тг.
@@ -296,7 +296,7 @@ const Index = () => {
             За 3 месяца
           </p>
           <p className="mt-4 text-4xl font-extrabold leading-none text-highlight sm:text-6xl">
-            60 000 000
+            60 млн
           </p>
           <p className="mt-1 text-sm font-semibold text-highlight/80">тенге</p>
           <p className="mt-5 text-base leading-relaxed text-white/80 sm:text-lg">
