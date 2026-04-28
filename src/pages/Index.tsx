@@ -39,7 +39,7 @@ const Index = () => {
             alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
             width={1024}
             height={1024}
-            className="mx-auto block w-full max-w-[250px] sm:max-w-md"
+            className="mx-auto block w-full max-w-[360px] sm:max-w-md"
           />
         </div>
 
