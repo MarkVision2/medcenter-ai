@@ -298,8 +298,8 @@ const Index = () => {
 
       {/* 8. СУТЬ */}
       <Section tone="muted">
-        <h2 className="text-center text-xl font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl">
-          ЕСЛИ ТЫ ХОЧЕШЬ ЗАБЫТЬ О РАБОТЕ ЗА КОПЕЙКИ И НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР, ИМЕЯ БОЛЬШЕ СВОБОДНОГО ВРЕМЕНИ И ЭНЕРГИИ 
+        <h2 className="text-center font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl text-base">
+          ЕСЛИ ТЫХОЧЕШЬ ЗАБЫТЬ О РАБОТЕ ЗА КОПЕЙКИ И НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР, ИМЕЯ БОЛЬШЕ ВРЕМЕНИ И ЭНЕРГИИ 
         </h2>
         <p className="mt-5 text-center leading-relaxed sm:text-lg text-lg">
           Это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
