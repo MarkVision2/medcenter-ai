@@ -45,7 +45,7 @@ const Index = () => {
 
         {/* Кнопка */}
         <div className="mt-1 sm:mt-4">
-          <ScrollToFormButton />
+          <ScrollToFormButton ctaId={1} ctaName="Hero — Записаться на диагностику" />
           <p className="mt-2 text-center text-xs text-muted-foreground">
             Заполните форму ниже — это займёт 30 секунд
           </p>
@@ -92,7 +92,7 @@ const Index = () => {
           Казахстана, имея больше свободного времени и&nbsp;энергии.
         </p>
         <div className="mt-6">
-          <ScrollToFormButton />
+          <ScrollToFormButton ctaId={2} ctaName="После блока боли — Записаться на диагностику" />
         </div>
       </Section>
 
@@ -391,7 +391,7 @@ const Index = () => {
               Окупится с первого пациента
             </p>
             <div className="mt-5">
-              <ScrollToFormButton label="Записаться за 9 900 ₸" />
+              <ScrollToFormButton ctaId={3} ctaName="Блок цены — Записаться за 9 900 ₸" label="Записаться за 9 900 ₸" />
             </div>
           </div>
         </div>
@@ -501,6 +501,8 @@ const Index = () => {
 
         <div className="mt-6">
           <ScrollToFormButton
+            ctaId={4}
+            ctaName="Время действовать — Доступ к системе «Врач на миллион»"
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
             className="uppercase"
@@ -546,6 +548,8 @@ const Index = () => {
 
         <div className="mt-6">
           <ScrollToFormButton
+            ctaId={5}
+            ctaName="Финал — Доступ к системе «Врач на миллион»"
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
             className="uppercase"
