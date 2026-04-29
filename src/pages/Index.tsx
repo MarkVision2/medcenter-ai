@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2 } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
@@ -208,30 +208,45 @@ const Index = () => {
                 Результат за 2 недели
               </div>
 
-              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-xl bg-white/10 p-4">
-                  <Users className="mx-auto h-6 w-6 text-highlight" />
-                  <p className="mt-2 text-3xl font-extrabold leading-none sm:text-4xl">
-                    113
-                  </p>
-                  <p className="mt-2 text-sm text-white/80">
-                    новых пациентов с оплатой
-                  </p>
-                </div>
-                <div className="rounded-xl bg-white/10 p-4">
-                  <Wallet className="mx-auto h-6 w-6 text-highlight" />
-                  <p className="mt-2 text-2xl font-extrabold leading-none text-highlight sm:text-3xl">
-                    +12 млн ₸
-                  </p>
-                  <p className="mt-2 text-sm text-white/80">
-                    в кассу
-                  </p>
-                </div>
+              {/* Воронка цифр */}
+              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {[
+                  { icon: Megaphone, value: "830 000 ₸", label: "Расходы на рекламу" },
+                  { icon: Inbox, value: "415", label: "Заявок с рекламы" },
+                  { icon: Stethoscope, value: "83", label: "Платных диагностик" },
+                  { icon: UserPlus, value: "29", label: "Новых пациентов" },
+                ].map((m, i) => (
+                  <div key={i} className="rounded-xl bg-white/10 p-3">
+                    <m.icon className="mx-auto h-5 w-5 text-highlight" />
+                    <p className="mt-2 text-lg font-extrabold leading-none sm:text-xl">
+                      {m.value}
+                    </p>
+                    <p className="mt-1.5 text-[11px] leading-tight text-white/80 sm:text-xs">
+                      {m.label}
+                    </p>
+                  </div>
+                ))}
               </div>
 
-              <p className="mt-4 text-sm text-white/70">
-                без дополнительных расходов&nbsp;{"\n"}на рекламный бюджет
-              </p>
+              {/* Средний чек */}
+              <div className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-white/10 p-3">
+                <Receipt className="h-5 w-5 text-highlight" />
+                <p className="text-sm text-white/80">
+                  Средний чек:{" "}
+                  <span className="font-extrabold text-white">350 000 ₸</span>
+                </p>
+              </div>
+
+              {/* Выручка */}
+              <div className="mt-4 rounded-xl bg-white/10 p-4">
+                <Wallet className="mx-auto h-6 w-6 text-highlight" />
+                <p className="mt-2 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
+                  +13 000 000 ₸
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  выручки в кассу
+                </p>
+              </div>
             </div>
 
             {/* Вывод */}
