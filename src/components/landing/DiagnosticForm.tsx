@@ -59,6 +59,40 @@ const getCookie = (name: string): string | undefined => {
   return match ? decodeURIComponent(match[1]) : undefined;
 };
 
+const UTM_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+] as const;
+type UtmKey = (typeof UTM_KEYS)[number];
+const UTM_STORAGE_KEY = "lovable_utm_v1";
+
+const getUtmParams = (): Partial<Record<UtmKey, string>> => {
+  if (typeof window === "undefined") return {};
+  const out: Partial<Record<UtmKey, string>> = {};
+  try {
+    const params = new URLSearchParams(window.location.search);
+    for (const k of UTM_KEYS) {
+      const v = params.get(k);
+      if (v && v.trim()) out[k] = v.trim().slice(0, 200);
+    }
+    if (Object.keys(out).length > 0) {
+      sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(out));
+      return out;
+    }
+    const cached = sessionStorage.getItem(UTM_STORAGE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached) as Partial<Record<UtmKey, string>>;
+      return parsed && typeof parsed === "object" ? parsed : {};
+    }
+  } catch {
+    /* ignore */
+  }
+  return out;
+};
+
 const formatPhone = (raw: string): string => {
   // Light input formatter for KZ/RU style: +7 (XXX) XXX-XX-XX
   const digits = raw.replace(/\D/g, "").slice(0, 11);
@@ -75,7 +109,12 @@ const formatPhone = (raw: string): string => {
   return out.trim();
 };
 
-const DiagnosticForm = () => {
+interface DiagnosticFormProps {
+  ctaId?: number;
+  ctaName?: string;
+}
+
+const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -140,6 +179,7 @@ const DiagnosticForm = () => {
 
       const fbp = getCookie("_fbp");
       const fbc = getCookie("_fbc");
+      const utm = getUtmParams();
 
       const { data, error } = await supabase.functions.invoke(
         "submit-diagnostic-lead",
@@ -155,6 +195,9 @@ const DiagnosticForm = () => {
             user_agent: navigator.userAgent,
             referrer: document.referrer,
             event_source_url: window.location.href,
+            cta_id: ctaId ?? null,
+            cta_name: ctaName ?? null,
+            utm,
           },
         },
       );
