@@ -18,6 +18,8 @@ export type Database = {
         Row: {
           clinic: string
           created_at: string
+          cta_id: number | null
+          cta_name: string | null
           fbc: string | null
           fbp: string | null
           id: string
@@ -28,10 +30,17 @@ export type Database = {
           referrer: string | null
           source: string
           user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
         }
         Insert: {
           clinic: string
           created_at?: string
+          cta_id?: number | null
+          cta_name?: string | null
           fbc?: string | null
           fbp?: string | null
           id?: string
@@ -42,10 +51,17 @@ export type Database = {
           referrer?: string | null
           source?: string
           user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
         }
         Update: {
           clinic?: string
           created_at?: string
+          cta_id?: number | null
+          cta_name?: string | null
           fbc?: string | null
           fbp?: string | null
           id?: string
@@ -56,6 +72,11 @@ export type Database = {
           referrer?: string | null
           source?: string
           user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
         }
         Relationships: []
       }
