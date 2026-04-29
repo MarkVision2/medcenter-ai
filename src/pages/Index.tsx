@@ -28,7 +28,7 @@ const Index = () => {
         {/* Синий баннер */}
         <div className="mt-3 sm:mt-10">
           <Banner className="px-3 py-4 sm:px-6 sm:py-6 text-base">
-            Которые устали работать за&nbsp;копейки и&nbsp;хотят выйти на&nbsp;доход от&nbsp;300&nbsp;000 до&nbsp;600&nbsp;000&nbsp;₸ в&nbsp;день, имея больше свободного времени и&nbsp;меньше стресса
+            КОТОРЫЕ УСТАЛИ РАБОТАТЬ ЗА&nbsp;КОПЕЙКИ И&nbsp;ХОТЯТ ВЫЙТИ НА&nbsp;ДОХОД ОТ&nbsp;300&nbsp;000 В&nbsp;ДЕНЬ, ИМЕЯ БОЛЬШЕ СВОБОДНОГО ВРЕМЕНИ И&nbsp;МЕНЬШЕ СТРЕССА
           </Banner>
         </div>
 
