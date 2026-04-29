@@ -315,7 +315,7 @@ const Index = () => {
         </div>
         <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
           Что вы получите вместе{"\n"}
-          <span className="text-accent-deep">с консультацией</span>
+          <span className="text-accent-deep">с диагностикой</span>
         </h2>
         <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg whitespace-pre-line">
           Найдём все дыры, через которые утекают{"\n"}ваши пациенты и деньги.
