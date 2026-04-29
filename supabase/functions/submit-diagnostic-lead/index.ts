@@ -17,6 +17,15 @@ interface LeadInput {
   user_agent?: string;
   referrer?: string;
   event_source_url?: string;
+  cta_id?: number | null;
+  cta_name?: string | null;
+  utm?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+  } | null;
 }
 
 async function sha256Hex(input: string): Promise<string> {
@@ -34,6 +43,70 @@ function normalizePhone(raw: string): string {
 function splitName(full: string): { first: string; last: string } {
   const parts = full.trim().split(/\s+/);
   return { first: parts[0] ?? "", last: parts.slice(1).join(" ") };
+}
+
+function htmlEscape(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function sendTelegram(params: {
+  token: string;
+  chatId: string;
+  name: string;
+  phone: string;
+  clinic: string;
+  niche: string;
+  ctaId: number | null;
+  ctaName: string | null;
+  utm: Record<string, string>;
+  pageUrl: string | null;
+}) {
+  const e = htmlEscape;
+  const ctaLine =
+    params.ctaId || params.ctaName
+      ? `Кнопка: <b>#${params.ctaId ?? "?"}</b>${params.ctaName ? ` — ${e(params.ctaName)}` : ""}`
+      : `Кнопка: не определена`;
+
+  const utmEntries = Object.entries(params.utm).filter(([, v]) => !!v);
+  const utmBlock =
+    utmEntries.length > 0
+      ? `\n\n🌐 <b>UTM:</b>\n` +
+        utmEntries
+          .map(([k, v]) => `  ${k.replace(/^utm_/, "")}: <code>${e(v)}</code>`)
+          .join("\n")
+      : "";
+
+  const pageLine = params.pageUrl ? `\n\n🔗 <a href="${e(params.pageUrl)}">Страница</a>` : "";
+
+  const text =
+    `🆕 <b>Заявка на диагностику</b>\n` +
+    `${ctaLine}\n\n` +
+    `👤 <b>Имя:</b> ${e(params.name)}\n` +
+    `📞 <b>Телефон:</b> ${e(params.phone)}\n` +
+    `🏥 <b>Клиника:</b> ${e(params.clinic)}\n` +
+    `🩺 <b>Ниша:</b> ${e(params.niche)}` +
+    utmBlock +
+    pageLine;
+
+  const url = `https://api.telegram.org/bot${params.token}/sendMessage`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: params.chatId,
+      text,
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    console.error("Telegram sendMessage failed", res.status, data);
+  }
+  return data;
 }
 
 Deno.serve(async (req) => {
@@ -60,6 +133,27 @@ Deno.serve(async (req) => {
     const phone = (body.phone ?? "").trim();
     const clinic = (body.clinic ?? "").trim();
     const niche = (body.niche ?? "").trim();
+
+    const ctaId =
+      typeof body.cta_id === "number" && Number.isFinite(body.cta_id)
+        ? Math.trunc(body.cta_id)
+        : null;
+    const ctaName =
+      typeof body.cta_name === "string" && body.cta_name.trim()
+        ? body.cta_name.trim().slice(0, 200)
+        : null;
+    const utmIn = (body.utm ?? {}) as Record<string, unknown>;
+    const pickUtm = (k: string): string | null => {
+      const v = utmIn[k];
+      return typeof v === "string" && v.trim() ? v.trim().slice(0, 200) : null;
+    };
+    const utm = {
+      utm_source: pickUtm("utm_source"),
+      utm_medium: pickUtm("utm_medium"),
+      utm_campaign: pickUtm("utm_campaign"),
+      utm_content: pickUtm("utm_content"),
+      utm_term: pickUtm("utm_term"),
+    };
 
     const errors: Record<string, string> = {};
     if (name.length < 2 || name.length > 100) errors.name = "Введите имя (2-100 символов)";
@@ -93,6 +187,13 @@ Deno.serve(async (req) => {
       fbp: body.fbp || null,
       fbc: body.fbc || null,
       meta_event_id: eventId,
+      cta_id: ctaId,
+      cta_name: ctaName,
+      utm_source: utm.utm_source,
+      utm_medium: utm.utm_medium,
+      utm_campaign: utm.utm_campaign,
+      utm_content: utm.utm_content,
+      utm_term: utm.utm_term,
     });
 
     if (dbError) {
@@ -101,6 +202,36 @@ Deno.serve(async (req) => {
         JSON.stringify({ error: "Не удалось сохранить заявку. Попробуйте ещё раз." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
+    }
+
+    // Send Telegram notification (non-blocking failure)
+    const TELEGRAM_BOT_TOKEN = Deno.env.get("TELEGRAM_BOT_TOKEN");
+    const TELEGRAM_CHAT_ID = Deno.env.get("TELEGRAM_CHAT_ID");
+    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+      try {
+        await sendTelegram({
+          token: TELEGRAM_BOT_TOKEN,
+          chatId: TELEGRAM_CHAT_ID,
+          name,
+          phone,
+          clinic,
+          niche,
+          ctaId,
+          ctaName,
+          utm: {
+            utm_source: utm.utm_source ?? "",
+            utm_medium: utm.utm_medium ?? "",
+            utm_campaign: utm.utm_campaign ?? "",
+            utm_content: utm.utm_content ?? "",
+            utm_term: utm.utm_term ?? "",
+          },
+          pageUrl: body.event_source_url ?? null,
+        });
+      } catch (tgErr) {
+        console.error("Telegram notification exception", tgErr);
+      }
+    } else {
+      console.warn("Telegram secrets not configured; skipping group notification");
     }
 
     let capiResult: unknown = { skipped: true };
