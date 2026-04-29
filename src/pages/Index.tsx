@@ -153,7 +153,7 @@ const Index = () => {
           <Sparkles className="h-3.5 w-3.5" />
           Реальный кейс
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
           Но почему я так уверен,{" "}
           <span className="text-accent-deep">что эта система реально работает?</span>
         </h2>
@@ -174,8 +174,7 @@ const Index = () => {
                 Было
               </p>
               <p className="mt-2 text-base leading-relaxed sm:text-lg">
-                Один администратор не справлялся со звонками. Записывал всех подряд —
-                приходило только <span className="font-bold text-destructive">30%</span> от записанных.
+                Один администратор не справлялся со звонками. Записывал всех подряд приходило только <span className="font-bold text-destructive">30%</span> от записанных.
               </p>
             </div>
 
