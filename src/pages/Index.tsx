@@ -240,7 +240,7 @@ const Index = () => {
               <div className="mt-4 rounded-xl bg-white/10 p-4">
                 <Wallet className="mx-auto h-6 w-6 text-highlight" />
                 <p className="mt-2 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
-                  +13 000 000 ₸
+                  +13 000 000
                 </p>
                 <p className="mt-2 text-sm text-white/80">
                   выручки в кассу
