@@ -298,13 +298,39 @@ const Index = () => {
 
       {/* 8. СУТЬ */}
       <Section tone="muted">
-        <h2 className="text-center font-extrabold uppercase leading-tight tracking-tight sm:text-2xl md:text-3xl text-base">
-          ЕСЛИ ТЫХОЧЕШЬ ЗАБЫТЬ О РАБОТЕ ЗА КОПЕЙКИ И НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР, ИМЕЯ БОЛЬШЕ ВРЕМЕНИ И ЭНЕРГИИ 
-        </h2>
-        <p className="mt-5 text-center leading-relaxed sm:text-lg text-lg">
-          Это требует <span className="font-semibold">системного подхода</span>. Без системы вы будете
-          и дальше терять пациентов и деньги.
-        </p>
+        <div className="relative overflow-hidden rounded-3xl bg-banner p-7 text-white shadow-xl sm:p-10">
+          {/* Декор */}
+          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-highlight/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
+
+          <div className="relative">
+            <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-highlight">
+              <Sparkles className="h-3.5 w-3.5" />
+              Главное
+            </div>
+
+            <h2 className="text-center font-extrabold uppercase leading-[1.15] tracking-tight text-lg sm:text-2xl md:text-3xl">
+              Если ты хочешь забыть о&nbsp;работе за&nbsp;копейки
+              <br className="hidden sm:block" />
+              <span className="text-highlight"> и&nbsp;начать зарабатывать как топовый медицинский центр</span>,
+              <br className="hidden sm:block" />
+              имея больше времени и&nbsp;энергии —
+            </h2>
+
+            <div className="mx-auto mt-7 max-w-md rounded-2xl border border-white/15 bg-white/10 p-5 text-center backdrop-blur-sm">
+              <p className="text-base leading-relaxed sm:text-lg">
+                Это требует{" "}
+                <span className="rounded-md bg-highlight/25 px-1.5 py-0.5 font-bold text-highlight">
+                  системного подхода
+                </span>
+                .
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
+                Без системы вы будете и&nbsp;дальше терять пациентов и&nbsp;деньги.
+              </p>
+            </div>
+          </div>
+        </div>
       </Section>
 
       {/* 9. ЧТО ПОЛУЧИТЕ */}
