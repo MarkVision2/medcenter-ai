@@ -16,14 +16,19 @@ interface ScrollToFormButtonProps {
   label?: string;
   className?: string;
   variant?: "whatsapp" | "cta-orange";
+  ctaId?: number;
+  ctaName?: string;
 }
 
 const ScrollToFormButton = ({
   label = "Записаться на диагностику",
   className,
   variant = "whatsapp",
+  ctaId,
+  ctaName,
 }: ScrollToFormButtonProps) => {
   const [open, setOpen] = useState(false);
+  const resolvedCtaName = ctaName ?? label;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -53,7 +58,7 @@ const ScrollToFormButton = ({
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4">
-          <DiagnosticForm />
+          <DiagnosticForm ctaId={ctaId} ctaName={resolvedCtaName} />
         </div>
       </DialogContent>
     </Dialog>
