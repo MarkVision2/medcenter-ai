@@ -550,19 +550,7 @@ const Index = () => {
 
       {/* 15. ФИНАЛ */}
       <Section>
-        <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
-          В медицинском бизнесе есть два типа клиник
-        </h2>
-        <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Те, кто <span className="font-semibold text-foreground">растёт по системе</span>,
-          и те, кто оправдывает стагнацию обстоятельствами.
-        </p>
-
-        <div className="mt-6">
-          <Banner>В какой категории хотите быть&nbsp;вы?</Banner>
-        </div>
-
-        <div className="mt-6">
+        <div>
           <WhatsAppButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
