@@ -116,7 +116,7 @@ const Index = () => {
               <div className="border-t bg-card px-4 py-3">
                 <p className="text-sm font-bold leading-tight">Юрий</p>
                 <p className="text-xs text-muted-foreground">
-                  Автор системы «Врач на миллион»
+                  Работаю по системе «Врач на миллион»
                 </p>
               </div>
             </div>
