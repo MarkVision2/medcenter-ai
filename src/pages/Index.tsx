@@ -163,7 +163,7 @@ const Index = () => {
           <div className="border-b bg-accent-soft/40 px-6 py-4 sm:px-8">
             <div className="flex items-center justify-center gap-2 text-center font-semibold text-accent-deep">
               <MapPin className="h-5 w-5 shrink-0" />
-              <span className="text-lg sm:text-xl">Клиника из Астаны</span>
+              <span className="text-lg sm:text-xl">Клиника из Алматы</span>
             </div>
           </div>
 
