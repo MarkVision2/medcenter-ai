@@ -405,11 +405,9 @@ const Index = () => {
         <div className="mt-8 overflow-hidden rounded-2xl bg-banner text-white shadow-xl">
           <div className="px-6 py-7 text-center sm:px-8 sm:py-8">
             <p className="text-base font-semibold leading-relaxed text-white sm:text-lg">
-              Запишитесь на бесплатную диагностику вашей клиники
+              Запишитесь на диагностику вашей клиники
             </p>
-            <p className="mt-2 text-sm text-white/80">
-              Окупится с первого пациента
-            </p>
+            <p className="mt-2 text-sm text-white/80">{"\n"}</p>
             <div className="mt-5">
               <WhatsAppButton label="Записаться на диагностику" />
             </div>
