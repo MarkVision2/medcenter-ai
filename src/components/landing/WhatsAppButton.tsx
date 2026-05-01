@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "77472842595";
 const DEFAULT_MESSAGE =
-  "Здравствуйте, Юрий! Хочу записаться на диагностику по системе «Врач на миллион»";
+  "Здравствуйте, Юрий! Хочу записаться на диагностику клиники по системе «Врач на миллион»";
 
 interface WhatsAppButtonProps {
   label?: string;
