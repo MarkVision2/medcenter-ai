@@ -53,6 +53,31 @@ const WhatsAppButton = ({
       fbq("track", "Lead", {}, { eventID: eventId });
     }
 
+    // Google Analytics (gtag.js) — событие конверсии
+    const gtag = (window as any).gtag;
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", {
+        event_category: "engagement",
+        event_label: "whatsapp_button",
+        method: "WhatsApp",
+        value: 0,
+        currency: "KZT",
+      });
+      gtag("event", "click_whatsapp", {
+        event_category: "engagement",
+        event_label: "whatsapp_button",
+      });
+    }
+
+    // Google Tag Manager — push в dataLayer для триггеров в GTM
+    const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+    dataLayer.push({
+      event: "whatsapp_click",
+      event_id: eventId,
+      lead_source: "whatsapp_button",
+      lead_destination: "whatsapp",
+    });
+
     // Server-side Conversions API (fire-and-forget, must not block navigation)
     const fbp = getCookie("_fbp");
     const fbc = getCookie("_fbc");
