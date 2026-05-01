@@ -1,7 +1,7 @@
 import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
-import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
+import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import yuriPhoto from "@/assets/yuri.png";
 import heroLaptop from "@/assets/hero-laptop.png";
 
@@ -45,9 +45,9 @@ const Index = () => {
 
         {/* Кнопка */}
         <div className="mt-1 sm:mt-4">
-          <ScrollToFormButton ctaId={1} ctaName="Hero — Записаться на диагностику" />
+          <WhatsAppButton label="Записаться на диагностику" />
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Заполните форму ниже — это займёт 30 секунд
+            Напишите нам в WhatsApp — это займёт 30 секунд
           </p>
         </div>
       </Section>
