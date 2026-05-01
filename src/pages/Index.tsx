@@ -1,7 +1,7 @@
 import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
-import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
+import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import yuriPhoto from "@/assets/yuri.png";
 import heroLaptop from "@/assets/hero-laptop.png";
 
@@ -45,9 +45,9 @@ const Index = () => {
 
         {/* Кнопка */}
         <div className="mt-1 sm:mt-4">
-          <ScrollToFormButton ctaId={1} ctaName="Hero — Записаться на диагностику" />
+          <WhatsAppButton label="Записаться на диагностику" />
           <p className="mt-2 text-center text-xs text-muted-foreground">
-            Заполните форму ниже — это займёт 30 секунд
+            Напишите нам в WhatsApp — это займёт 30 секунд
           </p>
         </div>
       </Section>
@@ -92,7 +92,7 @@ const Index = () => {
           Казахстана, имея больше свободного времени и&nbsp;энергии.
         </p>
         <div className="mt-6">
-          <ScrollToFormButton ctaId={2} ctaName="После блока боли — Записаться на диагностику" />
+          <WhatsAppButton label="Записаться на диагностику" />
         </div>
       </Section>
 
@@ -403,35 +403,15 @@ const Index = () => {
         </ul>
 
         <div className="mt-8 overflow-hidden rounded-2xl bg-banner text-white shadow-xl">
-          <div className="space-y-3 p-6 sm:p-8">
-            <div className="flex items-baseline justify-between gap-4">
-              <span className="text-base text-white/80 sm:text-lg">Общая ценность:</span>
-              <span className="text-xl font-bold line-through opacity-70 sm:text-2xl">
-                340 000 ₸
-              </span>
-            </div>
-            <div className="flex items-baseline justify-between gap-4">
-              <span className="text-base font-semibold text-highlight sm:text-lg">
-                Ваша экономия:
-              </span>
-              <span className="text-xl font-extrabold text-highlight sm:text-2xl">
-                −330 100 ₸
-              </span>
-            </div>
-          </div>
-
-          <div className="border-t border-white/20 bg-white/5 px-6 py-6 text-center sm:px-8">
-            <p className="text-xs font-semibold uppercase tracking-wider text-white/80">
-              Стоимость диагностики сегодня
+          <div className="px-6 py-7 text-center sm:px-8 sm:py-8">
+            <p className="text-base font-semibold leading-relaxed text-white sm:text-lg">
+              Запишитесь на бесплатную диагностику вашей клиники
             </p>
-            <p className="mt-2 text-5xl font-black leading-none text-highlight sm:text-6xl">
-              9 900 ₸
-            </p>
-            <p className="mt-3 text-sm text-white/70">
+            <p className="mt-2 text-sm text-white/80">
               Окупится с первого пациента
             </p>
             <div className="mt-5">
-              <ScrollToFormButton ctaId={3} ctaName="Блок цены — Записаться за 9 900 ₸" label="Записаться за 9 900 ₸" />
+              <WhatsAppButton label="Записаться на диагностику" />
             </div>
           </div>
         </div>
@@ -540,9 +520,7 @@ const Index = () => {
         </div>
 
         <div className="mt-6">
-          <ScrollToFormButton
-            ctaId={4}
-            ctaName="Время действовать — Доступ к системе «Врач на миллион»"
+          <WhatsAppButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
             className="uppercase"
@@ -587,9 +565,7 @@ const Index = () => {
         </div>
 
         <div className="mt-6">
-          <ScrollToFormButton
-            ctaId={5}
-            ctaName="Финал — Доступ к системе «Врач на миллион»"
+          <WhatsAppButton
             variant="cta-orange"
             label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
             className="uppercase"
