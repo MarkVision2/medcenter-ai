@@ -378,8 +378,9 @@ const Index = () => {
             </h2>
 
             <div className="mx-auto mt-7 max-w-md rounded-2xl border border-white/15 bg-white/10 p-5 text-center backdrop-blur-sm">
-              <p className="text-base leading-relaxed sm:text-lg">
-                Это требует{" "}
+              <p className="whitespace-pre-line text-base leading-relaxed sm:text-lg">
+                Это требует&nbsp;
+                {"\n"}
                 <span className="rounded-md bg-highlight/25 px-1.5 py-0.5 font-bold text-highlight">
                   системного подхода
                 </span>
