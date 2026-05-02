@@ -331,8 +331,9 @@ const Index = () => {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Это не разовые истории —{" "}
+        <p className="mt-6 whitespace-pre-line text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Это не разовые истории&nbsp;
+          {"\n"}
           <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
         </p>
       </Section>
