@@ -56,7 +56,7 @@ const Index = () => {
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7">
           <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
-            Ответьте на вопросы — ответ на которые «ДА»:
+            Ответьте на вопросы&nbsp; ответ на которые «ДА»:
           </h2>
 
           <ul className="mx-auto mt-6 max-w-md space-y-5">
