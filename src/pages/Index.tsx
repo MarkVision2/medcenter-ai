@@ -158,7 +158,7 @@ const Index = () => {
           <span className="text-accent-deep">из реальных клиник</span>
         </h2>
         <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
-          4 кейса. Разные города, разные ниши — одна система.
+          Разные города, разные ниши&nbsp; одна система.
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
