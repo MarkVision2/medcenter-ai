@@ -265,7 +265,7 @@ const Index = () => {
         </div>
 
         {/* Ещё 3 коротких кейса */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-3">
           {[
             {
               city: "Астана",
@@ -296,15 +296,16 @@ const Index = () => {
               key={i}
               className="flex flex-col rounded-2xl border bg-card p-5 shadow-sm"
             >
-              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5 text-accent-deep" />
-                <span>{c.city}</span>
-                <span className="text-muted-foreground/50">·</span>
-                <span className="normal-case tracking-normal">{c.niche}</span>
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <MapPin className="h-3.5 w-3.5 text-accent-deep" />
+                  {c.city}
+                </span>
+                <span className="text-sm text-muted-foreground">{c.niche}</span>
               </div>
 
               <div className="mt-3">
-                <p className="text-3xl font-extrabold leading-none text-accent-deep">
+                <p className="whitespace-nowrap text-2xl font-extrabold leading-none text-accent-deep sm:text-3xl">
                   {c.value}
                 </p>
                 <p className="mt-1.5 text-xs text-muted-foreground">{c.period}</p>
