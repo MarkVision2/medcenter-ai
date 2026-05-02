@@ -497,9 +497,6 @@ const Index = () => {
             <p className="text-base font-semibold leading-snug sm:text-lg">
             Важно: работаем только с 1 клиникой в городе
             </p>
-            <p className="mt-2 text-base leading-snug text-muted-foreground sm:text-lg">
-            {"\n"}
-            </p>
           </div>
         </div>
       </Section>
