@@ -154,7 +154,7 @@ const Index = () => {
           Реальный кейс
         </div>
         <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
-          Реальные цифры{" "}
+          Результаты&nbsp;
           <span className="text-accent-deep">из реальных клиник</span>
         </h2>
         <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
