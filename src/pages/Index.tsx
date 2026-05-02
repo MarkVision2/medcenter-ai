@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, Clock, Zap } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, Clock, Zap, ShieldCheck, Handshake, Lightbulb } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -340,19 +340,67 @@ const Index = () => {
 
       {/* 7. СКЕПСИС */}
       <Section tone="muted">
-        <div className="rounded-2xl border-2 border-destructive/70 bg-background p-6 sm:p-8">
-          <h2 className="text-center text-2xl font-extrabold sm:text-3xl">Никакого подвоха нет.</h2>
-          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Мы проводим консультации, чтобы показать <span className="font-bold">вам свой</span> метод
-            ежедневного привлечения премиум-пациентов на услуги имплантов, виниров и т.д.
-          </p>
-          <p className="mt-4 text-center text-base leading-relaxed sm:text-lg">
-            Если после консультации вы захотите, <span className="font-bold">чтобы мы помогли</span> выйти на
-            доход от 500 000 тенге в день с помощью моего метода — то сможете продолжить работу со мной
-            на платной основе. Консультация вас ни к чему не обязывает.
-          </p>
-          <p className="mt-5 text-center text-lg font-bold sm:text-xl">Да-да, нет-нет.</p>
-          <p className="mt-2 text-center text-lg font-bold sm:text-xl">ВСЁ по ЧЕСТНОМУ 🤝</p>
+        <div className="overflow-hidden rounded-3xl border bg-background shadow-lg">
+          {/* Шапка */}
+          <div className="flex flex-col items-center gap-3 bg-gradient-to-br from-accent-soft to-background px-6 pb-7 pt-8 text-center sm:px-10 sm:pt-10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-deep text-white shadow-lg shadow-accent-deep/30">
+              <ShieldCheck className="h-7 w-7" />
+            </div>
+            <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl">
+              Никакого подвоха нет
+            </h2>
+            <p className="max-w-md text-sm text-muted-foreground sm:text-base">
+              Честно объясняем, как всё устроено
+            </p>
+          </div>
+
+          {/* Две карточки */}
+          <div className="grid gap-3 px-5 pb-5 sm:grid-cols-2 sm:gap-4 sm:px-7 sm:pb-7">
+            <div className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent-deep">
+                  <Lightbulb className="h-5 w-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent-deep">
+                  На консультации
+                </p>
+              </div>
+              <p className="text-sm leading-relaxed sm:text-base">
+                Покажу <span className="font-bold">свой метод</span> ежедневного привлечения премиум-пациентов на импланты, виниры и другие дорогие услуги.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-highlight/20 text-banner">
+                  <Handshake className="h-5 w-5" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-banner">
+                  Что дальше
+                </p>
+              </div>
+              <p className="text-sm leading-relaxed sm:text-base">
+                Если захотите, <span className="font-bold">чтобы мы помогли</span> выйти на доход от <span className="whitespace-nowrap font-bold text-accent-deep">500 000 ₸ в день</span> — продолжим работу на платной основе.
+              </p>
+            </div>
+          </div>
+
+          {/* Дисклеймер */}
+          <div className="border-t bg-muted/40 px-5 py-4 text-center sm:px-7">
+            <p className="text-xs text-muted-foreground sm:text-sm">
+              Консультация вас <span className="font-semibold text-foreground">ни к чему не обязывает</span>
+            </p>
+          </div>
+
+          {/* Финальная плашка */}
+          <div className="bg-accent-deep px-5 py-5 text-center text-white sm:px-7 sm:py-6">
+            <p className="text-base font-extrabold uppercase tracking-wide sm:text-lg">
+              Да-да, нет-нет
+            </p>
+            <p className="mt-1 flex items-center justify-center gap-2 text-base font-extrabold uppercase tracking-wide text-highlight sm:text-lg">
+              Всё по&nbsp;честному <span className="text-xl">🤝</span>
+            </p>
+          </div>
         </div>
       </Section>
 
