@@ -154,9 +154,12 @@ const Index = () => {
           Реальный кейс
         </div>
         <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
-          Но почему я так уверен,{" "}
-          <span className="text-accent-deep">что эта система реально работает?</span>
+          Реальные цифры{" "}
+          <span className="text-accent-deep">из реальных клиник</span>
         </h2>
+        <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
+          4 кейса. Разные города, разные ниши — одна система.
+        </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
           {/* Шапка карточки */}
@@ -260,6 +263,77 @@ const Index = () => {
             </p>
           </div>
         </div>
+
+        {/* Ещё 3 коротких кейса */}
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-3">
+          {[
+            {
+              city: "Астана",
+              niche: "Стоматология",
+              value: "+8 400 000 ₸",
+              period: "за 2 месяца",
+              before: "22% доходимости с заявок",
+              after: "61% доходимости, график забит на 3 недели вперёд",
+            },
+            {
+              city: "Шымкент",
+              niche: "Многопрофильный центр",
+              value: "+18 200 000 ₸",
+              period: "за 4 месяца",
+              before: "Собственник лично закрывал заявки по вечерам",
+              after: "Колл-центр работает без владельца, +47 первичных в месяц",
+            },
+            {
+              city: "Караганда",
+              niche: "Косметология",
+              value: "x2,4",
+              period: "к выручке за 3 месяца",
+              before: "Повторных пациентов почти не было",
+              after: "64% записываются на повторный приём ещё до выхода из кабинета",
+            },
+          ].map((c, i) => (
+            <div
+              key={i}
+              className="flex flex-col rounded-2xl border bg-card p-5 shadow-sm"
+            >
+              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 text-accent-deep" />
+                <span>{c.city}</span>
+                <span className="text-muted-foreground/50">·</span>
+                <span className="normal-case tracking-normal">{c.niche}</span>
+              </div>
+
+              <div className="mt-3">
+                <p className="text-3xl font-extrabold leading-none text-accent-deep">
+                  {c.value}
+                </p>
+                <p className="mt-1.5 text-xs text-muted-foreground">{c.period}</p>
+              </div>
+
+              <div className="mt-4 space-y-2 border-t pt-4">
+                <div className="flex items-start gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
+                  <p className="text-sm leading-snug">
+                    <span className="font-semibold text-muted-foreground">Было:</span>{" "}
+                    {c.before}
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <p className="text-sm leading-snug">
+                    <span className="font-semibold text-accent-deep">Стало:</span>{" "}
+                    {c.after}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Это не разовые истории —{" "}
+          <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
+        </p>
       </Section>
 
       {/* 6. РЕЗУЛЬТАТ */}
