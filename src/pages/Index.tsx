@@ -495,7 +495,7 @@ const Index = () => {
           <AlertTriangle className="h-6 w-6 shrink-0 text-accent-deep" />
           <div className="flex-1 text-center">
             <p className="text-base font-semibold leading-snug sm:text-lg">
-              Важно: делаем максимум 2 исследования в неделю.
+            Важно: работаем только с 1 клиникой в городе
             </p>
             <p className="mt-2 text-base leading-snug text-muted-foreground sm:text-lg">
               И только с одной клиникой в городе.
