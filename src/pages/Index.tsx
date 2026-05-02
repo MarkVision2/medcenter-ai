@@ -590,9 +590,10 @@ const Index = () => {
       {/* 14. ДОЖИМ */}
       <Section tone="muted">
         <div className="space-y-4 text-center text-base leading-relaxed sm:text-lg">
-          <p>
-            <span className="font-bold">P.S. Завтра свободных мест может не быть.</span>{" "}
-            Я беру максимум 2 клиники в неделю и только одну в каждом городе.
+          <p className="whitespace-pre-line">
+            <span className="font-bold">&nbsp;Завтра свободных мест может не быть.</span>&nbsp;
+            {"\n"}
+            Я работаю с 1 клиникой в каждом городе.
           </p>
           <p>
             <span className="font-bold">P.P.S.</span> Если вы всё ещё думаете — просто представьте,
