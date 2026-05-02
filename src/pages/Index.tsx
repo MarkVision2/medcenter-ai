@@ -370,11 +370,11 @@ const Index = () => {
             </div>
 
             <h2 className="text-center font-extrabold uppercase leading-[1.15] tracking-tight text-lg sm:text-2xl md:text-3xl">
-              Если ты хочешь забыть о&nbsp;работе за&nbsp;копейки
+              ЕСЛИ ТЫ ХОЧЕШЬ ЗАБЫТЬ О&nbsp;РАБОТЕ ЗА&nbsp;КОПЕЙКИ
               <br className="hidden sm:block" />
-              <span className="text-highlight"> и&nbsp;начать зарабатывать как топовый медицинский центр</span>,
+              <span className="text-highlight"> И&nbsp;НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР</span>,
               <br className="hidden sm:block" />
-              имея больше времени и&nbsp;энергии —
+              ИМЕЯ БОЛЬШЕ ВРЕМЕНИ И&nbsp;ЭНЕРГИИ&nbsp;
             </h2>
 
             <div className="mx-auto mt-7 max-w-md rounded-2xl border border-white/15 bg-white/10 p-5 text-center backdrop-blur-sm">
