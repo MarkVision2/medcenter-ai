@@ -498,7 +498,7 @@ const Index = () => {
             Важно: работаем только с 1 клиникой в городе
             </p>
             <p className="mt-2 text-base leading-snug text-muted-foreground sm:text-lg">
-              И только с одной клиникой в городе.
+            {"\n"}
             </p>
           </div>
         </div>
