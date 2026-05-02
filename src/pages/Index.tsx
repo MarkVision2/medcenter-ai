@@ -1,4 +1,4 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, Clock, Zap } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -586,23 +586,41 @@ const Index = () => {
 
       {/* 14. ДОЖИМ */}
       <Section tone="muted">
-        <div className="space-y-4 text-center text-base leading-relaxed sm:text-lg">
-          <p className="whitespace-pre-line">
-            <span className="font-bold">&nbsp;Завтра свободных мест может не быть.</span>&nbsp;
-            {"\n"}
-            Я работаю с 1 клиникой в каждом городе.
-          </p>
-          <p>
-            Если всё ещё думаете просто представьте,
-            где будете через год, когда узнаете,{" "}
-            <span className="font-bold">что мои клиенты уже делают по 20+ миллионов</span>.
-          </p>
-          <div className="flex items-center gap-3 rounded-xl border-l-4 border-banner bg-background p-4 text-left">
-            <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-banner" />
-            <p className="font-medium">
-              Помните: пока вы думаете, ваши конкуренты внедряют системы продаж и забирают
-              ваших пациентов.
+        <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-background to-muted/40 shadow-xl">
+          {/* Алерт-таймер */}
+          <div className="flex items-center gap-3 bg-destructive/10 px-5 py-3.5 text-destructive sm:px-7">
+            <Clock className="h-5 w-5 shrink-0 animate-pulse" />
+            <p className="text-sm font-bold uppercase tracking-wider sm:text-base">
+              Завтра свободных мест может не быть
             </p>
+          </div>
+
+          {/* Контент */}
+          <div className="space-y-6 px-5 py-7 sm:px-8 sm:py-9">
+            <p className="text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Я работаю только{" "}
+              <span className="font-bold text-foreground">с одной клиникой в каждом городе</span>.
+            </p>
+
+            {/* Главный посыл */}
+            <div className="relative rounded-2xl bg-card p-5 text-center shadow-sm sm:p-7">
+              <p className="text-base leading-relaxed sm:text-lg">
+                Если всё ещё думаете — просто представьте, где будете через год,{" "}
+                <span className="block pt-2 text-2xl font-extrabold leading-tight text-accent-deep sm:text-3xl">
+                  когда мои клиенты уже делают<br />по 20+ миллионов ₸
+                </span>
+              </p>
+            </div>
+
+            {/* Плашка-предупреждение */}
+            <div className="flex items-start gap-3 rounded-xl bg-banner p-4 text-left text-white sm:p-5">
+              <Zap className="mt-0.5 h-5 w-5 shrink-0 text-highlight" />
+              <p className="text-sm font-medium leading-snug sm:text-base">
+                Пока вы думаете —{" "}
+                <span className="font-bold text-highlight">ваши конкуренты внедряют системы продаж</span>{" "}
+                и забирают ваших пациентов.
+              </p>
+            </div>
           </div>
         </div>
       </Section>
