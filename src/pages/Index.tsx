@@ -1,72 +1,63 @@
-import { Check, ArrowRight, AlertTriangle, Phone, MapPin, Square, X, TrendingUp, Users, Wallet, Sparkles, Gift, MessageCircle, Map, BarChart3, PhoneCall, BadgeCheck, Award, Building2, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, Clock, Zap, ShieldCheck, Handshake, Lightbulb } from "lucide-react";
+import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import yuriPhoto from "@/assets/yuri.png";
-import heroLaptop from "@/assets/hero-laptop.png";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
-      {/* 1. HERO */}
-      <Section className="pt-3 pb-4 sm:pt-10 sm:pb-12">
+      {/* 1. HERO + ВИДЕО */}
+      <Section className="pt-3 pb-6 sm:pt-8 sm:pb-10">
         {/* Красный баннер */}
-        <div className="rounded-md bg-destructive px-5 py-5 sm:px-6 sm:py-6 text-center">
-          <p className="text-primary-foreground font-sans font-semibold sm:text-xl md:text-2xl">
-            Проверенная методика
-          </p>
-          <p className="mt-1 text-primary-foreground font-sans font-semibold sm:text-xl md:text-2xl">
-            для владельцев медицинских центров
+        <div className="rounded-md bg-destructive px-5 py-4 sm:px-6 sm:py-5 text-center">
+          <p className="text-primary-foreground font-sans font-semibold text-base sm:text-xl md:text-2xl leading-snug">
+            Проверенная система для владельцев медицинских клиник
           </p>
         </div>
 
-        {/* Главный заголовок */}
-        <h1 className="mt-4 text-center font-extrabold uppercase leading-[1.1] tracking-tight sm:mt-10 sm:text-4xl md:text-5xl whitespace-pre-line text-xl">
-          ИЩУ 2-Х ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ, КОТОРЫЕ ХОТЯТ СТАБИЛЬНЫЙ ПОТОК ПЕРВИЧНЫХ ПАЦИЕНТОВ,{"\n"}И ПОЛНОСТЬЮ ЗАПОЛНИТЬ ГРАФИК ВСЕХ ДОКТОРОВ
+        {/* H1 */}
+        <h1 className="mt-4 text-center font-extrabold leading-[1.15] tracking-tight text-xl sm:text-3xl md:text-4xl">
+          Как увеличить выручку медицинской клиники{" "}
+          <span className="text-accent-deep">в 2–3 раза</span>{" "}
+          без увеличения расходов на рекламу
         </h1>
 
-        {/* Синий баннер */}
-        <div className="mt-3 sm:mt-10">
-          <Banner className="px-3 py-4 sm:px-6 sm:py-6 text-base">
-            КОТОРЫЕ УСТАЛИ РАБОТАТЬ ЗА&nbsp;КОПЕЙКИ И&nbsp;ХОТЯТ ВЫЙТИ НА&nbsp;ДОХОД ОТ&nbsp;300&nbsp;000 В&nbsp;ДЕНЬ, ИМЕЯ БОЛЬШЕ СВОБОДНОГО ВРЕМЕНИ И&nbsp;МЕНЬШЕ СТРЕССА
-          </Banner>
-        </div>
+        <p className="mt-3 text-center text-sm text-muted-foreground sm:text-base">
+          Вы можете посмотреть видео или прочитать статью ниже
+        </p>
 
-        {/* Картинка с ноутбуком — прозрачный фон, естественно вписана */}
-        <div className="mt-1 sm:mt-4">
-          <img
-            src={heroLaptop}
-            alt="Система «Врач на миллион» — превращение первичных заявок в пациентов"
-            width={1024}
-            height={1024}
-            className="mx-auto block w-full max-w-[360px] sm:max-w-md"
+        {/* Видео-плейсхолдер. TODO: замените dQw4w9WgXcQ на ID вашего YouTube видео */}
+        <div className="relative mt-4 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Как увеличить выручку медицинской клиники"
+            className="absolute inset-0 h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           />
         </div>
 
-        {/* Кнопка */}
-        <div className="mt-1 sm:mt-4">
-          <WhatsAppButton label="Записаться на диагностику" />
-          <p className="mt-2 text-center text-xs text-muted-foreground">
-            Напишите нам в WhatsApp — это займёт 30 секунд
-          </p>
+        {/* CTA под видео */}
+        <div className="mt-5">
+          <WhatsAppButton label="Забронировать диагностику" />
         </div>
       </Section>
 
-      {/* 2. БОЛЬ */}
+      {/* 2. БОЛИ */}
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7">
           <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
-            Ответьте на вопросы&nbsp; ответ на которые «ДА»:
+            Узнайте себя?
           </h2>
 
           <ul className="mx-auto mt-6 max-w-md space-y-5">
             {[
-              "Устали работать и нанимать разных таргетологов, SMMщиков, которые обещают результат, но пациентов нет и нет",
-              "Видите, как ваши коллеги успешно зарабатывают и путешествуют, а вы смотрите на них и не понимаете ЧТО ДЕЛАЕТЕ НЕ ТАК",
-              "Вынуждены цепляться за каждого пациента, даже на невыгодных условиях и работаете в минус",
-              "Не знаете, как привлекать клиентов на премиум-услуги и выйти из ловушки дешёвых пациентов?",
-              "Больше всего надоело, что пациенты уходят к конкурентам,\nа вы не понимаете почему",
-              "Хотите создать систему, при которой пациенты приходят сами, а врачи только лечат",
+              "Если у вас нет стабильного потока первичных пациентов",
+              "Вы устали постоянно нанимать таргетологов которые что-то делают, но результата как не было, так и нет, и при этом у вас есть ощущение, что вы платите и не понимаете, за что.",
+              "Видите, как ваши коллеги успешно зарабатывают и путешествуют, а вы смотрите на них и не понимаете, ЧТО ДЕЛАЕТЕ НЕ ТАК.",
+              "Вынуждены цепляться за каждого пациента, даже на невыгодных условиях, и работаете в минус.",
+              "Не знаете, как привлекать пациентов на премиум-услуги и выйти из ловушки дешёвых пациентов?",
             ].map((item, i) => (
               <li key={i} className="flex gap-3">
                 <Square
@@ -80,74 +71,84 @@ const Index = () => {
             ))}
           </ul>
         </div>
+
+        <div className="mt-6">
+          <Banner>
+            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp;— ТО&nbsp;ЭТА ИНФОРМАЦИЯ ДЛЯ&nbsp;ВАС
+          </Banner>
+        </div>
       </Section>
 
       {/* 3. ПЕРЕХОД */}
       <Section>
-        <Banner>
-          ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp; ЗАПИСЫВАЙТЕСЬ НА&nbsp;ДИАГНОСТИКУ
-        </Banner>
-        <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Я расскажу, как забыть о&nbsp;работе за&nbsp;копейки и&nbsp;начать зарабатывать как лучшие клиники
-          Казахстана, имея больше свободного времени и&nbsp;энергии.
+        <p className="text-center text-lg leading-relaxed sm:text-xl">
+          Сейчас я расскажу, как забыть о&nbsp;работе за&nbsp;копейки и&nbsp;начать зарабатывать, как{" "}
+          <span className="font-bold text-accent-deep">лучшие клиники Казахстана</span>, имея больше свободного времени и&nbsp;энергии.
         </p>
-        <div className="mt-6">
-          <WhatsAppButton label="Записаться на диагностику" />
-        </div>
       </Section>
 
-      {/* 4. ОБО МНЕ */}
+      {/* 4. СУТЬ СИСТЕМЫ — 3 ЗОНЫ */}
       <Section tone="muted">
-        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
-          <BadgeCheck className="h-3.5 w-3.5" />
-          Знакомство
+        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+          <Sparkles className="h-3.5 w-3.5" />
+          Суть системы
         </div>
+        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
+          Система, которая работает{" "}
+          <span className="text-accent-deep">в трёх зонах</span>
+        </h2>
 
-        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10">
-          {/* Фото + подпись */}
-          <div className="relative mx-auto w-full max-w-sm md:mx-0">
-            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-accent-deep/20 blur-xl" aria-hidden="true" />
-            <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
-              <img
-                src={yuriPhoto}
-                alt="Юрий — автор системы «Врач на миллион»"
-                className="block w-full object-cover"
-              />
-              <div className="border-t bg-card px-4 py-3">
-                <p className="text-sm font-bold leading-tight">Юрий</p>
-                <p className="text-xs text-muted-foreground">
-                  Работаю по системе «Врач на миллион»
-                </p>
-              </div>
-            </div>
-          </div>
+        <ul className="mt-7 space-y-4">
+          {[
+            {
+              icon: Target,
+              title: "Стоимость привлечения пациента",
+              desc: "Это всё, что вы тратите на рекламу, на контент-маркетинг, на листовки, на радио и так далее. Здесь важно знать стоимость одной заявки, то есть обращения, которое поступило в вашу клинику.",
+            },
+            {
+              icon: Workflow,
+              title: "Эффективность рекламы и воронки продаж",
+              desc: "Как быстро заявка с рекламы превращается в запись и визит на приём. На этом этапе важно фиксировать стоимость визита.",
+            },
+            {
+              icon: Layers,
+              title: "Основная продажа курса лечения",
+              desc: "Восстановления и так далее. На этом этапе мы измеряем эффективность ваших врачей или кураторов лечения и то, как они проводят первичную диагностику: делают анамнез, презентуют клинику, методику и составляют план лечения.",
+            },
+          ].map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <li
+                key={i}
+                className="group relative overflow-hidden rounded-2xl border bg-card p-5 shadow-sm sm:p-6"
+              >
+                <span className="absolute right-3 top-3 text-5xl font-black leading-none text-accent/10 sm:text-6xl">
+                  {i + 1}
+                </span>
+                <div className="relative flex items-start gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
+                    <Icon className="h-5 w-5" strokeWidth={2.5} />
+                  </span>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold leading-snug">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
 
-          {/* Текст */}
-          <div>
-            <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left">
-              Привет, меня зовут{" "}
-              <span className="text-accent-deep">Юрий</span>
-            </h2>
-
-            <p className="mt-4 text-base leading-relaxed sm:text-lg">
-              Я прошёл путь от маркетолога, который запускает рекламу для стоматологий и
-              медицинских центров, до эксперта, который создал систему, по которой мед. центры
-              получают не просто заявки, а именно{" "}
-              <span className="font-semibold">«платежеспособных» пациентов</span>.
-            </p>
-
-            <p className="mt-4 text-base leading-relaxed sm:text-lg">
-              Я помогаю медицинским клиникам вырваться из замкнутого круга и выйти на доход{" "}
-              <span className="font-semibold text-accent-deep">от 500 000 тенге в день</span>{" "}
-              через систему «Врач на миллион» — ту самую систему, которая изменила жизнь уже{" "}
-              <span className="font-semibold">25+ мед. центрам</span>.
-            </p>
-
-          </div>
+        <div className="mt-6 rounded-2xl bg-banner p-5 text-center text-white shadow-lg sm:p-6">
+          <p className="text-base font-extrabold uppercase leading-snug text-highlight sm:text-lg">
+            Именно здесь находится ваша максимальная прибыль
+          </p>
         </div>
       </Section>
 
-      {/* 5. КЕЙС */}
+      {/* 5. КЕЙСЫ — оставлены без изменений */}
       <Section>
         <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
           <Sparkles className="h-3.5 w-3.5" />
@@ -162,7 +163,6 @@ const Index = () => {
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
-          {/* Шапка карточки */}
           <div className="border-b bg-accent-soft/40 px-6 py-4 sm:px-8">
             <div className="flex items-center justify-center gap-2 text-center font-semibold text-accent-deep">
               <MapPin className="h-5 w-5 shrink-0" />
@@ -171,7 +171,6 @@ const Index = () => {
           </div>
 
           <div className="p-6 sm:p-8">
-            {/* Проблема */}
             <div className="rounded-xl border-l-4 border-destructive bg-destructive/5 p-4">
               <p className="text-xs font-bold uppercase tracking-wider text-destructive">
                 Было
@@ -181,7 +180,6 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Что сделали */}
             <h3 className="mt-7 text-center text-lg font-bold sm:text-xl">
               Что мы сделали?
             </h3>
@@ -203,14 +201,12 @@ const Index = () => {
               ))}
             </ul>
 
-            {/* Результат */}
             <div className="mt-7 rounded-2xl bg-banner p-6 text-center text-white shadow-lg">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-highlight">
                 <TrendingUp className="h-3.5 w-3.5" />
                 Результат за 2 недели
               </div>
 
-              {/* Воронка цифр */}
               <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {[
                   { icon: Megaphone, value: "830 000 ₸", label: "Расходы на рекламу" },
@@ -230,7 +226,6 @@ const Index = () => {
                 ))}
               </div>
 
-              {/* Средний чек */}
               <div className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-white/10 p-3">
                 <Receipt className="h-5 w-5 text-highlight" />
                 <p className="text-sm text-white/80">
@@ -239,7 +234,6 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* Выручка */}
               <div className="mt-4 rounded-xl bg-white/10 p-4">
                 <Wallet className="mx-auto h-6 w-6 text-highlight" />
                 <p className="mt-2 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
@@ -251,7 +245,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Вывод */}
             <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
               Тот же бюджет на рекламу в{" "}
               <span className="font-bold text-foreground">3 раза больше</span>{" "}
@@ -264,7 +257,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Ещё 3 коротких кейса */}
         <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-3">
           {[
             {
@@ -331,357 +323,125 @@ const Index = () => {
           ))}
         </div>
 
-        <p className="mt-6 whitespace-pre-line text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Это не разовые истории&nbsp;
-          {"\n"}
+        <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Это не разовые истории —{" "}
           <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
         </p>
       </Section>
 
-      {/* 7. СКЕПСИС */}
+      {/* 6. ОБО МНЕ */}
       <Section tone="muted">
-        <div className="overflow-hidden rounded-3xl border bg-background shadow-lg">
-          {/* Шапка */}
-          <div className="flex flex-col items-center gap-3 bg-gradient-to-br from-accent-soft to-background px-6 pb-7 pt-8 text-center sm:px-10 sm:pt-10">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-deep text-white shadow-lg shadow-accent-deep/30">
-              <ShieldCheck className="h-7 w-7" />
-            </div>
-            <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl">
-              Никакого подвоха нет
-            </h2>
-            <p className="max-w-md text-sm text-muted-foreground sm:text-base">
-              Честно объясняем, как всё устроено
-            </p>
-          </div>
+        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+          <BadgeCheck className="h-3.5 w-3.5" />
+          Знакомство
+        </div>
 
-          {/* Две карточки */}
-          <div className="grid gap-3 px-5 pb-5 sm:grid-cols-2 sm:gap-4 sm:px-7 sm:pb-7">
-            <div className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent-deep">
-                  <Lightbulb className="h-5 w-5" />
-                </div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent-deep">
-                  На консультации
+        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10">
+          <div className="relative mx-auto w-full max-w-sm md:mx-0">
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-accent-deep/20 blur-xl" aria-hidden="true" />
+            <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
+              <img
+                src={yuriPhoto}
+                alt="Юрий — автор системы для медицинских клиник"
+                className="block w-full object-cover"
+              />
+              <div className="border-t bg-card px-4 py-3">
+                <p className="text-sm font-bold leading-tight">Юрий</p>
+                <p className="text-xs text-muted-foreground">
+                  Эксперт по росту медицинских клиник
                 </p>
               </div>
-              <p className="text-sm leading-relaxed sm:text-base">
-                Покажу <span className="font-bold">свой метод</span> ежедневного привлечения премиум-пациентов на импланты, виниры и другие дорогие услуги.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-highlight/20 text-banner">
-                  <Handshake className="h-5 w-5" />
-                </div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-banner">
-                  Что дальше
-                </p>
-              </div>
-              <p className="text-sm leading-relaxed sm:text-base">
-                Если захотите, <span className="font-bold">чтобы мы помогли</span> выйти на доход от <span className="whitespace-nowrap font-bold text-accent-deep">500 000 ₸ в день</span> — продолжим работу на платной основе.
-              </p>
             </div>
           </div>
 
-          {/* Дисклеймер */}
-          <div className="border-t bg-muted/40 px-5 py-4 text-center sm:px-7">
-            <p className="text-xs text-muted-foreground sm:text-sm">
-              Консультация вас <span className="font-semibold text-foreground">ни к чему не обязывает</span>
-            </p>
-          </div>
-
-          {/* Финальная плашка */}
-          <div className="bg-accent-deep px-5 py-5 text-center text-white sm:px-7 sm:py-6">
-            <p className="text-base font-extrabold uppercase tracking-wide sm:text-lg">
-              Да-да, нет-нет
-            </p>
-            <p className="mt-1 flex items-center justify-center gap-2 text-base font-extrabold uppercase tracking-wide text-highlight sm:text-lg">
-              Всё по&nbsp;честному <span className="text-xl">🤝</span>
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* 8. СУТЬ */}
-      <Section tone="muted">
-        <div className="relative overflow-hidden rounded-3xl bg-banner p-7 text-white shadow-xl sm:p-10">
-          {/* Декор */}
-          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-highlight/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
-
-          <div className="relative">
-            <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-highlight">
-              <Sparkles className="h-3.5 w-3.5" />
-              Главное
-            </div>
-
-            <h2 className="text-center font-extrabold uppercase leading-[1.15] tracking-tight text-lg sm:text-2xl md:text-3xl">
-              ЕСЛИ ТЫ ХОЧЕШЬ ЗАБЫТЬ О&nbsp;РАБОТЕ ЗА&nbsp;КОПЕЙКИ
-              <br className="hidden sm:block" />
-              <span className="text-highlight"> И&nbsp;НАЧАТЬ ЗАРАБАТЫВАТЬ КАК ТОПОВЫЙ МЕДИЦИНСКИЙ ЦЕНТР</span>,
-              <br className="hidden sm:block" />
-              ИМЕЯ БОЛЬШЕ ВРЕМЕНИ И&nbsp;ЭНЕРГИИ&nbsp;
+          <div>
+            <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left">
+              Меня зовут <span className="text-accent-deep">Юрий</span>
             </h2>
 
-            <div className="mx-auto mt-7 max-w-md rounded-2xl border border-white/15 bg-white/10 p-5 text-center backdrop-blur-sm">
-              <p className="whitespace-pre-line text-base leading-relaxed sm:text-lg">
-                Это требует&nbsp;
-                {"\n"}
-                <span className="rounded-md bg-highlight/25 px-1.5 py-0.5 font-bold text-highlight">
-                  системного подхода
-                </span>
-                .
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">
-                Без системы вы будете и&nbsp;дальше терять пациентов и&nbsp;деньги.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* 9. ЧТО ПОЛУЧИТЕ */}
-      <Section>
-        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
-          <Gift className="h-3.5 w-3.5" />
-          4 шага диагностики
-        </div>
-        <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
-          Что вы получите вместе{"\n"}
-          <span className="text-accent-deep">с диагностикой</span>
-        </h2>
-        <p className="mt-3 text-center text-base text-muted-foreground sm:text-lg whitespace-pre-line">
-          Найдём все дыры, через которые утекают{"\n"}ваши пациенты и деньги.
-        </p>
-
-        <ul className="mt-7 space-y-4">
-          {[
-            {
-              icon: MessageCircle,
-              title: "Часовая консультация&nbsp;\n1 на 1 со мной",
-              desc: "Покажу, как привлекать первичных пациентов с бюджетами от 300 000 тенге без бесконечного поиска и сарафанного радио",
-              value: "150 000 ₸",
-            },
-            {
-              icon: Map,
-              title: "Карта с пошаговым планом",
-              desc: "Как выйти на стабильный доход\n300 000 – 600 000 ₸ в день, даже если сейчас зарабатываете в 5 раз меньше",
-              value: "80 000 ₸",
-            },
-            {
-              icon: BarChart3,
-              title: "Анализ рекламы и каналов привлечения",
-              desc: "Разберём текущие источники пациентов и точки утечки бюджета",
-              value: "60 000 ₸",
-            },
-            {
-              icon: PhoneCall,
-              title: "Тайный звонок",
-              desc: "Прозвоним как пациент, запишем разговор, покажем, где администратор сливает заявки",
-              value: "50 000 ₸",
-            },
-          ].map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <li
-                key={i}
-                className="group relative overflow-hidden rounded-2xl border bg-card p-5 shadow-sm transition-shadow hover:shadow-md sm:p-6"
-              >
-                <span className="absolute right-3 top-3 text-5xl font-black leading-none text-accent/10 sm:text-6xl">
-                  {i + 1}
-                </span>
-                <div className="relative flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
-                    <Icon className="h-5 w-5" strokeWidth={2.5} />
-                  </span>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold leading-snug">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {item.desc}
-                    </p>
-                    <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-sm font-bold text-accent-deep">
-                      Ценность: {item.value}
-                    </div>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-
-        <div className="mt-8 overflow-hidden rounded-2xl bg-banner text-white shadow-xl">
-          <div className="px-6 py-7 text-center sm:px-8 sm:py-8">
-            <p className="text-base font-semibold leading-relaxed text-white sm:text-lg">
-              Запишитесь на диагностику вашей клиники
+            <p className="mt-4 text-base leading-relaxed sm:text-lg">
+              Последние <span className="font-semibold">5 лет</span> я занимался именно этим: выстраивал систему, которая позволяет при тех же вложениях в рекламный бюджет увеличивать выручку клиники. Мы с командой прогнали десятки кейсов разных клиник и помогли сделать окупаемость в{" "}
+              <span className="font-semibold text-accent-deep">3, 5 и даже 10 раз</span>.
             </p>
-            <p className="mt-2 text-sm text-white/80">{"\n"}</p>
-            <div className="mt-5">
-              <WhatsAppButton label="Записаться на диагностику" />
-            </div>
-          </div>
-        </div>
-      </Section>
 
-      {/* 10. УНИКАЛЬНОСТЬ */}
-      <Section tone="muted">
-        <h2 className="text-center text-2xl font-bold sm:text-3xl">
-          На рынке я не видел, чтобы так кто-то делал
-        </h2>
-        <p className="mt-4 text-center leading-relaxed sm:text-lg text-xl">
-          Обычно это: <span className="italic">«Давайте больше рекламы настроим…»</span>
-        </p>
-        <p className="mt-3 text-center leading-relaxed sm:text-lg text-xl">
-          А мы сначала закроем все дыры в воронке. Нет смысла лить больше воды в дырявое ведро.
-        </p>
-      </Section>
+            <p className="mt-4 text-base leading-relaxed sm:text-lg">
+              Я беру на себя ответственность за каждый этап. Я точно знаю, на что смотреть, чтобы больше пациентов доходило до клиники, записывалось на лечение и оставалось с вами на долгие годы.
+            </p>
 
-      {/* 11. ОГРАНИЧЕНИЕ */}
-      <Section>
-        <div className="flex items-center gap-4 rounded-2xl border-l-4 border-accent bg-accent-soft p-5 sm:p-6">
-          <AlertTriangle className="h-6 w-6 shrink-0 text-accent-deep" />
-          <div className="flex-1 text-center">
-            <p className="text-base font-semibold leading-snug sm:text-lg">
-            Важно: работаем только с 1 клиникой в городе
+            <p className="mt-4 rounded-xl border-l-4 border-accent bg-accent-soft p-4 text-base font-semibold leading-relaxed text-accent-deep sm:text-lg">
+              С этой системой вы перестанете терять деньги, а каждая инвестиция в маркетинг начнёт работать на результат.
             </p>
           </div>
         </div>
       </Section>
 
-      {/* 12. ВЫБОР — ДВЕ ДОРОГИ */}
-      <Section tone="muted">
-        <h2 className="text-center text-4xl font-black uppercase tracking-tight sm:text-5xl">
-          Две дороги:
-        </h2>
-
-        {/* Развилка-эмодзи между заголовком и карточками */}
-        <div className="mt-4 flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
-          🛣️
-        </div>
-
-        <div className="mt-2 grid grid-cols-2 gap-3 sm:gap-4">
-          {/* Красная — первая дорога */}
-          <div className="rounded-3xl bg-road-bad p-5 text-road-bad-foreground shadow-lg sm:p-6">
-            <div className="flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
-              🤷‍♂️
-            </div>
-            <h3 className="mt-3 text-center text-xl font-black uppercase leading-tight sm:text-2xl">
-              Первая<br />дорога:
-            </h3>
-            <ul className="mt-5 space-y-4 text-base sm:text-lg">
-              {[
-                "Закрыть эту страницу",
-                "Дальше сидеть без денег",
-                "Через год жалеть о потерянном времени",
-              ].map((t) => (
-                <li key={t} className="flex gap-2">
-                  <X className="mt-1 h-4 w-4 shrink-0" strokeWidth={3} />
-                  <span className="leading-snug">{t}</span>
-                </li>
-              ))}
-            </ul>
+      {/* 7. СТОИМОСТЬ */}
+      <Section>
+        <div className="overflow-hidden rounded-3xl border bg-card shadow-md">
+          <div className="flex items-center gap-3 border-b bg-accent-soft/50 px-5 py-4 sm:px-7">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-deep text-white">
+              <HelpCircle className="h-5 w-5" />
+            </span>
+            <p className="text-lg font-extrabold leading-tight sm:text-xl">
+              Вы спросите: сколько это стоит?
+            </p>
           </div>
-
-          {/* Зелёная — для волков */}
-          <div className="rounded-3xl bg-road-good p-5 text-road-good-foreground shadow-lg sm:p-6">
-            <div className="flex justify-center text-5xl sm:text-6xl" aria-hidden="true">
-              🐺
-            </div>
-            <h3 className="mt-3 text-center text-xl font-black uppercase leading-tight sm:text-2xl">
-              Вторая дорога<br />(для&nbsp;волков):
-            </h3>
-            <ul className="mt-5 space-y-4 text-base sm:text-lg">
-              {[
-                "Пройти диагностику",
-                "Узнать свои слабые места",
-                "Начать зарабатывать как босс",
-              ].map((t, i) => (
-                <li key={t} className="flex gap-2">
-                  <span
-                    className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/90 text-sm font-black text-road-good shadow-sm"
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="leading-snug">{t}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="px-5 py-6 sm:px-7 sm:py-7">
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Я не знаю, сколько это стоит, потому что не знаю конкретно вашу проблему и что именно нужно будет делать в первую очередь. Возможно, будет достаточно <span className="font-semibold text-foreground">что-то подправить</span>, а возможно — <span className="font-semibold text-foreground">выстроить всю систему под ключ</span>.
+            </p>
           </div>
         </div>
       </Section>
 
-      {/* 13. CTA — ВРЕМЯ ДЕЙСТВОВАТЬ */}
-      <Section>
-        <h2 className="text-center text-4xl font-extrabold uppercase leading-none tracking-tight sm:text-5xl">
-          Время действовать
+      {/* 8. ФИНАЛЬНЫЙ CTA */}
+      <Section tone="muted">
+        <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
+          Если вы хотите оставить конкурентов позади и{" "}
+          <span className="text-accent-deep">кратно увеличить выручку</span> вашей клиники…
         </h2>
 
-        <div className="mt-7">
-          <Banner>
-            ЕСЛИ ХОТИТЕ ПОНЯТЬ КАК&nbsp;ВЫРАСТИ&nbsp; НАЖИМАЙТЕ НА&nbsp;КНОПКУ НИЖЕ
-          </Banner>
+        <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет — жмите на кнопку и записывайтесь на диагностику.
+        </p>
+
+        {/* Цена */}
+        <div className="mt-6 rounded-2xl bg-banner p-5 text-center text-white shadow-lg sm:p-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-highlight">
+            Диагностика стоит
+          </p>
+          <p className="mt-1 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
+            10 000 тенге
+          </p>
+        </div>
+
+        {/* Что внутри */}
+        <div className="mt-5 rounded-2xl border bg-card p-5 sm:p-6">
+          <p className="text-base leading-relaxed sm:text-lg">
+            Мы разберём вашу текущую ситуацию и дадим{" "}
+            <span className="font-bold text-accent-deep">готовый пошаговый план</span>: где вы теряете деньги прямо сейчас и как увеличить количество первичных пациентов без дополнительных расходов на рекламу.
+          </p>
+        </div>
+
+        {/* Алерт */}
+        <div className="mt-5 flex items-start gap-3 rounded-xl border-l-4 border-destructive bg-destructive/5 p-4 sm:p-5">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-destructive" />
+          <p className="text-sm font-semibold leading-snug text-foreground sm:text-base">
+            Количество мест ограничено, поэтому успейте оставить заявку.
+          </p>
         </div>
 
         <div className="mt-6">
           <WhatsAppButton
             variant="cta-orange"
-            label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
+            label="Забронировать диагностику"
             className="uppercase"
           />
         </div>
-      </Section>
 
-      {/* 14. ДОЖИМ */}
-      <Section tone="muted">
-        <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-background to-muted/40 shadow-xl">
-          {/* Алерт-таймер */}
-          <div className="flex items-center gap-3 bg-destructive/10 px-5 py-3.5 text-destructive sm:px-7">
-            <Clock className="h-5 w-5 shrink-0 animate-pulse" />
-            <p className="text-sm font-bold uppercase tracking-wider sm:text-base">
-              Завтра свободных мест может не быть
-            </p>
-          </div>
-
-          {/* Контент */}
-          <div className="space-y-6 px-5 py-7 sm:px-8 sm:py-9">
-            <p className="text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Я работаю только{" "}
-              <span className="font-bold text-foreground">с одной клиникой в каждом городе</span>.
-            </p>
-
-            {/* Главный посыл */}
-            <div className="relative rounded-2xl bg-card p-5 text-center shadow-sm sm:p-7">
-              <p className="text-base leading-relaxed sm:text-lg">
-                Если всё ещё думаете — просто представьте, где будете через год,{" "}
-                <span className="block pt-2 text-2xl font-extrabold leading-tight text-accent-deep sm:text-3xl">
-                  когда мои клиенты уже делают<br />по 20+ миллионов ₸
-                </span>
-              </p>
-            </div>
-
-            {/* Плашка-предупреждение */}
-            <div className="flex items-start gap-3 rounded-xl bg-banner p-4 text-left text-white sm:p-5">
-              <Zap className="mt-0.5 h-5 w-5 shrink-0 text-highlight" />
-              <p className="text-sm font-medium leading-snug sm:text-base">
-                Пока вы думаете —{" "}
-                <span className="font-bold text-highlight">ваши конкуренты внедряют системы продаж</span>{" "}
-                и забирают ваших пациентов.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* 15. ФИНАЛ */}
-      <Section>
-        <div>
-          <WhatsAppButton
-            variant="cta-orange"
-            label="🔗 ХОЧУ ПОЛУЧИТЬ ДОСТУП К СИСТЕМЕ «ВРАЧ НА МИЛЛИОН»"
-            className="uppercase"
-          />
-        </div>
+        <p className="mt-4 text-center text-base font-bold text-accent-deep sm:text-lg">
+          До встречи на разборе!
+        </p>
       </Section>
 
       <footer className="border-t bg-background px-5 py-8 text-center text-xs text-muted-foreground">
