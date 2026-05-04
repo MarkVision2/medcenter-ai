@@ -76,7 +76,7 @@ const Index = () => {
 
         <div className="mt-6">
           <Banner>
-            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp;— ТО&nbsp;ЭТА ИНФОРМАЦИЯ ДЛЯ&nbsp;ВАС
+            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp; ТО&nbsp;ЭТА ИНФОРМАЦИЯ ТОЧНО ДЛЯ&nbsp;ВАС
           </Banner>
         </div>
       </Section>
