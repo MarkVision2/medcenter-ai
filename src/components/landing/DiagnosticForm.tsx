@@ -177,6 +177,30 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         );
       }
 
+      // Google Analytics (gtag.js) — конверсия Lead
+      const gtag = (window as any).gtag;
+      if (typeof gtag === "function") {
+        gtag("event", "generate_lead", {
+          event_category: "engagement",
+          event_label: ctaName ?? "diagnostic_form",
+          method: "form",
+          value: 9900,
+          currency: "KZT",
+          transaction_id: eventId,
+        });
+      }
+
+      // GTM dataLayer
+      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dataLayer.push({
+        event: "lead_submitted",
+        event_id: eventId,
+        cta_id: ctaId ?? null,
+        cta_name: ctaName ?? null,
+        lead_value: 9900,
+        currency: "KZT",
+      });
+
       const fbp = getCookie("_fbp");
       const fbc = getCookie("_fbc");
       const utm = getUtmParams();
