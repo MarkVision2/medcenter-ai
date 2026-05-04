@@ -96,7 +96,7 @@ const Index = () => {
           Суть системы
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
-          Система, которая работает{" "}
+          Система, которая работает <br />
           <span className="text-accent-deep">в трёх зонах</span>
         </h2>
 
