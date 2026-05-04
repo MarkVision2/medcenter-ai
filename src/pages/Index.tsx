@@ -2,6 +2,7 @@ import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Meg
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
+import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
 import yuriPhoto from "@/assets/yuri.png";
 
 const Index = () => {
@@ -42,7 +43,11 @@ const Index = () => {
 
         {/* CTA под видео */}
         <div className="mt-5">
-          <WhatsAppButton label="Забронировать диагностику" />
+          <ScrollToFormButton
+            label="Забронировать диагностику"
+            ctaId={1}
+            ctaName="Hero — Забронировать диагностику"
+          />
         </div>
       </Section>
 
@@ -434,10 +439,12 @@ const Index = () => {
         </div>
 
         <div className="mt-6">
-          <WhatsAppButton
+          <ScrollToFormButton
             variant="cta-orange"
             label="Забронировать диагностику"
             className="uppercase"
+            ctaId={2}
+            ctaName="Финальный CTA — Забронировать диагностику"
           />
         </div>
 
