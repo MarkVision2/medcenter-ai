@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO + ВИДЕО */}
-      <Section className="pt-3 pb-6 sm:pt-8 sm:pb-10">
+      <Section className="pt-3 pb-20 sm:pt-8 sm:pb-10 min-h-[100svh]">
         {/* Красный баннер */}
         <div className="rounded-md bg-destructive px-5 py-4 sm:px-6 sm:py-5 text-center">
           <p className="text-primary-foreground font-sans font-semibold text-base sm:text-xl md:text-2xl leading-snug">
