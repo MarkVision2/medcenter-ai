@@ -17,14 +17,16 @@ const Index = () => {
         </div>
 
         {/* H1 */}
-        <h1 className="mt-4 text-center font-extrabold leading-[1.15] tracking-tight text-xl sm:text-3xl md:text-4xl">
+        <h1 className="mt-4 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-2xl">
           Как увеличить выручку медицинской клиники{" "}
+          <br />
           <span className="text-accent-deep">в 2–3 раза</span>{" "}
           без увеличения расходов на рекламу
         </h1>
 
         <p className="mt-3 text-center text-sm text-muted-foreground sm:text-base">
-          Вы можете посмотреть видео или прочитать статью ниже
+          Вы можете посмотреть видео <br />
+          или прочитать статью ниже
         </p>
 
         {/* Видео-плейсхолдер. TODO: замените dQw4w9WgXcQ на ID вашего YouTube видео */}
