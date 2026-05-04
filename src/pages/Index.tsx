@@ -24,11 +24,6 @@ const Index = () => {
           без увеличения расходов на рекламу
         </h1>
 
-        <p className="mt-3 text-center text-sm text-muted-foreground sm:text-base">
-          Вы можете посмотреть видео <br />
-          или прочитать статью ниже
-        </p>
-
         {/* Видео-плейсхолдер. TODO: замените dQw4w9WgXcQ на ID вашего YouTube видео */}
         <div className="relative mt-4 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
           <iframe
@@ -39,6 +34,11 @@ const Index = () => {
             allowFullScreen
           />
         </div>
+
+        <p className="mt-3 text-center text-sm text-muted-foreground sm:text-base">
+          Вы можете посмотреть видео <br />
+          или прочитать статью ниже
+        </p>
 
         {/* CTA под видео */}
         <div className="mt-5">
