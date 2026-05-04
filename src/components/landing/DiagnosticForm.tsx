@@ -1,27 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Phone, Building2, ArrowRight, Loader2 } from "lucide-react";
+import { User, Phone, ArrowRight, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
-
-const NICHES: string[] = [
-  "Многопрофильная клиника",
-  "Стоматология",
-  "Косметология / эстетическая медицина",
-  "Гинекология / репродуктология",
-  "Урология / андрология",
-  "Ортопедия / травматология",
-  "Реабилитация / физиотерапия",
-  "Диагностика (УЗИ / МРТ / КТ)",
-];
-const OTHER_VALUE = "Другое";
 
 const formSchema = z.object({
   name: z
@@ -37,21 +23,9 @@ const formSchema = z.object({
     .refine((v) => v.replace(/\D/g, "").length >= 7, {
       message: "Введите корректный номер",
     }),
-  clinic: z
-    .string()
-    .trim()
-    .min(2, { message: "Введите название клиники" })
-    .max(200, { message: "Название слишком длинное" }),
-  niche: z
-    .string()
-    .trim()
-    .min(2, { message: "Выберите направление" }),
-  agreement: z.literal(true, {
-    errorMap: () => ({ message: "Необходимо подтверждение" }),
-  }),
 });
 
-type FieldErrors = Partial<Record<"name" | "phone" | "clinic" | "niche" | "agreement", string>>;
+type FieldErrors = Partial<Record<"name" | "phone", string>>;
 
 const getCookie = (name: string): string | undefined => {
   if (typeof document === "undefined") return undefined;
@@ -118,10 +92,6 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [clinic, setClinic] = useState("");
-  const [niche, setNiche] = useState("");
-  const [nicheOther, setNicheOther] = useState("");
-  const [agreement, setAgreement] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -129,20 +99,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
     e.preventDefault();
     if (submitting) return;
 
-    const finalNiche =
-      niche === OTHER_VALUE
-        ? nicheOther.trim()
-          ? `Другое: ${nicheOther.trim()}`
-          : ""
-        : niche;
-
-    const parsed = formSchema.safeParse({
-      name,
-      phone,
-      clinic,
-      niche: finalNiche,
-      agreement,
-    });
+    const parsed = formSchema.safeParse({ name, phone });
     if (!parsed.success) {
       const fieldErrors: FieldErrors = {};
       for (const issue of parsed.error.issues) {
@@ -211,8 +168,8 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
           body: {
             name: parsed.data.name,
             phone: parsed.data.phone,
-            clinic: parsed.data.clinic,
-            niche: parsed.data.niche,
+            clinic: "Не указано",
+            niche: "Не указано",
             event_id: eventId,
             fbp,
             fbc,
@@ -242,8 +199,6 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         JSON.stringify({
           name: parsed.data.name,
           phone: parsed.data.phone,
-          clinic: parsed.data.clinic,
-          niche: parsed.data.niche,
           event_id: (data as any)?.event_id ?? eventId,
         }),
       );
@@ -271,7 +226,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
       className="space-y-5"
       aria-label="Форма заявки на диагностику"
     >
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="lead-name" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
             Ваше имя <span className="text-destructive">*</span>
@@ -322,104 +277,6 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
           </div>
           {errors.phone && (
             <p id="lead-phone-err" className="text-xs text-destructive">{errors.phone}</p>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="lead-clinic" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Название клиники <span className="text-destructive">*</span>
-        </Label>
-        <div className="relative">
-          <Building2 className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            id="lead-clinic"
-            name="clinic"
-            type="text"
-            autoComplete="organization"
-            placeholder="Введите название вашей клиники"
-            value={clinic}
-            onChange={(e) => setClinic(e.target.value)}
-            className={cn(inputBase, errors.clinic && "border-destructive focus-visible:ring-destructive")}
-            maxLength={200}
-            required
-            aria-invalid={!!errors.clinic}
-            aria-describedby={errors.clinic ? "lead-clinic-err" : undefined}
-          />
-        </div>
-        {errors.clinic && (
-          <p id="lead-clinic-err" className="text-xs text-destructive">{errors.clinic}</p>
-        )}
-      </div>
-
-      <div className="space-y-2">
-        <Label className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-          Ваше направление (основной источник дохода) <span className="text-destructive">*</span>
-        </Label>
-        <RadioGroup
-          value={niche}
-          onValueChange={(v) => {
-            setNiche(v);
-            if (v !== OTHER_VALUE) setNicheOther("");
-          }}
-          className={cn(
-            "rounded-xl border bg-muted/30 p-3 space-y-1",
-            errors.niche ? "border-destructive" : "border-input",
-          )}
-          aria-invalid={!!errors.niche}
-          aria-describedby={errors.niche ? "lead-niche-err" : undefined}
-        >
-          {NICHES.map((n) => {
-            const id = `niche-${n}`;
-            return (
-              <div key={n} className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
-                <RadioGroupItem id={id} value={n} />
-                <Label htmlFor={id} className="cursor-pointer text-sm font-normal leading-snug flex-1">
-                  {n}
-                </Label>
-              </div>
-            );
-          })}
-          <div className="flex items-start gap-3 rounded-lg px-2 py-2 hover:bg-muted/60 transition-colors">
-            <RadioGroupItem id="niche-other" value={OTHER_VALUE} className="mt-2.5" />
-            <div className="flex-1 space-y-2">
-              <Label htmlFor="niche-other" className="cursor-pointer text-sm font-normal leading-snug">
-                Другое
-              </Label>
-              {niche === OTHER_VALUE && (
-                <Input
-                  type="text"
-                  placeholder="Укажите ваше направление"
-                  value={nicheOther}
-                  onChange={(e) => setNicheOther(e.target.value)}
-                  maxLength={100}
-                  className="h-10 rounded-lg bg-background"
-                  aria-label="Укажите направление"
-                />
-              )}
-            </div>
-          </div>
-        </RadioGroup>
-        {errors.niche && (
-          <p id="lead-niche-err" className="text-xs text-destructive">{errors.niche}</p>
-        )}
-      </div>
-
-      <div className="flex items-start gap-3">
-        <Checkbox
-          id="lead-agreement"
-          checked={agreement}
-          onCheckedChange={(v) => setAgreement(v === true)}
-          className="mt-0.5"
-          aria-invalid={!!errors.agreement}
-        />
-        <div>
-          <Label htmlFor="lead-agreement" className="cursor-pointer text-sm leading-snug font-normal">
-            Я владелец / принимаю решения в клинике
-            <span className="text-destructive"> *</span>
-          </Label>
-          {errors.agreement && (
-            <p className="mt-1 text-xs text-destructive">{errors.agreement}</p>
           )}
         </div>
       </div>
