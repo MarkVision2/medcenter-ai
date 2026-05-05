@@ -19,10 +19,10 @@ const Index = () => {
         </div>
 
         {/* H1 */}
-        <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-3xl">
+        <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-3xl max-w-4xl mx-auto px-4">
           Как увеличить выручку медицинской клиники{" "}
           <span className="text-accent-deep">в 2–3 раза</span>{" "}
-          без увеличения расходов на&nbsp;рекламу
+          без увеличения расходов на&nbsp;рекламу в 2026 году
         </h1>
 
         {/* Подзаголовок */}
