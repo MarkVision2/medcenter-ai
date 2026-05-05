@@ -10,23 +10,29 @@ const Index = () => {
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO + ВИДЕО */}
       <Section className="pt-3 pb-20 sm:pt-8 sm:pb-10 min-h-[100svh]">
-        {/* Красный баннер */}
-        <div className="rounded-md bg-destructive px-5 py-4 sm:px-6 sm:py-5 text-center">
-          <p className="text-primary-foreground font-sans font-semibold text-base sm:text-xl md:text-2xl leading-snug">
-            Проверенная система для владельцев медицинских клиник
-          </p>
+        {/* Верхняя плашка-капсула */}
+        <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-2 text-center">
+          <BadgeCheck className="h-4 w-4 text-accent-deep" strokeWidth={2.5} />
+          <span className="text-[11px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
+            Методика для медицинских клиник
+          </span>
         </div>
 
         {/* H1 */}
-        <h1 className="mt-4 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-2xl">
+        <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-3xl">
           Как увеличить выручку медицинской клиники{" "}
-          <br />
           <span className="text-accent-deep">в 2–3 раза</span>{" "}
-          без увеличения расходов на рекламу
+          без увеличения расходов на&nbsp;рекламу
         </h1>
 
+        {/* Подзаголовок */}
+        <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Для владельцев медицинских клиник, которые хотят обойти конкурентов
+          в 2026 году и увеличить выручку без увеличения расходов на рекламу
+        </p>
+
         {/* Видео-плейсхолдер. TODO: замените dQw4w9WgXcQ на ID вашего YouTube видео */}
-        <div className="relative mt-4 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
+        <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
           <iframe
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Как увеличить выручку медицинской клиники"
@@ -36,9 +42,8 @@ const Index = () => {
           />
         </div>
 
-        <p className="mt-3 text-center text-sm text-muted-foreground sm:text-base">
-          Вы можете посмотреть видео <br />
-          или прочитать статью ниже
+        <p className="mt-3 text-center text-sm italic text-muted-foreground sm:text-base">
+          Посмотрите видео или прочитайте статью ниже
         </p>
 
         {/* CTA под видео */}
@@ -48,6 +53,9 @@ const Index = () => {
             ctaId={1}
             ctaName="Hero — Забронировать диагностику"
           />
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Количество мест ограничено
+          </p>
         </div>
       </Section>
 

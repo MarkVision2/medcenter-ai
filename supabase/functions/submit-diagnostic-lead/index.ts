@@ -57,8 +57,6 @@ async function sendTelegram(params: {
   chatId: string;
   name: string;
   phone: string;
-  clinic: string;
-  niche: string;
   ctaId: number | null;
   ctaName: string | null;
   utm: Record<string, string>;
@@ -79,15 +77,22 @@ async function sendTelegram(params: {
           .join("\n")
       : "";
 
-  const pageLine = params.pageUrl ? `\n\n🔗 <a href="${e(params.pageUrl)}">Страница</a>` : "";
+  let pageLine = "";
+  if (params.pageUrl) {
+    let host = params.pageUrl;
+    try {
+      host = new URL(params.pageUrl).host;
+    } catch {
+      /* keep raw */
+    }
+    pageLine = `\n\n🔗 Страница: <a href="${e(params.pageUrl)}">${e(host)}</a>`;
+  }
 
   const text =
     `🆕 <b>Заявка на диагностику</b>\n` +
-    `${ctaLine}\n\n` +
+    `\n${ctaLine}\n\n` +
     `👤 <b>Имя:</b> ${e(params.name)}\n` +
-    `📞 <b>Телефон:</b> ${e(params.phone)}\n` +
-    `🏥 <b>Клиника:</b> ${e(params.clinic)}\n` +
-    `🩺 <b>Ниша:</b> ${e(params.niche)}` +
+    `📞 <b>Телефон:</b> ${e(params.phone)}` +
     utmBlock +
     pageLine;
 
@@ -105,6 +110,8 @@ async function sendTelegram(params: {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
     console.error("Telegram sendMessage failed", res.status, data);
+  } else {
+    console.log("Telegram sendMessage ok", data?.result?.message_id);
   }
   return data;
 }
@@ -214,8 +221,6 @@ Deno.serve(async (req) => {
           chatId: TELEGRAM_CHAT_ID,
           name,
           phone,
-          clinic,
-          niche,
           ctaId,
           ctaName,
           utm: {
