@@ -1,17 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ArrowLeft, Phone } from "lucide-react";
+import { CheckCircle2, ArrowLeft, Phone, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WHATSAPP_NUMBER = "77472842595";
+const KASPI_PAY_URL = "https://pay.kaspi.kz/pay/a3ftc2oi";
 const FALLBACK_MESSAGE =
   "Добрый день! Я оставил заявку на диагностику медицинского центра.";
 
 interface LeadData {
   name?: string;
   phone?: string;
-  clinic?: string;
-  niche?: string;
 }
 
 const WhatsAppIcon = () => (
@@ -41,14 +40,41 @@ const ThankYou = () => {
   }, []);
 
   const whatsappHref = useMemo(() => {
-    const lines = ["Добрый день! Я оставил заявку на диагностику за 9 900.", ""];
+    const lines = ["Добрый день! Я оставил заявку на диагностику клиники.", ""];
     if (lead?.name) lines.push(`Имя: ${lead.name}`);
     if (lead?.phone) lines.push(`Телефон: ${lead.phone}`);
-    if (lead?.clinic) lines.push(`Клиника: ${lead.clinic}`);
-    if (lead?.niche) lines.push(`Ниша: ${lead.niche}`);
     const text = lead ? lines.join("\n") : FALLBACK_MESSAGE;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [lead]);
+
+  const handlePayClick = () => {
+    try {
+      const fbq = (window as any).fbq;
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          content_name: "Диагностика медцентра",
+          value: 9900,
+          currency: "KZT",
+        });
+      }
+      const gtag = (window as any).gtag;
+      if (typeof gtag === "function") {
+        gtag("event", "begin_checkout", {
+          currency: "KZT",
+          value: 9900,
+          items: [{ item_name: "Диагностика медцентра" }],
+        });
+        gtag("event", "click_payment_kaspi", {
+          event_category: "engagement",
+          value: 9900,
+        });
+      }
+      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dataLayer.push({ event: "click_payment", cta: "kaspi_pay", value: 9900 });
+    } catch {
+      /* ignore analytics errors */
+    }
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
@@ -58,13 +84,51 @@ const ThankYou = () => {
         </div>
 
         <h1 className="mt-6 text-3xl font-extrabold leading-tight sm:text-4xl">
-          Заявка принята!
+          Спасибо за вашу заявку!
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Благодарим за оставленную заявку на диагностику медицинской клиники.
-          Мы свяжемся с вами в рабочее время для подтверждения записи.
+          Спасибо за вашу заявку на диагностику и стратегический разбор вашей
+          клиники. В видео ниже я расскажу, что вас ждёт на диагностике.
         </p>
+
+        {/* Видео-плейсхолдер. TODO: замените YOUTUBE_ID на ID вашего видео */}
+        <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Что вас ждёт на диагностике"
+            className="absolute inset-0 h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        {/* Главная CTA — оплата Kaspi */}
+        <div className="mt-6 w-full rounded-2xl border-2 border-cta-orange/30 bg-cta-orange/5 p-5">
+          <p className="text-base font-semibold">
+            Закрепите место — оплатите диагностику
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Оплата через Kaspi Pay. После оплаты место за вами зафиксировано,
+            и я свяжусь с вами для согласования времени.
+          </p>
+          <Button
+            asChild
+            variant="cta-orange"
+            size="cta"
+            className="mt-4 w-full font-semibold whitespace-normal text-center"
+          >
+            <a
+              href={KASPI_PAY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handlePayClick}
+            >
+              <CreditCard className="h-5 w-5" />
+              <span>Оплатить диагностику</span>
+            </a>
+          </Button>
+        </div>
 
         {lead && (
           <div className="mt-6 w-full rounded-2xl border bg-muted/40 p-5 text-left">
@@ -84,27 +148,15 @@ const ThankYou = () => {
                   <dd className="font-medium text-right">{lead.phone}</dd>
                 </div>
               )}
-              {lead.clinic && (
-                <div className="flex justify-between gap-4">
-                  <dt className="text-muted-foreground">Клиника</dt>
-                  <dd className="font-medium text-right">{lead.clinic}</dd>
-                </div>
-              )}
-              {lead.niche && (
-                <div className="flex justify-between gap-4">
-                  <dt className="text-muted-foreground">Ниша</dt>
-                  <dd className="font-medium text-right">{lead.niche}</dd>
-                </div>
-              )}
             </dl>
           </div>
         )}
 
         <div className="mt-8 w-full rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
-          <p className="text-base font-semibold">Хотите ускорить запись?</p>
+          <p className="text-base font-semibold">Есть вопросы? Напишите в WhatsApp</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Напишите нам в WhatsApp — данные заявки уже подставлены в сообщение,
-            достаточно нажать «Отправить».
+            Данные вашей заявки уже подставлены в сообщение — достаточно
+            нажать «Отправить».
           </p>
           <Button
             asChild
