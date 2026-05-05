@@ -9,55 +9,86 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO + ВИДЕО */}
-      <Section className="pt-3 pb-20 sm:pt-8 sm:pb-10 min-h-[100svh]">
-        {/* Верхняя плашка-капсула */}
-        <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-2 text-center">
-          <BadgeCheck className="h-4 w-4 text-accent-deep" strokeWidth={2.5} />
-          <span className="text-[11px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
-            Методика для медицинских клиник
-          </span>
-        </div>
-
-        {/* H1 */}
-        <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl text-3xl max-w-4xl mx-auto px-4">
-          Как увеличить выручку медицинской клиники{" "}
-          <span className="text-accent-deep">в 2–3 раза</span>{" "}
-          без увеличения расходов на&nbsp;рекламу в 2026 году
-        </h1>
-
-        {/* Подзаголовок */}
-        <p className="mt-4 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Для владельцев медицинских клиник, которые хотят обойти конкурентов
-          в 2026 году и увеличить выручку без увеличения расходов на рекламу
-        </p>
-
-        {/* Видео-плейсхолдер. TODO: замените dQw4w9WgXcQ на ID вашего YouTube видео */}
-        <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Как увеличить выручку медицинской клиники"
-            className="absolute inset-0 h-full w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+      <section className="relative overflow-hidden">
+        {/* Декоративный фон */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent-soft/60 via-background to-background" />
+          <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+          <div className="absolute top-40 -left-20 h-72 w-72 rounded-full bg-accent-deep/10 blur-3xl" />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, hsl(var(--accent-deep)) 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+            }}
           />
         </div>
 
-        <p className="mt-3 text-center text-sm italic text-muted-foreground sm:text-base">
-          Посмотрите видео или прочитайте статью ниже
-        </p>
+        <div className="mx-auto w-full max-w-3xl px-4 pt-6 pb-14 sm:px-6 sm:pt-10 sm:pb-16">
+          {/* Верхняя плашка-капсула */}
+          <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent-deep">
+              <BadgeCheck className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
+              Методика для медицинских клиник
+            </span>
+          </div>
 
-        {/* CTA под видео */}
-        <div className="mt-5">
-          <ScrollToFormButton
-            label="Забронировать диагностику"
-            ctaId={1}
-            ctaName="Hero — Забронировать диагностику"
-          />
-          <p className="mt-3 text-center text-xs text-muted-foreground">
-            Количество мест ограничено
+          {/* H1 */}
+          <h1 className="mt-6 text-center font-extrabold leading-[1.1] tracking-tight text-[28px] sm:text-4xl md:text-5xl">
+            Как увеличить выручку{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">медицинской клиники</span>
+              <span className="absolute inset-x-0 bottom-1 -z-0 h-2 bg-highlight/60 sm:h-3" />
+            </span>{" "}
+            <span className="text-accent-deep">в 2–3 раза</span>{" "}
+            <span className="block sm:inline">без увеличения расходов на&nbsp;рекламу</span>{" "}
+            <span className="text-accent-deep">в 2026 году</span>
+          </h1>
+
+          {/* Подзаголовок */}
+          <p className="mx-auto mt-5 max-w-xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Для владельцев медицинских клиник, которые хотят обойти конкурентов
+            и увеличить выручку без роста рекламного бюджета
           </p>
+
+          {/* Видео */}
+          <div className="relative mx-auto mt-7 w-full max-w-2xl">
+            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent-deep/30 via-accent/20 to-highlight/30 blur-xl" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border-2 border-white bg-black shadow-2xl ring-1 ring-accent-deep/10">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Как увеличить выручку медицинской клиники"
+                className="absolute inset-0 h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          <p className="mt-4 text-center text-sm italic text-muted-foreground sm:text-base">
+            Посмотрите видео или прочитайте статью ниже
+          </p>
+
+          {/* CTA */}
+          <div className="mt-6">
+            <ScrollToFormButton
+              label="Забронировать диагностику"
+              ctaId={1}
+              ctaName="Hero — Забронировать диагностику"
+            />
+            <p className="mt-3 flex items-center justify-center gap-2 text-center text-xs font-medium text-muted-foreground">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-destructive" />
+              </span>
+              Количество мест ограничено
+            </p>
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 2. БОЛИ */}
       <Section tone="muted">
