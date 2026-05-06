@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background text-foreground antialiased">
       {/* 1. HERO + ВИДЕО */}
-      <section className="relative overflow-hidden">
+      <section className="relative flex min-h-[100svh] flex-col overflow-hidden">
         {/* Декоративный фон */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-accent-soft/60 via-background to-background" />
@@ -25,19 +25,19 @@ const Index = () => {
           />
         </div>
 
-        <div className="mx-auto w-full max-w-3xl px-4 pt-5 pb-12 sm:px-6 sm:pt-10 sm:pb-16">
+        <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-4 pt-3 pb-4 sm:px-6 sm:pt-10 sm:pb-16">
           {/* Верхняя плашка-капсула */}
-          <div className="mx-auto flex w-fit max-w-full items-center gap-2 rounded-full border border-accent/30 bg-white/80 px-3.5 py-1.5 shadow-sm backdrop-blur sm:px-4 sm:py-2">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-deep">
-              <BadgeCheck className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+          <div className="mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-accent/30 bg-white/80 px-3 py-1 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-deep sm:h-5 sm:w-5">
+              <BadgeCheck className="h-2.5 w-2.5 text-white sm:h-3.5 sm:w-3.5" strokeWidth={3} />
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
+            <span className="text-[9px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
               Методика для&nbsp;медицинских клиник
             </span>
           </div>
 
           {/* H1 */}
-          <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight text-[22px] sm:text-4xl md:text-5xl">
+          <h1 className="mt-3 text-center font-extrabold leading-[1.15] tracking-tight text-[19px] sm:mt-5 sm:text-4xl md:text-5xl">
             Как увеличить выручку{" "}
             <span className="relative inline-block whitespace-nowrap">
               <span className="relative z-10">медицинской&nbsp;клиники</span>
@@ -48,14 +48,14 @@ const Index = () => {
             <span className="text-accent-deep whitespace-nowrap">в&nbsp;2026&nbsp;году</span>
           </h1>
 
-          {/* Подзаголовок */}
-          <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg">
+          {/* Подзаголовок — скрыт на мобильном для компактности */}
+          <p className="mx-auto mt-3 hidden max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:block sm:text-lg">
             Для владельцев медицинских клиник, которые хотят обойти конкурентов
             и увеличить выручку без роста рекламного бюджета
           </p>
 
           {/* Видео */}
-          <div className="relative mx-auto mt-6 w-full max-w-2xl sm:mt-7">
+          <div className="relative mx-auto mt-4 w-full max-w-2xl sm:mt-7">
             <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-tr from-accent-deep/25 via-accent/15 to-highlight/25 blur-lg sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
             <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white bg-black shadow-xl ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
               <iframe
@@ -68,18 +68,18 @@ const Index = () => {
             </div>
           </div>
 
-          <p className="mt-3 text-center text-xs italic text-muted-foreground sm:mt-4 sm:text-base">
+          <p className="mt-2 text-center text-[11px] italic text-muted-foreground sm:mt-4 sm:text-base">
             Посмотрите видео или прочитайте статью ниже
           </p>
 
           {/* CTA */}
-          <div className="mt-5 sm:mt-6">
+          <div className="mt-3 sm:mt-6">
             <ScrollToFormButton
               label="Забронировать диагностику"
               ctaId={1}
               ctaName="Hero — Забронировать диагностику"
             />
-            <p className="mt-3 flex items-center justify-center gap-2 text-center text-xs font-medium text-muted-foreground">
+            <p className="mt-2 flex items-center justify-center gap-2 text-center text-[11px] font-medium text-muted-foreground sm:mt-3 sm:text-xs">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-destructive" />
