@@ -25,39 +25,39 @@ const Index = () => {
           />
         </div>
 
-        <div className="mx-auto w-full max-w-3xl px-4 pt-6 pb-14 sm:px-6 sm:pt-10 sm:pb-16">
+        <div className="mx-auto w-full max-w-3xl px-4 pt-5 pb-12 sm:px-6 sm:pt-10 sm:pb-16">
           {/* Верхняя плашка-капсула */}
-          <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-accent/30 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent-deep">
+          <div className="mx-auto flex w-fit max-w-full items-center gap-2 rounded-full border border-accent/30 bg-white/80 px-3.5 py-1.5 shadow-sm backdrop-blur sm:px-4 sm:py-2">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-deep">
               <BadgeCheck className="h-3.5 w-3.5 text-white" strokeWidth={3} />
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
-              Методика для медицинских клиник
+            <span className="text-[10px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
+              Методика для&nbsp;медицинских клиник
             </span>
           </div>
 
           {/* H1 */}
-          <h1 className="mt-6 text-center font-extrabold leading-[1.1] tracking-tight text-[28px] sm:text-4xl md:text-5xl">
+          <h1 className="mt-5 text-center font-extrabold leading-[1.15] tracking-tight text-[22px] sm:text-4xl md:text-5xl">
             Как увеличить выручку{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10">медицинской клиники</span>
-              <span className="absolute inset-x-0 bottom-1 -z-0 h-2 bg-highlight/60 sm:h-3" />
+            <span className="relative inline-block whitespace-nowrap">
+              <span className="relative z-10">медицинской&nbsp;клиники</span>
+              <span className="absolute inset-x-0 bottom-0.5 -z-0 h-1.5 bg-highlight/70 sm:h-3" />
             </span>{" "}
-            <span className="text-accent-deep">в 2–3 раза</span>{" "}
-            <span className="block sm:inline">без увеличения расходов на&nbsp;рекламу</span>{" "}
-            <span className="text-accent-deep">в 2026 году</span>
+            <span className="text-accent-deep">в&nbsp;2–3&nbsp;раза</span>{" "}
+            без увеличения расходов на&nbsp;рекламу{" "}
+            <span className="text-accent-deep whitespace-nowrap">в&nbsp;2026&nbsp;году</span>
           </h1>
 
           {/* Подзаголовок */}
-          <p className="mx-auto mt-5 max-w-xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg">
             Для владельцев медицинских клиник, которые хотят обойти конкурентов
             и увеличить выручку без роста рекламного бюджета
           </p>
 
           {/* Видео */}
-          <div className="relative mx-auto mt-7 w-full max-w-2xl">
-            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent-deep/30 via-accent/20 to-highlight/30 blur-xl" />
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border-2 border-white bg-black shadow-2xl ring-1 ring-accent-deep/10">
+          <div className="relative mx-auto mt-6 w-full max-w-2xl sm:mt-7">
+            <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-tr from-accent-deep/25 via-accent/15 to-highlight/25 blur-lg sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white bg-black shadow-xl ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
               <iframe
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                 title="Как увеличить выручку медицинской клиники"
@@ -68,12 +68,12 @@ const Index = () => {
             </div>
           </div>
 
-          <p className="mt-4 text-center text-sm italic text-muted-foreground sm:text-base">
+          <p className="mt-3 text-center text-xs italic text-muted-foreground sm:mt-4 sm:text-base">
             Посмотрите видео или прочитайте статью ниже
           </p>
 
           {/* CTA */}
-          <div className="mt-6">
+          <div className="mt-5 sm:mt-6">
             <ScrollToFormButton
               label="Забронировать диагностику"
               ctaId={1}
