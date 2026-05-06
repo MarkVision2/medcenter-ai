@@ -413,23 +413,33 @@ const Index = () => {
             </div>
           </div>
 
-          <div>
-            <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl md:text-left">
+          <div className="relative rounded-2xl border border-border/60 bg-background p-5 shadow-sm sm:p-7">
+            <h2 className="text-center text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl md:text-left">
               Меня зовут <span className="text-accent-deep">Юрий</span>
             </h2>
+            <div className="mt-2 h-1 w-12 rounded-full bg-accent-deep/70 mx-auto md:mx-0" />
 
-            <p className="mt-4 text-base leading-relaxed sm:text-lg">
-              Последние <span className="font-semibold">5 лет</span> я занимался именно этим: выстраивал систему, которая позволяет при тех же вложениях в рекламный бюджет увеличивать выручку клиники. Мы с командой прогнали десятки кейсов разных клиник и помогли сделать окупаемость в{" "}
-              <span className="font-semibold text-accent-deep">3, 5 и даже 10 раз</span>.
-            </p>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-foreground/85 sm:text-lg">
+              <p>
+                Последние <span className="font-semibold text-foreground">5 лет</span> я занимался именно этим: выстраивал систему, которая позволяет при тех же вложениях в рекламный бюджет увеличивать выручку клиники. Мы с командой прогнали десятки кейсов разных клиник и помогли сделать окупаемость в{" "}
+                <span className="rounded bg-highlight/50 px-1 font-bold text-foreground">3, 5 и даже 10 раз</span>.
+              </p>
+              <p>
+                Я беру на себя ответственность за каждый этап. Я точно знаю, на что смотреть, чтобы больше пациентов доходило до клиники, записывалось на лечение и оставалось с вами на долгие годы.
+              </p>
+            </div>
 
-            <p className="mt-4 text-base leading-relaxed sm:text-lg">
-              Я беру на себя ответственность за каждый этап. Я точно знаю, на что смотреть, чтобы больше пациентов доходило до клиники, записывалось на лечение и оставалось с вами на долгие годы.
-            </p>
-
-            <p className="mt-4 rounded-xl border-l-4 border-accent bg-accent-soft p-4 text-base font-semibold leading-relaxed text-accent-deep sm:text-lg">
-              С этой системой вы перестанете терять деньги, а каждая инвестиция в маркетинг начнёт работать на результат.
-            </p>
+            <div className="relative mt-6 overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-accent-soft to-accent-soft/40 p-4 sm:p-5">
+              <div className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
+              <div className="relative flex items-start gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-deep text-white shadow-md">
+                  <BadgeCheck className="h-4.5 w-4.5" strokeWidth={2.5} />
+                </span>
+                <p className="text-[15px] font-semibold leading-relaxed text-accent-deep sm:text-base">
+                  С этой системой вы перестанете терять деньги, а каждая инвестиция в маркетинг начнёт работать на результат.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
