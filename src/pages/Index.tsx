@@ -92,12 +92,23 @@ const Index = () => {
 
       {/* 2. БОЛИ */}
       <Section tone="muted">
-        <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7">
-          <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
+        <div className="relative overflow-hidden rounded-3xl border border-destructive/20 bg-background p-5 shadow-lg shadow-destructive/5 sm:p-8">
+          {/* Декоративный градиент */}
+          <div className="pointer-events-none absolute -top-20 -right-20 h-48 w-48 rounded-full bg-destructive/10 blur-3xl" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-destructive/60 to-transparent" />
+
+          <div className="relative mx-auto flex w-fit items-center gap-2 rounded-full border border-destructive/30 bg-destructive/5 px-3 py-1">
+            <AlertTriangle className="h-3.5 w-3.5 text-destructive" strokeWidth={2.5} />
+            <span className="text-[10px] font-bold uppercase tracking-wider text-destructive sm:text-xs">
+              Знакомая ситуация?
+            </span>
+          </div>
+
+          <h2 className="relative mt-4 text-center text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
             Узнайте себя?
           </h2>
 
-          <ul className="mx-auto mt-6 max-w-md space-y-5">
+          <ul className="relative mx-auto mt-6 max-w-md space-y-3">
             {[
               "Если у вас нет стабильного потока первичных пациентов",
               "Вы устали постоянно нанимать таргетологов которые что-то делают, но результата как не было, так и нет, и при этом у вас есть ощущение, что вы платите и не понимаете, за что.",
@@ -105,12 +116,14 @@ const Index = () => {
               "Вынуждены цепляться за каждого пациента, даже на невыгодных условиях, и работаете в минус.",
               "Не знаете, как привлекать пациентов на премиум-услуги и выйти из ловушки дешёвых пациентов?",
             ].map((item, i) => (
-              <li key={i} className="flex gap-3">
-                <Square
-                  className="mt-1 h-6 w-6 shrink-0 text-banner"
-                  strokeWidth={2.5}
-                />
-                <span className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+              <li
+                key={i}
+                className="group flex items-start gap-3 rounded-xl border border-border/60 bg-muted/40 p-3 transition-colors hover:border-destructive/40 hover:bg-destructive/[0.03] sm:gap-4 sm:p-4"
+              >
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-destructive/10 text-destructive ring-1 ring-destructive/20 sm:h-7 sm:w-7">
+                  <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={3} />
+                </span>
+                <span className="text-sm leading-relaxed text-foreground/80 sm:text-base">
                   {item}
                 </span>
               </li>
