@@ -56,6 +56,26 @@ const Index = () => {
         </div>
       </Section>
 
+      {/* 1.1. ВИДЕО */}
+      <Section tone="muted" containerClassName="max-w-4xl">
+        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep ring-1 ring-accent/20">
+          <Sparkles className="h-3.5 w-3.5" />
+          Посмотрите видео
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border bg-card shadow-xl">
+          <video
+            className="block aspect-video w-full bg-black"
+            controls
+            playsInline
+            preload="metadata"
+          >
+            <source src="/videos/case-video.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+          </video>
+        </div>
+      </Section>
+
       {/* 2. БОЛЬ */}
       <Section tone="muted">
         <div className="rounded-2xl border-2 border-destructive/70 bg-background p-5 sm:p-7 shadow-xl shadow-destructive/5">
@@ -95,7 +115,7 @@ const Index = () => {
           Я расскажу, как забыть о работе за копейки и начать зарабатывать как лучшие клиники
           Казахстана, имея больше свободного времени и энергии.
         </p>
-        <div className="mt-6 text-center text-3xl">​</div>
+        <div className="mt-6 text-center text-3xl" aria-hidden="true" />
         <div className="mt-3">
           <ScrollToFormButton />
         </div>
