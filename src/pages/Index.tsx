@@ -505,7 +505,7 @@ const Index = () => {
       </Section>
 
       {/* 8. ФИНАЛЬНЫЙ CTA */}
-      <Section tone="muted">
+      <Section tone="muted" contentClassName="max-w-5xl">
         <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
           Если вы хотите оставить конкурентов позади и{" "}
           <span className="text-accent-deep">кратно увеличить выручку</span> вашей клиники…
@@ -515,30 +515,65 @@ const Index = () => {
           Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет — жмите на кнопку и записывайтесь на диагностику.
         </p>
 
-        {/* Что внутри */}
-        <div className="mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-accent-deep via-accent to-accent-deep p-5 text-white shadow-xl shadow-accent/20 sm:p-7">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-highlight">
-            На диагностике вы получите
-          </p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            {[
-              "Разбор текущей воронки",
-              "Точки, где теряются деньги",
-              "План роста без доп. бюджета",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl bg-white/12 p-4 ring-1 ring-white/15">
-                <Check className="h-5 w-5 text-highlight" strokeWidth={3} />
-                <p className="mt-3 text-sm font-bold leading-snug sm:text-base">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="mt-8 overflow-hidden rounded-[2rem] border bg-background shadow-xl shadow-accent/5">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="bg-gradient-to-br from-accent-deep via-accent to-accent-deep p-5 text-white sm:p-7 lg:p-8">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-highlight">
+                Что будет на диагностике
+              </p>
+              <h3 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
+                Найдём, где клиника теряет заявки, пациентов и деньги
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-white/82 sm:text-lg">
+                За одну встречу разложим вашу текущую систему по этапам и покажем,
+                что исправить в первую очередь, чтобы маркетинг начал давать результат.
+              </p>
 
-        <div className="mt-5 rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
-          <p className="text-lg leading-relaxed sm:text-xl">
-            Мы разберём вашу текущую ситуацию и дадим{" "}
-            <span className="font-extrabold text-accent-deep">готовый пошаговый план</span>: где вы теряете деньги прямо сейчас и как увеличить количество первичных пациентов без дополнительных расходов на рекламу.
-          </p>
+              <div className="mt-6 rounded-2xl bg-white/12 p-4 ring-1 ring-white/15">
+                <p className="text-sm font-semibold uppercase tracking-wide text-highlight">
+                  Итог диагностики
+                </p>
+                <p className="mt-2 text-xl font-black leading-snug">
+                  Готовый план роста без увеличения рекламного бюджета
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-3 p-4 sm:p-5 lg:p-6">
+              {[
+                {
+                  title: "Разберём текущую воронку",
+                  text: "Посмотрим путь пациента от рекламы до записи и найдём места, где заявки остывают.",
+                },
+                {
+                  title: "Проверим рекламу и источники",
+                  text: "Поймём, какие каналы приводят качественных пациентов, а какие просто съедают бюджет.",
+                },
+                {
+                  title: "Найдём потери в админах и продажах",
+                  text: "Разберём, почему люди не доходят до приёма, не покупают лечение или не возвращаются.",
+                },
+                {
+                  title: "Соберём пошаговый план",
+                  text: "Вы получите список действий: что исправить сейчас, что внедрить дальше и где будет самый быстрый рост.",
+                },
+              ].map((item, i) => (
+                <div key={item.title} className="flex gap-4 rounded-2xl border bg-card p-4 shadow-sm">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
+                    <span className="text-sm font-black">{i + 1}</span>
+                  </span>
+                  <div>
+                    <p className="text-base font-extrabold leading-snug sm:text-lg">
+                      {item.title}
+                    </p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Алерт */}
