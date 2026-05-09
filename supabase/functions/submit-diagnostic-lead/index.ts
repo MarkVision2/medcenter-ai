@@ -6,6 +6,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+const DEFAULT_CRM_WEBHOOK_URL =
+  "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
+
 interface LeadInput {
   name?: string;
   phone?: string;
@@ -116,6 +119,66 @@ async function sendTelegram(params: {
   return data;
 }
 
+async function sendCrmLead(params: {
+  webhookUrl: string;
+  name: string;
+  phone: string;
+  clinic: string;
+  niche: string;
+  ctaId: number | null;
+  ctaName: string | null;
+  utm: Record<string, string | null>;
+  referrer: string | null;
+  landingUrl: string | null;
+  eventId: string;
+}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+
+  const messageParts = [
+    "Заявка на диагностику медицинской клиники",
+    params.ctaName ? `CTA: ${params.ctaName}` : null,
+    params.ctaId ? `CTA ID: ${params.ctaId}` : null,
+    params.clinic && params.clinic !== "Не указано" ? `Клиника: ${params.clinic}` : null,
+    params.niche && params.niche !== "Не указано" ? `Ниша: ${params.niche}` : null,
+    `Event ID: ${params.eventId}`,
+  ].filter(Boolean);
+
+  const payload = {
+    name: params.name,
+    phone: params.phone,
+    message: messageParts.join("\n"),
+    service: "Диагностика медицинской клиники",
+    city: "Не указано",
+    source: "site",
+    referrer: params.referrer,
+    landing_url: params.landingUrl,
+    utm_source: params.utm.utm_source ?? undefined,
+    utm_medium: params.utm.utm_medium ?? undefined,
+    utm_campaign: params.utm.utm_campaign ?? undefined,
+    utm_content: params.utm.utm_content ?? undefined,
+    utm_term: params.utm.utm_term ?? undefined,
+  };
+
+  try {
+    const res = await fetch(params.webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      console.error("CRM lead-intake failed", res.status, data);
+      return { ok: false, status: res.status, data };
+    }
+    console.log("CRM lead-intake ok", data?.leadId ?? data);
+    return { ok: true, status: res.status, data };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -126,6 +189,8 @@ Deno.serve(async (req) => {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const PIXEL_ID = Deno.env.get("META_PIXEL_ID");
     const ACCESS_TOKEN = Deno.env.get("META_CAPI_ACCESS_TOKEN");
+    const CRM_WEBHOOK_URL =
+      Deno.env.get("CRM_LEAD_WEBHOOK_URL") || DEFAULT_CRM_WEBHOOK_URL;
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
       return new Response(
@@ -239,6 +304,28 @@ Deno.serve(async (req) => {
       console.warn("Telegram secrets not configured; skipping group notification");
     }
 
+    let crmResult: unknown = { skipped: true };
+    if (CRM_WEBHOOK_URL) {
+      try {
+        crmResult = await sendCrmLead({
+          webhookUrl: CRM_WEBHOOK_URL,
+          name,
+          phone,
+          clinic,
+          niche,
+          ctaId,
+          ctaName,
+          utm,
+          referrer: body.referrer ?? null,
+          landingUrl: body.event_source_url ?? null,
+          eventId,
+        });
+      } catch (crmErr) {
+        console.error("CRM lead-intake exception", crmErr);
+        crmResult = { ok: false, error: crmErr instanceof Error ? crmErr.message : "Unknown error" };
+      }
+    }
+
     let capiResult: unknown = { skipped: true };
     if (PIXEL_ID && ACCESS_TOKEN) {
       try {
@@ -299,7 +386,7 @@ Deno.serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ success: true, event_id: eventId, capi: capiResult }),
+      JSON.stringify({ success: true, event_id: eventId, crm: crmResult, capi: capiResult }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (err) {

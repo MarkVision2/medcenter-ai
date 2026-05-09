@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ArrowLeft, Phone, CreditCard } from "lucide-react";
+import { ArrowLeft, CalendarCheck, CheckCircle2, Clock3, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WHATSAPP_NUMBER = "77472842595";
-const KASPI_PAY_URL = "https://pay.kaspi.kz/pay/a3ftc2oi";
 const FALLBACK_MESSAGE =
   "Добрый день! Я оставил заявку на диагностику медицинского центра.";
 
@@ -23,7 +22,7 @@ const ThankYou = () => {
   const [lead, setLead] = useState<LeadData | null>(null);
 
   useEffect(() => {
-    document.title = "Заявка принята — Система «Врач на миллион»";
+    document.title = "Заявка принята — MarkVision AI";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
@@ -47,141 +46,137 @@ const ThankYou = () => {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }, [lead]);
 
-  const handlePayClick = () => {
-    try {
-      const fbq = (window as any).fbq;
-      if (typeof fbq === "function") {
-        fbq("track", "InitiateCheckout", {
-          content_name: "Диагностика медцентра",
-          value: 9900,
-          currency: "KZT",
-        });
-      }
-      const gtag = (window as any).gtag;
-      if (typeof gtag === "function") {
-        gtag("event", "begin_checkout", {
-          currency: "KZT",
-          value: 9900,
-          items: [{ item_name: "Диагностика медцентра" }],
-        });
-        gtag("event", "click_payment_kaspi", {
-          event_category: "engagement",
-          value: 9900,
-        });
-      }
-      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
-      dataLayer.push({ event: "click_payment", cta: "kaspi_pay", value: 9900 });
-    } catch {
-      /* ignore analytics errors */
-    }
-  };
-
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
-      <section className="mx-auto flex min-h-screen max-w-xl flex-col items-center justify-center px-5 py-12 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 ring-8 ring-accent/5">
-          <CheckCircle2 className="h-12 w-12 text-accent" strokeWidth={2.2} />
-        </div>
+    <main className="relative min-h-screen overflow-hidden bg-background text-foreground antialiased">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-accent-soft/70 via-background to-background" />
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, hsl(var(--accent-deep)) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+      </div>
 
-        <h1 className="mt-6 text-3xl font-extrabold leading-tight sm:text-4xl">
-          Спасибо за вашу заявку!
-        </h1>
-
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Спасибо за вашу заявку на диагностику и стратегический разбор вашей
-          клиники. В видео ниже я расскажу, что вас ждёт на диагностике.
-        </p>
-
-        {/* Видео-плейсхолдер. TODO: замените YOUTUBE_ID на ID вашего видео */}
-        <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl border bg-black shadow-lg">
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Что вас ждёт на диагностике"
-            className="absolute inset-0 h-full w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-
-        {/* Главная CTA — оплата Kaspi */}
-        <div className="mt-6 w-full rounded-2xl border-2 border-cta-orange/30 bg-cta-orange/5 p-5">
-          <p className="text-base font-semibold">
-            Закрепите место — оплатите диагностику
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Оплата через Kaspi Pay. После оплаты место за вами зафиксировано,
-            и я свяжусь с вами для согласования времени.
-          </p>
-          <Button
-            asChild
-            variant="cta-orange"
-            size="cta"
-            className="mt-4 w-full font-semibold whitespace-normal text-center"
-          >
-            <a
-              href={KASPI_PAY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handlePayClick}
-            >
-              <CreditCard className="h-5 w-5" />
-              <span>Оплатить диагностику</span>
-            </a>
-          </Button>
-        </div>
-
-        {lead && (
-          <div className="mt-6 w-full rounded-2xl border bg-muted/40 p-5 text-left">
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-              Ваши данные
-            </p>
-            <dl className="mt-3 space-y-2 text-sm">
-              {lead.name && (
-                <div className="flex justify-between gap-4">
-                  <dt className="text-muted-foreground">Имя</dt>
-                  <dd className="font-medium text-right">{lead.name}</dd>
-                </div>
-              )}
-              {lead.phone && (
-                <div className="flex justify-between gap-4">
-                  <dt className="text-muted-foreground">Телефон</dt>
-                  <dd className="font-medium text-right">{lead.phone}</dd>
-                </div>
-              )}
-            </dl>
+      <section className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-5 py-10 text-center sm:py-14">
+        <div className="rounded-[2rem] border bg-card/95 p-5 shadow-xl shadow-accent/10 sm:p-8">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 ring-8 ring-accent/5">
+            <CheckCircle2 className="h-12 w-12 text-accent" strokeWidth={2.2} />
           </div>
-        )}
 
-        <div className="mt-8 w-full rounded-2xl border-2 border-accent/30 bg-accent/5 p-5">
-          <p className="text-base font-semibold">Есть вопросы? Напишите в WhatsApp</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Данные вашей заявки уже подставлены в сообщение — достаточно
-            нажать «Отправить».
+          <p className="mx-auto mt-5 w-fit rounded-full bg-accent-soft px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-accent-deep">
+            Заявка отправлена
           </p>
-          <Button
-            asChild
-            variant="whatsapp"
-            size="cta"
-            className="mt-4 w-full font-semibold whitespace-normal text-center"
-          >
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon />
-              <span>Написать в WhatsApp</span>
-            </a>
-          </Button>
+
+          <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
+            Спасибо за заявку на диагностику
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Я свяжусь с вами в ближайшее время, чтобы подтвердить запись,
+            уточнить детали по вашей клинике и согласовать удобное время для
+            диагностики.
+          </p>
+
+          <div className="mt-6 grid gap-3 text-left sm:grid-cols-3">
+            {[
+              {
+                icon: Phone,
+                title: "Свяжусь с вами",
+                text: "Проверю заявку и напишу или позвоню.",
+              },
+              {
+                icon: CalendarCheck,
+                title: "Подберём время",
+                text: "Согласуем удобный слот для диагностики.",
+              },
+              {
+                icon: MessageCircle,
+                title: "Разберём клинику",
+                text: "Посмотрим, где сейчас теряются заявки и деньги.",
+              },
+            ].map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.title} className="rounded-2xl border bg-background p-4">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
+                    <Icon className="h-5 w-5" strokeWidth={2.4} />
+                  </span>
+                  <p className="mt-3 text-sm font-extrabold leading-snug">
+                    {step.title}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                    {step.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 flex items-start gap-3 rounded-2xl border border-accent/25 bg-accent-soft/55 p-4 text-left">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-deep text-white">
+              <Clock3 className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-base font-extrabold leading-snug text-accent-deep">
+                Обычно отвечаю в ближайшее рабочее время
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                Если хотите ускорить подтверждение, напишите в WhatsApp по кнопке ниже.
+              </p>
+            </div>
+          </div>
+
+          {lead && (
+            <div className="mt-5 w-full rounded-2xl border bg-muted/40 p-5 text-left">
+              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                Ваши данные
+              </p>
+              <dl className="mt-3 space-y-2 text-sm">
+                {lead.name && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-muted-foreground">Имя</dt>
+                    <dd className="text-right font-medium">{lead.name}</dd>
+                  </div>
+                )}
+                {lead.phone && (
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-muted-foreground">Телефон</dt>
+                    <dd className="text-right font-medium">{lead.phone}</dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          )}
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto]">
+            <Button
+              asChild
+              variant="whatsapp"
+              size="cta"
+              className="w-full font-semibold whitespace-normal text-center"
+            >
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon />
+                <span>Написать в WhatsApp</span>
+              </a>
+            </Button>
+
+            <Button asChild variant="outline" size="cta" className="font-semibold">
+              <Link to="/">
+                <ArrowLeft className="h-4 w-4" />
+                На главную
+              </Link>
+            </Button>
+          </div>
+
+          <p className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <Phone className="h-3.5 w-3.5" />
+            WhatsApp: +7 747 284 25 95
+          </p>
         </div>
-
-        <Button asChild variant="ghost" className="mt-6">
-          <Link to="/">
-            <ArrowLeft className="h-4 w-4" />
-            Вернуться на главную
-          </Link>
-        </Button>
-
-        <p className="mt-8 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-          <Phone className="h-3.5 w-3.5" />
-          WhatsApp: +7 747 284 25 95
-        </p>
       </section>
     </main>
   );

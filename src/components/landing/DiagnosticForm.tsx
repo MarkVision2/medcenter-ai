@@ -42,6 +42,8 @@ const UTM_KEYS = [
 ] as const;
 type UtmKey = (typeof UTM_KEYS)[number];
 const UTM_STORAGE_KEY = "lovable_utm_v1";
+const CRM_WEBHOOK_URL =
+  "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
 
 const getUtmParams = (): Partial<Record<UtmKey, string>> => {
   if (typeof window === "undefined") return {};
@@ -83,6 +85,57 @@ const formatPhone = (raw: string): string => {
   return out.trim();
 };
 
+const submitCrmWebhook = async (params: {
+  name: string;
+  phone: string;
+  eventId: string;
+  ctaId?: number;
+  ctaName?: string;
+  utm: Partial<Record<UtmKey, string>>;
+}) => {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 5000);
+  const message = [
+    "Заявка на диагностику медицинской клиники",
+    params.ctaName ? `CTA: ${params.ctaName}` : null,
+    params.ctaId ? `CTA ID: ${params.ctaId}` : null,
+    `Event ID: ${params.eventId}`,
+  ].filter(Boolean).join("\n");
+
+  try {
+    const response = await fetch(CRM_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: params.name,
+        phone: params.phone,
+        message,
+        service: "Диагностика медицинской клиники",
+        city: "Не указано",
+        source: "site",
+        referrer: document.referrer || undefined,
+        landing_url: window.location.href,
+        utm_source: params.utm.utm_source,
+        utm_medium: params.utm.utm_medium,
+        utm_campaign: params.utm.utm_campaign,
+        utm_content: params.utm.utm_content,
+        utm_term: params.utm.utm_term,
+      }),
+      signal: controller.signal,
+    });
+    const payload = await response.json().catch(() => null);
+    if (!response.ok) {
+      console.error("CRM webhook failed", response.status, payload);
+    } else {
+      console.log("CRM webhook ok", payload);
+    }
+  } catch (err) {
+    console.error("CRM webhook exception", err);
+  } finally {
+    window.clearTimeout(timeout);
+  }
+};
+
 interface DiagnosticFormProps {
   ctaId?: number;
   ctaName?: string;
@@ -118,46 +171,6 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
           ? crypto.randomUUID()
           : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-      // Browser Pixel (with eventID for deduplication)
-      const fbq = (window as any).fbq;
-      if (typeof fbq === "function") {
-        fbq(
-          "track",
-          "Lead",
-          {
-            content_name: "Диагностика медцентра",
-            content_category: "lead",
-            value: 9900,
-            currency: "KZT",
-          },
-          { eventID: eventId },
-        );
-      }
-
-      // Google Analytics (gtag.js) — конверсия Lead
-      const gtag = (window as any).gtag;
-      if (typeof gtag === "function") {
-        gtag("event", "generate_lead", {
-          event_category: "engagement",
-          event_label: ctaName ?? "diagnostic_form",
-          method: "form",
-          value: 9900,
-          currency: "KZT",
-          transaction_id: eventId,
-        });
-      }
-
-      // GTM dataLayer
-      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
-      dataLayer.push({
-        event: "lead_submitted",
-        event_id: eventId,
-        cta_id: ctaId ?? null,
-        cta_name: ctaName ?? null,
-        lead_value: 9900,
-        currency: "KZT",
-      });
-
       const fbp = getCookie("_fbp");
       const fbc = getCookie("_fbc");
       const utm = getUtmParams();
@@ -191,6 +204,44 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
           variant: "destructive",
         });
         return;
+      }
+
+      const fbq = (window as any).fbq;
+      if (typeof fbq === "function") {
+        fbq(
+          "track",
+          "Lead",
+          {
+            content_name: "Диагностика медцентра",
+            content_category: "lead",
+            value: 9900,
+            currency: "KZT",
+          },
+          { eventID: eventId },
+        );
+      }
+
+      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dataLayer.push({
+        event: "generate_lead",
+        event_category: "engagement",
+        event_label: ctaName ?? "diagnostic_form",
+        method: "form",
+        value: 9900,
+        currency: "KZT",
+        transaction_id: eventId,
+      });
+
+      const serverCrmOk = (data as any)?.crm?.ok === true;
+      if (!serverCrmOk) {
+        await submitCrmWebhook({
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          eventId,
+          ctaId: ctaId ?? undefined,
+          ctaName: ctaName ?? undefined,
+          utm,
+        });
       }
 
       // Save form payload for the thank-you page (WhatsApp prefill)

@@ -25,61 +25,64 @@ const Index = () => {
           />
         </div>
 
-        <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-4 pt-3 pb-4 sm:px-6 sm:pt-10 sm:pb-16">
+        <div className="mx-auto flex min-h-[100svh] w-full max-w-3xl flex-col px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:min-h-0 sm:flex-1 sm:justify-center sm:px-6 sm:pt-10 sm:pb-16">
           {/* Верхняя плашка-капсула */}
-          <div className="mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-accent/30 bg-white/80 px-3 py-1 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
+          <div className="mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-accent/25 bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
             <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-deep sm:h-5 sm:w-5">
               <BadgeCheck className="h-2.5 w-2.5 text-white sm:h-3.5 sm:w-3.5" strokeWidth={3} />
             </span>
-            <span className="text-[9px] font-bold uppercase tracking-wider text-accent-deep sm:text-xs">
+            <span className="text-[10px] font-bold uppercase tracking-wide text-accent-deep sm:text-xs sm:tracking-wider">
               Методика для&nbsp;медицинских клиник
             </span>
           </div>
 
           {/* H1 */}
-          <h1 className="mt-3 text-center font-extrabold leading-[1.15] tracking-tight text-[19px] sm:mt-5 sm:text-4xl md:text-5xl">
-            Как увеличить выручку{" "}
-            <span className="relative inline-block whitespace-nowrap">
-              <span className="relative z-10">медицинской&nbsp;клиники</span>
-              <span className="absolute inset-x-0 bottom-0.5 -z-0 h-1.5 bg-highlight/70 sm:h-3" />
-            </span>{" "}
-            <span className="text-accent-deep">в&nbsp;2–3&nbsp;раза</span>{" "}
-            без увеличения расходов на&nbsp;рекламу{" "}
-            <span className="text-accent-deep whitespace-nowrap">в&nbsp;2026&nbsp;году</span>
+          <h1 className="mx-auto mt-5 max-w-[23rem] text-center text-[40px] font-black leading-[0.92] tracking-tight sm:mt-5 sm:max-w-none sm:text-5xl sm:leading-[1.02] md:text-6xl">
+            Хватит терять{" "}
+            <span className="relative inline-block text-accent-deep">
+              пациентов
+              <span className="absolute inset-x-1 -bottom-1 -z-0 h-2 rounded-full bg-highlight/65" />
+            </span>
           </h1>
 
-          {/* Подзаголовок — скрыт на мобильном для компактности */}
-          <p className="mx-auto mt-3 hidden max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:mt-5 sm:block sm:text-lg">
-            Для владельцев медицинских клиник, которые хотят обойти конкурентов
-            и увеличить выручку без роста рекламного бюджета
+          <p className="mx-auto mt-3 max-w-[22rem] text-center text-[17px] font-semibold leading-snug text-foreground/75 sm:mt-5 sm:max-w-2xl sm:text-2xl">
+            Увеличьте выручку медицинской клиники{" "}
+            <span className="whitespace-nowrap font-black text-accent-deep">в 2–3 раза</span>{" "}
+            без дополнительных расходов на рекламу
           </p>
 
           {/* Видео */}
-          <div className="relative mx-auto mt-4 w-full max-w-2xl sm:mt-7">
-            <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-tr from-accent-deep/25 via-accent/15 to-highlight/25 blur-lg sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white bg-black shadow-xl ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Как увеличить выручку медицинской клиники"
-                className="absolute inset-0 h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+          <div className="relative mx-auto mt-8 w-full max-w-2xl sm:mt-7">
+            <div className="absolute -inset-1 rounded-[1.35rem] bg-gradient-to-tr from-accent-deep/20 via-accent/10 to-highlight/20 blur-md sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-[1.1rem] border border-white bg-black shadow-lg ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
+              <video
+                className="absolute inset-0 h-full w-full bg-black object-cover"
+                autoPlay
+                muted
+                controls
+                playsInline
+                preload="auto"
+                poster="/videos/case-video-poster.jpg"
+              >
+                <source src="/videos/case-video-optimized.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+              </video>
             </div>
           </div>
 
-          <p className="mt-2 text-center text-[11px] italic text-muted-foreground sm:mt-4 sm:text-base">
+          <p className="mt-2 text-center text-[12px] italic leading-snug text-muted-foreground sm:mt-4 sm:text-base">
             Посмотрите видео или прочитайте статью ниже
           </p>
 
           {/* CTA */}
-          <div className="mt-3 sm:mt-6">
+          <div className="mt-auto pt-4 sm:mt-6 sm:pt-0">
             <ScrollToFormButton
               label="Забронировать диагностику"
+              className="h-16 rounded-2xl text-[21px] shadow-lg shadow-accent/20 sm:h-14 sm:rounded-xl sm:text-base"
               ctaId={1}
               ctaName="Hero — Забронировать диагностику"
             />
-            <p className="mt-2 flex items-center justify-center gap-2 text-center text-[11px] font-medium text-muted-foreground sm:mt-3 sm:text-xs">
+            <p className="mt-3 flex items-center justify-center gap-2 text-center text-sm font-medium text-muted-foreground sm:mt-3 sm:text-xs">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-destructive" />
@@ -207,7 +210,7 @@ const Index = () => {
         </div>
       </Section>
 
-      {/* 5. КЕЙСЫ — оставлены без изменений */}
+      {/* 5. КЕЙСЫ */}
       <Section>
         <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
           <Sparkles className="h-3.5 w-3.5" />
@@ -218,7 +221,7 @@ const Index = () => {
           <span className="text-accent-deep">из реальных клиник</span>
         </h2>
         <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
-          Разные города, разные ниши&nbsp; одна система.
+          Разные города, разные ниши — одна система.
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
@@ -316,21 +319,21 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:gap-4 lg:grid-cols-3">
           {[
             {
               city: "Астана",
               niche: "Стоматология",
-              value: "+8 400 000 ₸",
-              period: "за 2 месяца",
+              value: "+8,4 млн ₸",
+              period: "дополнительной выручки за 2 месяца",
               before: "22% доходимости с заявок",
               after: "61% доходимости, график забит на 3 недели вперёд",
             },
             {
               city: "Шымкент",
               niche: "Многопрофильный центр",
-              value: "+18 200 000 ₸",
-              period: "за 4 месяца",
+              value: "+18,2 млн ₸",
+              period: "дополнительной выручки за 4 месяца",
               before: "Собственник лично закрывал заявки по вечерам",
               after: "Колл-центр работает без владельца, +47 первичных в месяц",
             },
@@ -345,99 +348,137 @@ const Index = () => {
           ].map((c, i) => (
             <div
               key={i}
-              className="flex flex-col rounded-2xl border bg-card p-5 shadow-sm"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm transition-shadow hover:shadow-md"
             >
-              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  <MapPin className="h-3.5 w-3.5 text-accent-deep" />
-                  {c.city}
-                </span>
-                <span className="text-sm text-muted-foreground">{c.niche}</span>
+              <div className="border-b bg-gradient-to-r from-accent-soft/70 via-background to-background px-4 py-3 sm:px-5">
+                <div className="flex min-w-0 items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="inline-flex max-w-full items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-accent-deep">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" />
+                      <span className="truncate">{c.city}</span>
+                    </span>
+                    <p className="mt-1 truncate text-sm font-medium text-muted-foreground">
+                      {c.niche}
+                    </p>
+                  </div>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-deep/10 text-accent-deep">
+                    <TrendingUp className="h-4.5 w-4.5" strokeWidth={2.5} />
+                  </span>
+                </div>
               </div>
 
-              <div className="mt-3">
-                <p className="whitespace-nowrap text-2xl font-extrabold leading-none text-accent-deep sm:text-3xl">
+              <div className="flex flex-1 flex-col p-4 sm:p-5">
+                <div className="rounded-2xl bg-accent-soft/45 p-4 ring-1 ring-accent/15">
+                <p className="text-[2rem] font-black leading-none tracking-tight text-accent-deep sm:text-[2.35rem] lg:text-[2rem] xl:text-[2.25rem]">
                   {c.value}
                 </p>
-                <p className="mt-1.5 text-xs text-muted-foreground">{c.period}</p>
-              </div>
-
-              <div className="mt-4 space-y-2 border-t pt-4">
-                <div className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
-                  <p className="text-sm leading-snug">
-                    <span className="font-semibold text-muted-foreground">Было:</span>{" "}
-                    {c.before}
+                  <p className="mt-2 text-sm font-semibold leading-snug text-accent-deep/75">
+                    {c.period}
                   </p>
                 </div>
-                <div className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                  <p className="text-sm leading-snug">
-                    <span className="font-semibold text-accent-deep">Стало:</span>{" "}
-                    {c.after}
-                  </p>
+
+                <div className="mt-4 grid gap-2.5">
+                  <div className="rounded-xl border border-destructive/15 bg-destructive/[0.04] p-3">
+                    <p className="text-[11px] font-extrabold uppercase tracking-wider text-destructive">
+                      Было
+                    </p>
+                    <p className="mt-1.5 text-sm leading-snug text-foreground/85">
+                      {c.before}
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-accent/20 bg-accent-soft/35 p-3">
+                    <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent-deep">
+                      Стало
+                    </p>
+                    <p className="mt-1.5 text-sm font-medium leading-snug text-foreground">
+                      {c.after}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-muted/50 px-4 py-3 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
           Это не разовые истории —{" "}
           <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
         </p>
       </Section>
 
       {/* 6. ОБО МНЕ */}
-      <Section tone="muted">
-        <div className="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+      <Section tone="muted" className="sm:py-20" contentClassName="max-w-5xl">
+        <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase text-accent-deep">
           <BadgeCheck className="h-3.5 w-3.5" />
           Знакомство
         </div>
 
-        <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-10">
-          <div className="relative mx-auto w-full max-w-sm md:mx-0">
-            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/20 via-transparent to-accent-deep/20 blur-xl" aria-hidden="true" />
-            <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
-              <img
-                src={yuriPhoto}
-                alt="Юрий — автор системы для медицинских клиник"
-                className="block w-full object-cover"
-              />
-              <div className="border-t bg-card px-4 py-3">
-                <p className="text-sm font-bold leading-tight">Юрий</p>
-                <p className="text-xs text-muted-foreground">
-                  Эксперт по росту медицинских клиник
-                </p>
+        <div className="overflow-hidden rounded-[2rem] border bg-background shadow-xl shadow-accent/5">
+          <div className="grid lg:grid-cols-[minmax(280px,0.82fr)_minmax(0,1.18fr)]">
+            <div className="bg-gradient-to-br from-accent-soft/80 via-background to-background p-4 sm:p-6 lg:p-7">
+              <div className="mx-auto max-w-sm overflow-hidden rounded-[1.5rem] border bg-card shadow-lg lg:max-w-none">
+                <img
+                  src={yuriPhoto}
+                  alt="Юрий — автор системы для медицинских клиник"
+                  className="block aspect-[4/5] w-full object-cover object-center lg:aspect-[5/6]"
+                />
+                <div className="border-t bg-card px-5 py-4">
+                  <p className="text-lg font-black leading-tight">Юрий</p>
+                  <p className="mt-1 text-sm leading-snug text-muted-foreground">
+                    Эксперт по росту медицинских клиник
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="relative rounded-2xl border border-border/60 bg-background p-5 shadow-sm sm:p-7">
-            <h2 className="text-center text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl md:text-left">
-              Меня зовут <span className="text-accent-deep">Юрий</span>
-            </h2>
-            <div className="mt-2 h-1 w-12 rounded-full bg-accent-deep/70 mx-auto md:mx-0" />
+            <div className="p-5 sm:p-7 lg:p-9">
+              <h2 className="text-center text-[2.2rem] font-black leading-none sm:text-5xl md:text-left">
+                Меня зовут <span className="text-accent-deep">Юрий</span>
+              </h2>
+              <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent-deep/70 md:mx-0" />
 
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-foreground/85 sm:text-lg">
-              <p>
-                Последние <span className="font-semibold text-foreground">5 лет</span> я занимался именно этим: выстраивал систему, которая позволяет при тех же вложениях в рекламный бюджет увеличивать выручку клиники. Мы с командой прогнали десятки кейсов разных клиник и помогли сделать окупаемость в{" "}
-                <span className="rounded bg-highlight/50 px-1 font-bold text-foreground">3, 5 и даже 10 раз</span>.
-              </p>
-              <p>
-                Я беру на себя ответственность за каждый этап. Я точно знаю, на что смотреть, чтобы больше пациентов доходило до клиники, записывалось на лечение и оставалось с вами на долгие годы.
-              </p>
-            </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {[
+                  { value: "5 лет", label: "системно растим клиники" },
+                  { value: "десятки", label: "разобранных кейсов" },
+                  { value: "до 10x", label: "рост окупаемости" },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-2xl bg-muted/55 p-4">
+                    <p className="text-2xl font-black leading-none text-accent-deep">
+                      {item.value}
+                    </p>
+                    <p className="mt-2 text-sm font-medium leading-snug text-muted-foreground">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
 
-            <div className="relative mt-6 overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-accent-soft to-accent-soft/40 p-4 sm:p-5">
-              <div className="pointer-events-none absolute -top-8 -right-8 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
-              <div className="relative flex items-start gap-3">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-deep text-white shadow-md">
-                  <BadgeCheck className="h-4.5 w-4.5" strokeWidth={2.5} />
-                </span>
-                <p className="text-[15px] font-semibold leading-relaxed text-accent-deep sm:text-base">
-                  С этой системой вы перестанете терять деньги, а каждая инвестиция в маркетинг начнёт работать на результат.
+              <div className="mt-7 grid gap-4 text-base leading-relaxed text-foreground/85 sm:text-lg lg:grid-cols-2">
+                <p>
+                  Я выстраиваю систему, которая помогает медицинским клиникам увеличивать выручку при тех же вложениях в рекламный бюджет.
                 </p>
+                <p>
+                  Я точно знаю, где пациенты теряются: в рекламе, заявках, колл-центре, первичной диагностике или повторной записи.
+                </p>
+              </div>
+
+              <div className="mt-6 rounded-2xl border border-highlight/40 bg-highlight/20 p-4 sm:p-5">
+                <p className="text-lg font-black leading-snug text-foreground sm:text-xl">
+                  Мы с командой помогали клиникам повышать окупаемость в{" "}
+                  <span className="rounded bg-highlight px-1.5 text-foreground">3, 5 и даже 10 раз</span>.
+                </p>
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-accent/25 bg-accent-soft/55 p-4 sm:p-5">
+                <div className="flex items-start gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-deep text-white shadow-sm">
+                    <BadgeCheck className="h-5 w-5" strokeWidth={2.5} />
+                  </span>
+                  <p className="text-base font-extrabold leading-snug text-accent-deep sm:text-lg">
+                    С этой системой вы перестанете терять деньги, а каждая инвестиция в маркетинг начнёт работать на результат.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -474,28 +515,38 @@ const Index = () => {
           Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет — жмите на кнопку и записывайтесь на диагностику.
         </p>
 
-        {/* Цена */}
-        <div className="mt-6 rounded-2xl bg-banner p-5 text-center text-white shadow-lg sm:p-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-highlight">
-            Диагностика стоит
+        {/* Что внутри */}
+        <div className="mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-accent-deep via-accent to-accent-deep p-5 text-white shadow-xl shadow-accent/20 sm:p-7">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-highlight">
+            На диагностике вы получите
           </p>
-          <p className="mt-1 text-3xl font-extrabold leading-none text-highlight sm:text-4xl">
-            10 000 тенге
-          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {[
+              "Разбор текущей воронки",
+              "Точки, где теряются деньги",
+              "План роста без доп. бюджета",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl bg-white/12 p-4 ring-1 ring-white/15">
+                <Check className="h-5 w-5 text-highlight" strokeWidth={3} />
+                <p className="mt-3 text-sm font-bold leading-snug sm:text-base">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Что внутри */}
-        <div className="mt-5 rounded-2xl border bg-card p-5 sm:p-6">
-          <p className="text-base leading-relaxed sm:text-lg">
+        <div className="mt-5 rounded-3xl border bg-card p-5 shadow-sm sm:p-6">
+          <p className="text-lg leading-relaxed sm:text-xl">
             Мы разберём вашу текущую ситуацию и дадим{" "}
-            <span className="font-bold text-accent-deep">готовый пошаговый план</span>: где вы теряете деньги прямо сейчас и как увеличить количество первичных пациентов без дополнительных расходов на рекламу.
+            <span className="font-extrabold text-accent-deep">готовый пошаговый план</span>: где вы теряете деньги прямо сейчас и как увеличить количество первичных пациентов без дополнительных расходов на рекламу.
           </p>
         </div>
 
         {/* Алерт */}
-        <div className="mt-5 flex items-start gap-3 rounded-xl border-l-4 border-destructive bg-destructive/5 p-4 sm:p-5">
-          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-destructive" />
-          <p className="text-sm font-semibold leading-snug text-foreground sm:text-base">
+        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-destructive/15 bg-destructive/5 p-4 shadow-sm sm:p-5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
+            <AlertTriangle className="h-5 w-5" />
+          </span>
+          <p className="pt-1 text-base font-bold leading-snug text-foreground sm:text-lg">
             Количество мест ограничено, поэтому успейте оставить заявку.
           </p>
         </div>
@@ -520,7 +571,7 @@ const Index = () => {
           <Phone className="h-3.5 w-3.5" />
           WhatsApp: +7 747 284 25 95
         </p>
-        <p className="mt-2">© {new Date().getFullYear()} Система «Врач на миллион»</p>
+        <p className="mt-2">© {new Date().getFullYear()} Система MarkVision AI</p>
       </footer>
     </main>
   );
