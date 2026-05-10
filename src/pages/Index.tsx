@@ -1,4 +1,4 @@
-import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight } from "lucide-react";
+import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -606,6 +606,82 @@ const Index = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-10 text-center">
+          <h3 className="text-3xl font-black uppercase leading-none tracking-tight sm:text-5xl lg:text-6xl">
+            У вас два пути
+          </h3>
+          <p className="mt-3 text-base font-medium text-muted-foreground sm:text-xl">
+            Какой выберете для своей клиники?
+          </p>
+        </div>
+
+        <div className="mt-7 grid gap-4 lg:grid-cols-2">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-destructive via-[#bd302b] to-[#9f2925] p-5 text-white shadow-xl shadow-destructive/15 sm:p-7 lg:p-8">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative flex items-center gap-4">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/14 text-white sm:h-20 sm:w-20">
+                <TrendingUp className="h-8 w-8 rotate-180" strokeWidth={3} />
+              </span>
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70">
+                Путь 1
+              </p>
+            </div>
+
+            <h4 className="relative mt-9 text-3xl font-black uppercase leading-tight sm:text-4xl">
+              Оставить как есть
+            </h4>
+
+            <ul className="relative mt-7 space-y-4 text-base leading-snug text-white/95 sm:text-lg">
+              {[
+                "Закрыть страницу и забыть",
+                "Продолжать терять пациентов и сливать рекламный бюджет",
+                "Смотреть, как коллеги забирают ваш рынок",
+                "Через год вернуться к тем же проблемам, но дороже",
+              ].map((item) => (
+                <li key={item} className="flex gap-3">
+                  <X className="mt-0.5 h-5 w-5 shrink-0 text-white" strokeWidth={3} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#3b7f47] via-accent-deep to-[#235f48] p-5 text-white shadow-xl shadow-accent-deep/20 sm:p-7 lg:p-8">
+            <div className="absolute right-5 top-5 rounded-full bg-highlight px-4 py-2 text-[11px] font-black uppercase tracking-widest text-foreground shadow-md sm:right-7">
+              Рекомендуем
+            </div>
+            <div className="pointer-events-none absolute -bottom-20 -right-16 h-56 w-56 rounded-full bg-highlight/10 blur-3xl" />
+            <div className="relative flex items-center gap-4 pr-36">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/14 text-white sm:h-20 sm:w-20">
+                <TrendingUp className="h-8 w-8" strokeWidth={3} />
+              </span>
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-white/70">
+                Путь 2
+              </p>
+            </div>
+
+            <h4 className="relative mt-9 text-3xl font-black uppercase leading-tight sm:text-4xl">
+              Построить систему
+            </h4>
+
+            <ul className="relative mt-7 space-y-4 text-base leading-snug text-white/95 sm:text-lg">
+              {[
+                "Записаться на диагностику",
+                "Увидеть, где клиника теряет деньги",
+                "Получить пошаговый план роста выручки",
+                "Стать клиникой №1 в своём городе",
+              ].map((item, i) => (
+                <li key={item} className="flex gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-accent-deep">
+                    {i + 1}
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
