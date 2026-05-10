@@ -437,18 +437,40 @@ const Index = () => {
               </h2>
               <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent-deep/70 md:mx-0" />
 
+              <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg md:text-left">
+                Я помогаю клиникам находить неочевидные точки потерь: от рекламы и заявок до администраторов, первичных консультаций и повторных продаж.
+              </p>
+
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 {[
-                  { value: "5 лет", label: "системно растим клиники" },
-                  { value: "десятки", label: "разобранных кейсов" },
-                  { value: "до 10x", label: "рост окупаемости" },
+                  {
+                    value: "5 лет",
+                    label: "в медицинском маркетинге",
+                    note: "знаю, где чаще всего теряются заявки",
+                  },
+                  {
+                    value: "десятки",
+                    label: "разобранных клиник",
+                    note: "стоматологии, косметологии и многопрофильные центры",
+                  },
+                  {
+                    value: "до 10x",
+                    label: "рост окупаемости",
+                    note: "когда исправлена вся система, а не только реклама",
+                  },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl bg-muted/55 p-4">
-                    <p className="text-2xl font-black leading-none text-accent-deep">
+                  <div key={item.label} className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-accent-soft/60 via-background to-background p-4 shadow-sm">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-deep text-white shadow-sm">
+                      <Check className="h-4 w-4" strokeWidth={3} />
+                    </span>
+                    <p className="mt-4 text-3xl font-black leading-none text-accent-deep">
                       {item.value}
                     </p>
-                    <p className="mt-2 text-sm font-medium leading-snug text-muted-foreground">
+                    <p className="mt-2 text-sm font-extrabold leading-snug text-foreground">
                       {item.label}
+                    </p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      {item.note}
                     </p>
                   </div>
                 ))}
@@ -456,10 +478,10 @@ const Index = () => {
 
               <div className="mt-7 grid gap-4 text-base leading-relaxed text-foreground/85 sm:text-lg lg:grid-cols-2">
                 <p>
-                  Я выстраиваю систему, которая помогает медицинским клиникам увеличивать выручку при тех же вложениях в рекламный бюджет.
+                  Я не смотрю на рекламу отдельно от продаж. В клинике всё связано: заявка, звонок, запись, визит, план лечения и повторный приём.
                 </p>
                 <p>
-                  Я точно знаю, где пациенты теряются: в рекламе, заявках, колл-центре, первичной диагностике или повторной записи.
+                  Поэтому на диагностике мы ищем не “красивую гипотезу”, а конкретные места, где сейчас утекают пациенты и деньги.
                 </p>
               </div>
 
