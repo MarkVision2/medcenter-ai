@@ -1,4 +1,4 @@
-import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X } from "lucide-react";
+import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X, Clock, Flame } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -685,20 +685,51 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Алерт */}
-        <div className="mt-5 flex items-start gap-3 rounded-2xl border border-destructive/15 bg-destructive/5 p-4 shadow-sm sm:p-5">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
-            <AlertTriangle className="h-5 w-5" />
-          </span>
-          <p className="pt-1 text-base font-bold leading-snug text-foreground sm:text-lg">
-            Количество мест ограничено, поэтому успейте оставить заявку.
-          </p>
+        <div className="mt-10 space-y-5">
+          <div className="rounded-[2rem] bg-gradient-to-br from-[#356bd1] via-[#2f6a9d] to-accent-deep p-5 text-white shadow-xl shadow-accent-deep/15 sm:p-7">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/10">
+                <Clock className="h-7 w-7" strokeWidth={2.5} />
+              </span>
+              <div>
+                <p className="text-2xl font-black uppercase leading-tight sm:text-3xl lg:text-4xl">
+                  Завтра свободных мест может не быть
+                </p>
+                <p className="mt-3 text-base leading-snug text-highlight sm:text-xl">
+                  Я беру <span className="font-black">только 1 клинику</span> и только одну в нише в городе.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border-2 border-dashed border-[#b9cdf4] bg-white/85 px-5 py-6 text-center shadow-sm sm:px-8 sm:py-8">
+            <p className="mx-auto max-w-4xl text-lg font-medium leading-relaxed text-foreground/85 sm:text-2xl">
+              Если вы всё ещё думаете — просто представьте, где будете через год, когда узнаете, что{" "}
+              <span className="box-decoration-clone bg-highlight/35 px-1.5 font-black text-foreground">
+                клиники-конкуренты уже делают по 20+ миллионов в месяц
+              </span>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-[2rem] bg-gradient-to-br from-[#3f866b] via-accent-deep to-[#2c6c58] p-5 text-white shadow-xl shadow-accent-deep/15 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/14 text-highlight ring-1 ring-white/10">
+                <Flame className="h-6 w-6" strokeWidth={2.5} />
+              </span>
+              <p className="text-xl font-semibold leading-snug sm:text-2xl">
+                Пока вы думаете — ваши{" "}
+                <span className="font-black text-highlight">коллеги-клиники внедряют системы продаж</span>{" "}
+                и забирают ваших пациентов.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-8">
           <ScrollToFormButton
             variant="cta-orange"
-            label="Забронировать диагностику"
+            label="Забронировать диагностику клиники"
             className="uppercase"
             ctaId={2}
             ctaName="Финальный CTA — Забронировать диагностику"
