@@ -1,9 +1,56 @@
+import { useEffect, useRef, useState } from "react";
 import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X, Clock, Flame } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
-import yuriPhoto from "@/assets/yuri.png";
+import yuriPhoto from "@/assets/yuri-optimized.jpg";
+
+const DeferredHeroVideo = () => {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const load = () => setShouldLoadVideo(true);
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(load, { timeout: 1600 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const id = window.setTimeout(load, 900);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+    video.play().catch(() => {
+      /* Autoplay can be blocked by browser policy; controls remain available. */
+    });
+  }, [shouldLoadVideo]);
+
+  return (
+    <video
+      ref={videoRef}
+      className="absolute inset-0 h-full w-full bg-black object-cover"
+      autoPlay={shouldLoadVideo}
+      muted
+      controls
+      playsInline
+      preload="metadata"
+      poster="/videos/case-video-poster.jpg"
+    >
+      {shouldLoadVideo && <source src="/videos/case-video-optimized.mp4" type="video/mp4" />}
+      Ваш браузер не поддерживает видео.
+    </video>
+  );
+};
 
 const Index = () => {
   return (
@@ -55,18 +102,7 @@ const Index = () => {
           <div className="relative mx-auto mt-8 w-full max-w-2xl sm:mt-7">
             <div className="absolute -inset-1 rounded-[1.35rem] bg-gradient-to-tr from-accent-deep/20 via-accent/10 to-highlight/20 blur-md sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
             <div className="relative aspect-video w-full overflow-hidden rounded-[1.1rem] border border-white bg-black shadow-lg ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
-              <video
-                className="absolute inset-0 h-full w-full bg-black object-cover"
-                autoPlay
-                muted
-                controls
-                playsInline
-                preload="auto"
-                poster="/videos/case-video-poster.jpg"
-              >
-                <source src="/videos/case-video-optimized.mp4" type="video/mp4" />
-                Ваш браузер не поддерживает видео.
-              </video>
+              <DeferredHeroVideo />
             </div>
           </div>
 
@@ -431,6 +467,10 @@ const Index = () => {
                 <img
                   src={yuriPhoto}
                   alt="Юрий — автор системы для медицинских клиник"
+                  loading="lazy"
+                  decoding="async"
+                  width={720}
+                  height={1080}
                   className="block aspect-[4/5] w-full object-cover object-center lg:aspect-[5/6]"
                 />
                 <div className="border-t bg-card px-5 py-4">

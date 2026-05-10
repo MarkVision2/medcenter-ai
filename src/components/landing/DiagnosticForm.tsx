@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,26 @@ const formSchema = z.object({
 });
 
 type FieldErrors = Partial<Record<"name" | "phone", string>>;
+type Fbq = (
+  command: "track",
+  eventName: string,
+  params?: Record<string, unknown>,
+  options?: Record<string, unknown>,
+) => void;
+
+declare global {
+  interface Window {
+    fbq?: Fbq;
+    dataLayer?: Array<Record<string, unknown>>;
+  }
+}
+
+type SubmitDiagnosticLeadResponse = {
+  crm?: {
+    ok?: boolean;
+  };
+  event_id?: string;
+};
 
 const getCookie = (name: string): string | undefined => {
   if (typeof document === "undefined") return undefined;
@@ -206,7 +227,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         return;
       }
 
-      const fbq = (window as any).fbq;
+      const fbq = window.fbq;
       if (typeof fbq === "function") {
         fbq(
           "track",
@@ -221,7 +242,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         );
       }
 
-      const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+      const dataLayer = (window.dataLayer = window.dataLayer || []);
       dataLayer.push({
         event: "generate_lead",
         event_category: "engagement",
@@ -232,7 +253,8 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         transaction_id: eventId,
       });
 
-      const serverCrmOk = (data as any)?.crm?.ok === true;
+      const responseData = data as SubmitDiagnosticLeadResponse | null;
+      const serverCrmOk = responseData?.crm?.ok === true;
       if (!serverCrmOk) {
         await submitCrmWebhook({
           name: parsed.data.name,
@@ -250,7 +272,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         JSON.stringify({
           name: parsed.data.name,
           phone: parsed.data.phone,
-          event_id: (data as any)?.event_id ?? eventId,
+          event_id: responseData?.event_id ?? eventId,
         }),
       );
 
@@ -271,6 +293,8 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
     "h-12 rounded-xl bg-muted/50 border-input pl-11 text-base placeholder:text-muted-foreground/70";
 
   return (
+    <>
+    <Toaster />
     <form
       onSubmit={handleSubmit}
       noValidate
@@ -356,6 +380,7 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
       </p>
     </form>
+    </>
   );
 };
 

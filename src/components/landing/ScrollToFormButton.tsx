@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +10,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import DiagnosticForm from "@/components/landing/DiagnosticForm";
+
+const DiagnosticForm = lazy(() => import("@/components/landing/DiagnosticForm"));
 
 interface ScrollToFormButtonProps {
   label?: string;
@@ -58,7 +59,15 @@ const ScrollToFormButton = ({
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4">
-          <DiagnosticForm ctaId={ctaId} ctaName={resolvedCtaName} />
+          <Suspense
+            fallback={
+              <div className="rounded-2xl bg-muted p-5 text-center text-sm font-semibold text-muted-foreground">
+                Загружаем форму...
+              </div>
+            }
+          >
+            <DiagnosticForm ctaId={ctaId} ctaName={resolvedCtaName} />
+          </Suspense>
         </div>
       </DialogContent>
     </Dialog>

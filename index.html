@@ -17,6 +17,7 @@
     <meta name="description" content="Диагностика для владельцев медицинских центров: пошаговый план роста до 300–600 тыс тенге в день. Запись в WhatsApp.">
     <meta name="author" content="Юрий — Система «Врач на миллион»" />
     <meta name="google" content="notranslate" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
 
@@ -34,9 +35,9 @@
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      n.queue=[];function loadPixel(){t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      f.addEventListener('load',function(){f.setTimeout(loadPixel,4500)})}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '3912939922347990');
       fbq('track', 'PageView');
