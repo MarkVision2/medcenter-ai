@@ -1,4 +1,4 @@
-import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone } from "lucide-react";
+import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
@@ -211,7 +211,7 @@ const Index = () => {
       </Section>
 
       {/* 5. КЕЙСЫ */}
-      <Section>
+      <Section contentClassName="max-w-6xl">
         <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
           <Sparkles className="h-3.5 w-3.5" />
           Реальный кейс
@@ -224,7 +224,7 @@ const Index = () => {
           Разные города, разные ниши — одна система.
         </p>
 
-        <div className="mt-6 overflow-hidden rounded-2xl border bg-card shadow-md">
+        <div className="mx-auto mt-6 max-w-2xl overflow-hidden rounded-2xl border bg-card shadow-md">
           <div className="border-b bg-accent-soft/40 px-6 py-4 sm:px-8">
             <div className="flex items-center justify-center gap-2 text-center font-semibold text-accent-deep">
               <MapPin className="h-5 w-5 shrink-0" />
@@ -319,7 +319,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:gap-4 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 xl:gap-5 lg:grid-cols-3">
           {[
             {
               city: "Астана",
@@ -348,49 +348,60 @@ const Index = () => {
           ].map((c, i) => (
             <div
               key={i}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm transition-shadow hover:shadow-md"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="border-b bg-gradient-to-r from-accent-soft/70 via-background to-background px-4 py-3 sm:px-5">
-                <div className="flex min-w-0 items-center justify-between gap-3">
+              <div className="border-b bg-gradient-to-br from-accent-soft/80 via-background to-background px-5 py-5">
+                <div className="flex min-w-0 items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <span className="inline-flex max-w-full items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-accent-deep">
-                      <MapPin className="h-3.5 w-3.5 shrink-0" />
-                      <span className="truncate">{c.city}</span>
+                    <span className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/80 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-accent-deep ring-1 ring-accent/15">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2.5} />
+                      <span>{c.city}</span>
                     </span>
-                    <p className="mt-1 truncate text-sm font-medium text-muted-foreground">
+                    <p className="mt-3 text-base font-semibold leading-snug text-foreground">
                       {c.niche}
                     </p>
                   </div>
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-deep/10 text-accent-deep">
-                    <TrendingUp className="h-4.5 w-4.5" strokeWidth={2.5} />
+                  <span className="shrink-0 rounded-full bg-accent-deep/10 px-3 py-1.5 text-xs font-black text-accent-deep">
+                    0{i + 1}
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-1 flex-col p-4 sm:p-5">
-                <div className="rounded-2xl bg-accent-soft/45 p-4 ring-1 ring-accent/15">
-                <p className="text-[2rem] font-black leading-none tracking-tight text-accent-deep sm:text-[2.35rem] lg:text-[2rem] xl:text-[2.25rem]">
-                  {c.value}
-                </p>
-                  <p className="mt-2 text-sm font-semibold leading-snug text-accent-deep/75">
+              <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
+                <div className="flex min-h-[11.25rem] flex-col justify-between rounded-2xl bg-accent-deep p-4 text-white shadow-lg shadow-accent-deep/15 sm:min-h-[13.5rem] sm:px-5 sm:py-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-[11px] font-black uppercase tracking-[0.22em] text-highlight">
+                      Результат
+                    </p>
+                    <TrendingUp className="h-5 w-5 text-highlight" strokeWidth={2.5} />
+                  </div>
+                  <p className="mt-4 text-[2.35rem] font-black leading-[0.95] tracking-tight sm:text-[2.8rem] lg:text-[2.35rem] xl:text-[2.75rem]">
+                    {c.value}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold leading-snug text-white/78">
                     {c.period}
                   </p>
                 </div>
 
-                <div className="mt-4 grid gap-2.5">
-                  <div className="rounded-xl border border-destructive/15 bg-destructive/[0.04] p-3">
-                    <p className="text-[11px] font-extrabold uppercase tracking-wider text-destructive">
-                      Было
+                <div className="mt-5 flex flex-1 flex-col justify-between gap-4">
+                  <div>
+                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-destructive">
+                      До системы
                     </p>
-                    <p className="mt-1.5 text-sm leading-snug text-foreground/85">
+                    <p className="mt-2 text-base leading-snug text-foreground/78">
                       {c.before}
                     </p>
                   </div>
-                  <div className="rounded-xl border border-accent/20 bg-accent-soft/35 p-3">
-                    <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent-deep">
-                      Стало
+                  <div className="flex items-center gap-3 text-accent-deep/55">
+                    <span className="h-px flex-1 bg-border" />
+                    <ArrowRight className="h-5 w-5" />
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-accent-deep">
+                      После внедрения
                     </p>
-                    <p className="mt-1.5 text-sm font-medium leading-snug text-foreground">
+                    <p className="mt-2 text-base font-semibold leading-snug text-foreground">
                       {c.after}
                     </p>
                   </div>
