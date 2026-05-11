@@ -56,6 +56,59 @@ const UTM_KEYS = [
 ] as const;
 type UtmKey = (typeof UTM_KEYS)[number];
 const UTM_STORAGE_KEY = "lovable_utm_v1";
+const CRM_WEBHOOK_URL =
+  "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
+const CRM_PROJECT_ID = "cceb9a86-687b-4417-9b4e-d106bd8cc79c";
+const CRM_PROJECT_TOKEN = "MkcXbUBfd7ObDBy7";
+
+const submitCrmWebhook = async (params: {
+  name: string;
+  phone: string;
+  ctaId?: number;
+  ctaName?: string;
+  utm: Partial<Record<UtmKey, string>>;
+}) => {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 3500);
+  try {
+    const response = await fetch(CRM_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: CRM_PROJECT_TOKEN,
+        project_id: CRM_PROJECT_ID,
+        name: params.name,
+        phone: params.phone,
+        service: "Диагностика медицинской клиники",
+        city: "Не указано",
+        source: "site",
+        cta_id: params.ctaId,
+        cta_name: params.ctaName,
+        referrer: document.referrer || undefined,
+        landing_url: window.location.href,
+        fbc: getCookie("_fbc"),
+        fbp: getCookie("_fbp"),
+        utm_source: params.utm.utm_source,
+        utm_medium: params.utm.utm_medium,
+        utm_campaign: params.utm.utm_campaign,
+        utm_content: params.utm.utm_content,
+        utm_term: params.utm.utm_term,
+      }),
+      signal: controller.signal,
+    });
+    const payload = await response.json().catch(() => null);
+    if (!response.ok) {
+      console.error("CRM webhook failed", response.status, payload);
+      return { ok: false, status: response.status, data: payload };
+    }
+    return { ok: true, status: response.status, data: payload };
+  } catch (err) {
+    console.error("CRM webhook exception", err);
+    return { ok: false, error: err instanceof Error ? err.message : "Unknown error" };
+  } finally {
+    window.clearTimeout(timeout);
+  }
+};
 
 const getUtmParams = (): Partial<Record<UtmKey, string>> => {
   if (typeof window === "undefined") return {};
@@ -136,9 +189,10 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
       const fbp = getCookie("_fbp");
       const fbc = getCookie("_fbc");
 
-      const { data, error } = await supabase.functions.invoke(
-        "submit-diagnostic-lead",
-        {
+      // Fire Edge function in parallel for Telegram + server-side Meta CAPI.
+      // CRM webhook below is the source of truth for "lead delivered".
+      const edgePromise = supabase.functions
+        .invoke("submit-diagnostic-lead", {
           body: {
             name: parsed.data.name,
             phone: parsed.data.phone,
@@ -154,11 +208,21 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
             cta_name: ctaName ?? null,
             utm,
           },
-        },
-      );
+        })
+        .catch((err) => {
+          console.error("submit-diagnostic-lead side-effect failed", err);
+          return null;
+        });
 
-      if (error) {
-        console.error("submit-diagnostic-lead error", error);
+      const crmResult = await submitCrmWebhook({
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        ctaId: ctaId ?? undefined,
+        ctaName: ctaName ?? undefined,
+        utm,
+      });
+
+      if (!crmResult.ok) {
         toast({
           title: "Не удалось отправить заявку",
           description: "Проверьте подключение и попробуйте снова.",
@@ -166,6 +230,8 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         });
         return;
       }
+
+      void edgePromise;
 
       const fbq = window.fbq;
       if (typeof fbq === "function") {
@@ -193,15 +259,12 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         transaction_id: eventId,
       });
 
-      const responseEventId =
-        (data as { event_id?: string } | null)?.event_id ?? eventId;
-
       sessionStorage.setItem(
         "diagnostic_lead",
         JSON.stringify({
           name: parsed.data.name,
           phone: parsed.data.phone,
-          event_id: responseEventId,
+          event_id: eventId,
         }),
       );
 
