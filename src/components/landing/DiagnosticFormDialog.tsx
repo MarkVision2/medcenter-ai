@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,7 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import DiagnosticForm from "@/components/landing/DiagnosticForm";
+
+const DiagnosticForm = lazy(() => import("@/components/landing/DiagnosticForm"));
 
 interface DiagnosticFormDialogProps {
   open: boolean;
@@ -35,15 +36,17 @@ const DiagnosticFormDialog = ({
           </DialogDescription>
         </DialogHeader>
         <div className="mt-4">
-          <Suspense
-            fallback={
-              <div className="rounded-2xl bg-muted p-5 text-center text-sm font-semibold text-muted-foreground">
-                Загружаем форму...
-              </div>
-            }
-          >
-            <DiagnosticForm ctaId={ctaId} ctaName={ctaName} />
-          </Suspense>
+          {open && (
+            <Suspense
+              fallback={
+                <div className="rounded-2xl bg-muted p-5 text-center text-sm font-semibold text-muted-foreground">
+                  Загружаем форму…
+                </div>
+              }
+            >
+              <DiagnosticForm ctaId={ctaId} ctaName={ctaName} />
+            </Suspense>
+          )}
         </div>
       </DialogContent>
     </Dialog>
