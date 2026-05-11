@@ -1,9 +1,8 @@
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const DiagnosticFormDialog = lazy(() => import("@/components/landing/DiagnosticFormDialog"));
+import DiagnosticFormDialog from "@/components/landing/DiagnosticFormDialog";
 
 interface ScrollToFormButtonProps {
   label?: string;
@@ -39,16 +38,12 @@ const ScrollToFormButton = ({
         <ArrowRight className="h-5 w-5" />
       </Button>
 
-      {open && (
-        <Suspense fallback={null}>
-          <DiagnosticFormDialog
-            open={open}
-            onOpenChange={setOpen}
-            ctaId={ctaId}
-            ctaName={resolvedCtaName}
-          />
-        </Suspense>
-      )}
+      <DiagnosticFormDialog
+        open={open}
+        onOpenChange={setOpen}
+        ctaId={ctaId}
+        ctaName={resolvedCtaName}
+      />
     </>
   );
 };
