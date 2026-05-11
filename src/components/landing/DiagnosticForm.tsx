@@ -44,6 +44,10 @@ declare global {
 type SubmitDiagnosticLeadResponse = {
   crm?: {
     ok?: boolean;
+    status?: number;
+    data?: {
+      error?: string;
+    };
   };
   event_id?: string;
 };
@@ -151,12 +155,12 @@ const submitCrmWebhook = async (params: {
     const payload = await response.json().catch(() => null);
     if (!response.ok) {
       console.error("CRM webhook failed", response.status, payload);
-      throw new Error("CRM webhook failed");
+      return { ok: false, status: response.status, data: payload };
     }
-    return payload;
+    return { ok: true, status: response.status, data: payload };
   } catch (err) {
     console.error("CRM webhook exception", err);
-    throw err;
+    return { ok: false, error: err instanceof Error ? err.message : "Unknown error" };
   } finally {
     window.clearTimeout(timeout);
   }
@@ -259,14 +263,17 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
       });
 
       const responseData = data as SubmitDiagnosticLeadResponse | null;
-      await submitCrmWebhook({
-        name: parsed.data.name,
-        phone: parsed.data.phone,
-        eventId,
-        ctaId: ctaId ?? undefined,
-        ctaName: ctaName ?? undefined,
-        utm,
-      });
+      const serverCrmOk = responseData?.crm?.ok === true;
+      if (!serverCrmOk) {
+        await submitCrmWebhook({
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          eventId,
+          ctaId: ctaId ?? undefined,
+          ctaName: ctaName ?? undefined,
+          utm,
+        });
+      }
 
       // Save form payload for the thank-you page (WhatsApp prefill)
       sessionStorage.setItem(
