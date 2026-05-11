@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
-import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -40,17 +39,6 @@ declare global {
     dataLayer?: Array<Record<string, unknown>>;
   }
 }
-
-type SubmitDiagnosticLeadResponse = {
-  crm?: {
-    ok?: boolean;
-    status?: number;
-    data?: {
-      error?: string;
-    };
-  };
-  event_id?: string;
-};
 
 const getCookie = (name: string): string | undefined => {
   if (typeof document === "undefined") return undefined;
@@ -115,19 +103,12 @@ const formatPhone = (raw: string): string => {
 const submitCrmWebhook = async (params: {
   name: string;
   phone: string;
-  eventId: string;
   ctaId?: number;
   ctaName?: string;
   utm: Partial<Record<UtmKey, string>>;
 }) => {
   const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 5000);
-  const message = [
-    "Заявка на диагностику медицинской клиники",
-    params.ctaName ? `CTA: ${params.ctaName}` : null,
-    params.ctaId ? `CTA ID: ${params.ctaId}` : null,
-    `Event ID: ${params.eventId}`,
-  ].filter(Boolean).join("\n");
+  const timeout = window.setTimeout(() => controller.abort(), 3500);
 
   try {
     const response = await fetch(CRM_WEBHOOK_URL, {
@@ -138,10 +119,11 @@ const submitCrmWebhook = async (params: {
         project_id: CRM_PROJECT_ID,
         name: params.name,
         phone: params.phone,
-        message,
         service: "Диагностика медицинской клиники",
         city: "Не указано",
         source: "site",
+        cta_id: params.ctaId,
+        cta_name: params.ctaName,
         referrer: document.referrer || undefined,
         landing_url: window.location.href,
         fbc: getCookie("_fbc"),
@@ -203,33 +185,17 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
           ? crypto.randomUUID()
           : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-      const fbp = getCookie("_fbp");
-      const fbc = getCookie("_fbc");
       const utm = getUtmParams();
 
-      const { data, error } = await supabase.functions.invoke(
-        "submit-diagnostic-lead",
-        {
-          body: {
-            name: parsed.data.name,
-            phone: parsed.data.phone,
-            clinic: "Не указано",
-            niche: "Не указано",
-            event_id: eventId,
-            fbp,
-            fbc,
-            user_agent: navigator.userAgent,
-            referrer: document.referrer,
-            event_source_url: window.location.href,
-            cta_id: ctaId ?? null,
-            cta_name: ctaName ?? null,
-            utm,
-          },
-        },
-      );
+      const crmResult = await submitCrmWebhook({
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        ctaId: ctaId ?? undefined,
+        ctaName: ctaName ?? undefined,
+        utm,
+      });
 
-      if (error) {
-        console.error("submit error", error);
+      if (!crmResult.ok) {
         toast({
           title: "Не удалось отправить заявку",
           description: "Проверьте подключение и попробуйте снова.",
@@ -264,26 +230,13 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
         transaction_id: eventId,
       });
 
-      const responseData = data as SubmitDiagnosticLeadResponse | null;
-      const serverCrmOk = responseData?.crm?.ok === true;
-      if (!serverCrmOk) {
-        await submitCrmWebhook({
-          name: parsed.data.name,
-          phone: parsed.data.phone,
-          eventId,
-          ctaId: ctaId ?? undefined,
-          ctaName: ctaName ?? undefined,
-          utm,
-        });
-      }
-
       // Save form payload for the thank-you page (WhatsApp prefill)
       sessionStorage.setItem(
         "diagnostic_lead",
         JSON.stringify({
           name: parsed.data.name,
           phone: parsed.data.phone,
-          event_id: responseData?.event_id ?? eventId,
+          event_id: eventId,
         }),
       );
 

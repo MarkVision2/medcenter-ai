@@ -141,24 +141,16 @@ async function sendCrmLead(params: {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
 
-  const messageParts = [
-    "Заявка на диагностику медицинской клиники",
-    params.ctaName ? `CTA: ${params.ctaName}` : null,
-    params.ctaId ? `CTA ID: ${params.ctaId}` : null,
-    params.clinic && params.clinic !== "Не указано" ? `Клиника: ${params.clinic}` : null,
-    params.niche && params.niche !== "Не указано" ? `Ниша: ${params.niche}` : null,
-    `Event ID: ${params.eventId}`,
-  ].filter(Boolean);
-
   const payload = {
     token: params.token,
     project_id: params.projectId,
     name: params.name,
     phone: params.phone,
-    message: messageParts.join("\n"),
     service: "Диагностика медицинской клиники",
     city: "Не указано",
     source: "site",
+    cta_id: params.ctaId,
+    cta_name: params.ctaName,
     referrer: params.referrer,
     landing_url: params.landingUrl,
     fbc: params.fbc,
