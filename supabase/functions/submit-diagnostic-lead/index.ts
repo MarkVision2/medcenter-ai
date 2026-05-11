@@ -8,6 +8,7 @@ const corsHeaders = {
 
 const DEFAULT_CRM_WEBHOOK_URL =
   "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
+const DEFAULT_CRM_PROJECT_ID = "cceb9a86-687b-4417-9b4e-d106bd8cc79c";
 
 interface LeadInput {
   name?: string;
@@ -121,6 +122,7 @@ async function sendTelegram(params: {
 
 async function sendCrmLead(params: {
   webhookUrl: string;
+  projectId: string;
   name: string;
   phone: string;
   clinic: string;
@@ -130,6 +132,8 @@ async function sendCrmLead(params: {
   utm: Record<string, string | null>;
   referrer: string | null;
   landingUrl: string | null;
+  fbc: string | null;
+  fbp: string | null;
   eventId: string;
 }) {
   const controller = new AbortController();
@@ -145,6 +149,7 @@ async function sendCrmLead(params: {
   ].filter(Boolean);
 
   const payload = {
+    project_id: params.projectId,
     name: params.name,
     phone: params.phone,
     message: messageParts.join("\n"),
@@ -153,6 +158,8 @@ async function sendCrmLead(params: {
     source: "site",
     referrer: params.referrer,
     landing_url: params.landingUrl,
+    fbc: params.fbc,
+    fbp: params.fbp,
     utm_source: params.utm.utm_source ?? undefined,
     utm_medium: params.utm.utm_medium ?? undefined,
     utm_campaign: params.utm.utm_campaign ?? undefined,
@@ -191,6 +198,8 @@ Deno.serve(async (req) => {
     const ACCESS_TOKEN = Deno.env.get("META_CAPI_ACCESS_TOKEN");
     const CRM_WEBHOOK_URL =
       Deno.env.get("CRM_LEAD_WEBHOOK_URL") || DEFAULT_CRM_WEBHOOK_URL;
+    const CRM_PROJECT_ID =
+      Deno.env.get("CRM_PROJECT_ID") || DEFAULT_CRM_PROJECT_ID;
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
       return new Response(
@@ -309,6 +318,7 @@ Deno.serve(async (req) => {
       try {
         crmResult = await sendCrmLead({
           webhookUrl: CRM_WEBHOOK_URL,
+          projectId: CRM_PROJECT_ID,
           name,
           phone,
           clinic,
@@ -318,6 +328,8 @@ Deno.serve(async (req) => {
           utm,
           referrer: body.referrer ?? null,
           landingUrl: body.event_source_url ?? null,
+          fbc: body.fbc ?? null,
+          fbp: body.fbp ?? null,
           eventId,
         });
       } catch (crmErr) {

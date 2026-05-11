@@ -65,6 +65,7 @@ type UtmKey = (typeof UTM_KEYS)[number];
 const UTM_STORAGE_KEY = "lovable_utm_v1";
 const CRM_WEBHOOK_URL =
   "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
+const CRM_PROJECT_ID = "cceb9a86-687b-4417-9b4e-d106bd8cc79c";
 
 const getUtmParams = (): Partial<Record<UtmKey, string>> => {
   if (typeof window === "undefined") return {};
@@ -128,6 +129,7 @@ const submitCrmWebhook = async (params: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        project_id: CRM_PROJECT_ID,
         name: params.name,
         phone: params.phone,
         message,
@@ -136,6 +138,8 @@ const submitCrmWebhook = async (params: {
         source: "site",
         referrer: document.referrer || undefined,
         landing_url: window.location.href,
+        fbc: getCookie("_fbc"),
+        fbp: getCookie("_fbp"),
         utm_source: params.utm.utm_source,
         utm_medium: params.utm.utm_medium,
         utm_campaign: params.utm.utm_campaign,
@@ -147,11 +151,12 @@ const submitCrmWebhook = async (params: {
     const payload = await response.json().catch(() => null);
     if (!response.ok) {
       console.error("CRM webhook failed", response.status, payload);
-    } else {
-      console.log("CRM webhook ok", payload);
+      throw new Error("CRM webhook failed");
     }
+    return payload;
   } catch (err) {
     console.error("CRM webhook exception", err);
+    throw err;
   } finally {
     window.clearTimeout(timeout);
   }
@@ -254,17 +259,14 @@ const DiagnosticForm = ({ ctaId, ctaName }: DiagnosticFormProps = {}) => {
       });
 
       const responseData = data as SubmitDiagnosticLeadResponse | null;
-      const serverCrmOk = responseData?.crm?.ok === true;
-      if (!serverCrmOk) {
-        await submitCrmWebhook({
-          name: parsed.data.name,
-          phone: parsed.data.phone,
-          eventId,
-          ctaId: ctaId ?? undefined,
-          ctaName: ctaName ?? undefined,
-          utm,
-        });
-      }
+      await submitCrmWebhook({
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        eventId,
+        ctaId: ctaId ?? undefined,
+        ctaName: ctaName ?? undefined,
+        utm,
+      });
 
       // Save form payload for the thank-you page (WhatsApp prefill)
       sessionStorage.setItem(
