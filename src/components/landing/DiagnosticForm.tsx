@@ -70,6 +70,7 @@ const UTM_STORAGE_KEY = "lovable_utm_v1";
 const CRM_WEBHOOK_URL =
   "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
 const CRM_PROJECT_ID = "cceb9a86-687b-4417-9b4e-d106bd8cc79c";
+const CRM_PROJECT_TOKEN = "MkcXbUBfd7ObDBy7";
 
 const getUtmParams = (): Partial<Record<UtmKey, string>> => {
   if (typeof window === "undefined") return {};
@@ -133,6 +134,7 @@ const submitCrmWebhook = async (params: {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        token: CRM_PROJECT_TOKEN,
         project_id: CRM_PROJECT_ID,
         name: params.name,
         phone: params.phone,

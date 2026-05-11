@@ -9,6 +9,7 @@ const corsHeaders = {
 const DEFAULT_CRM_WEBHOOK_URL =
   "https://mekwfbqmsqiborjdrjxc.supabase.co/functions/v1/lead-intake";
 const DEFAULT_CRM_PROJECT_ID = "cceb9a86-687b-4417-9b4e-d106bd8cc79c";
+const DEFAULT_CRM_PROJECT_TOKEN = "MkcXbUBfd7ObDBy7";
 
 interface LeadInput {
   name?: string;
@@ -122,6 +123,7 @@ async function sendTelegram(params: {
 
 async function sendCrmLead(params: {
   webhookUrl: string;
+  token: string;
   projectId: string;
   name: string;
   phone: string;
@@ -149,6 +151,7 @@ async function sendCrmLead(params: {
   ].filter(Boolean);
 
   const payload = {
+    token: params.token,
     project_id: params.projectId,
     name: params.name,
     phone: params.phone,
@@ -200,6 +203,8 @@ Deno.serve(async (req) => {
       Deno.env.get("CRM_LEAD_WEBHOOK_URL") || DEFAULT_CRM_WEBHOOK_URL;
     const CRM_PROJECT_ID =
       Deno.env.get("CRM_PROJECT_ID") || DEFAULT_CRM_PROJECT_ID;
+    const CRM_PROJECT_TOKEN =
+      Deno.env.get("CRM_PROJECT_TOKEN") || DEFAULT_CRM_PROJECT_TOKEN;
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
       return new Response(
@@ -318,6 +323,7 @@ Deno.serve(async (req) => {
       try {
         crmResult = await sendCrmLead({
           webhookUrl: CRM_WEBHOOK_URL,
+          token: CRM_PROJECT_TOKEN,
           projectId: CRM_PROJECT_ID,
           name,
           phone,
