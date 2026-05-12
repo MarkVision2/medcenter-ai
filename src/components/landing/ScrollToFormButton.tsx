@@ -81,13 +81,6 @@ const resolveSourceCode = (utm: Utm): string => {
   return "direct";
 };
 
-const resolveCtaCode = (ctaId?: number): string => {
-  if (ctaId === 1) return "h"; // Hero CTA
-  if (ctaId === 2) return "f"; // Final CTA
-  if (typeof ctaId === "number") return `c${ctaId}`;
-  return "x";
-};
-
 const generateEventId = (): string =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
@@ -181,13 +174,9 @@ const ScrollToFormButton = ({
     const eventId = generateEventId();
     const utm = getUtmParams();
     const sourceCode = resolveSourceCode(utm);
-    const ctaCode = resolveCtaCode(ctaId);
-    const shortId = eventId.replace(/-/g, "").slice(0, 6);
 
-    // Trailing hashtag tag — looks like an order ref, doesn't read as "ad
-    // tracking" to the lead but tells Yuri the source at a glance.
-    const trackingTag = `#${sourceCode}-${ctaCode}-${shortId}`;
-    const text = `${WHATSAPP_MESSAGE}\n\n${trackingTag}`;
+    // Plain trailing channel code, e.g. "Хочу записаться на диагностику клиники. fb"
+    const text = `${WHATSAPP_MESSAGE}. ${sourceCode}`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 
     trackLeadEvents({
