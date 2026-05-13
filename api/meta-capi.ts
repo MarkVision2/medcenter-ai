@@ -13,11 +13,8 @@
  *                               "Test Events"
  */
 
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { createHash } from "node:crypto";
-
-export const config = {
-  runtime: "nodejs",
-};
 
 const ALLOWED_EVENTS = ["PageView", "Lead", "ViewContent", "InitiateCheckout"] as const;
 type EventName = (typeof ALLOWED_EVENTS)[number];
@@ -43,36 +40,49 @@ interface IncomingPayload {
 const sha256 = (input: string): string =>
   createHash("sha256").update(input.trim().toLowerCase()).digest("hex");
 
-const corsHeaders: HeadersInit = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+const setCors = (res: VercelResponse): void => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 };
 
-const json = (data: unknown, status = 200): Response =>
-  new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      ...corsHeaders,
-    },
-  });
-
-const getClientIp = (req: Request): string | undefined => {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) {
+const getClientIp = (req: VercelRequest): string | undefined => {
+  const fwd = req.headers["x-forwarded-for"];
+  if (typeof fwd === "string") {
     const first = fwd.split(",")[0]?.trim();
     if (first) return first;
   }
-  return req.headers.get("x-real-ip") ?? undefined;
+  if (Array.isArray(fwd) && fwd.length > 0) return fwd[0];
+  const real = req.headers["x-real-ip"];
+  if (typeof real === "string") return real;
+  return undefined;
 };
 
-export default async function handler(req: Request): Promise<Response> {
+const parseBody = (req: VercelRequest): IncomingPayload => {
+  if (!req.body) return {};
+  if (typeof req.body === "string") {
+    try {
+      return JSON.parse(req.body) as IncomingPayload;
+    } catch {
+      return {};
+    }
+  }
+  return req.body as IncomingPayload;
+};
+
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse,
+): Promise<void> {
+  setCors(res);
+
   if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
+    res.status(204).end();
+    return;
   }
   if (req.method !== "POST") {
-    return json({ error: "method_not_allowed" }, 405);
+    res.status(405).json({ error: "method_not_allowed" });
+    return;
   }
 
   const PIXEL_ID = process.env.META_PIXEL_ID;
@@ -80,19 +90,16 @@ export default async function handler(req: Request): Promise<Response> {
   const TEST_EVENT_CODE = process.env.META_CAPI_TEST_EVENT_CODE;
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
-    return json({ error: "capi_not_configured" }, 500);
+    res.status(500).json({ error: "capi_not_configured" });
+    return;
   }
 
-  let body: IncomingPayload;
-  try {
-    body = (await req.json()) as IncomingPayload;
-  } catch {
-    return json({ error: "invalid_json" }, 400);
-  }
+  const body = parseBody(req);
 
   const eventName = body.event_name;
   if (!eventName || !ALLOWED_EVENTS.includes(eventName)) {
-    return json({ error: "invalid_event_name" }, 400);
+    res.status(400).json({ error: "invalid_event_name" });
+    return;
   }
 
   const eventTime =
@@ -100,7 +107,7 @@ export default async function handler(req: Request): Promise<Response> {
       ? Math.trunc(body.event_time)
       : Math.floor(Date.now() / 1000);
 
-  const userAgent = req.headers.get("user-agent") ?? "";
+  const userAgent = (req.headers["user-agent"] as string | undefined) ?? "";
   const clientIp = getClientIp(req);
 
   const userData: Record<string, unknown> = {
@@ -132,19 +139,28 @@ export default async function handler(req: Request): Promise<Response> {
 
   const url = `https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${encodeURIComponent(ACCESS_TOKEN)}`;
 
+  // Hard cap upstream call so the Vercel function never sits idle near the
+  // platform timeout if Graph stalls.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4000);
+
   try {
     const fbRes = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     });
     const data = (await fbRes.json().catch(() => ({}))) as Record<string, unknown>;
     if (!fbRes.ok) {
-      return json({ ok: false, status: fbRes.status, meta: data }, 502);
+      res.status(502).json({ ok: false, status: fbRes.status, meta: data });
+      return;
     }
-    return json({ ok: true, meta: data });
+    res.status(200).json({ ok: true, meta: data });
   } catch (err) {
     const message = err instanceof Error ? err.message : "unknown_error";
-    return json({ ok: false, error: message }, 500);
+    res.status(500).json({ ok: false, error: message });
+  } finally {
+    clearTimeout(timeout);
   }
 }
