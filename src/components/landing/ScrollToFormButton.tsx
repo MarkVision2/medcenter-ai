@@ -150,6 +150,55 @@ const trackLeadEvents = ({
       transaction_id: eventId,
     });
   }
+
+  // Meta Conversions API — server-side mirror of the browser Lead event.
+  // Same event_id → Meta dedupes against the browser pixel call above.
+  try {
+    const body = JSON.stringify({
+      event_name: "Lead",
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      event_source_url: window.location.href,
+      fbp: getCookie("_fbp"),
+      fbc: getCookie("_fbc"),
+      custom_data: {
+        content_name: "Диагностика медцентра",
+        content_category: "lead",
+        value: 9900,
+        currency: "KZT",
+        cta_id: ctaId ?? null,
+        cta_name: ctaName ?? null,
+        source_code: sourceCode,
+        utm_source: utm.utm_source ?? null,
+        utm_medium: utm.utm_medium ?? null,
+        utm_campaign: utm.utm_campaign ?? null,
+        utm_content: utm.utm_content ?? null,
+        utm_term: utm.utm_term ?? null,
+      },
+    });
+    // sendBeacon survives the WhatsApp tab switch on mobile; fall back to
+    // keepalive fetch when unsupported.
+    if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+      const blob = new Blob([body], { type: "application/json" });
+      if (!navigator.sendBeacon("/api/meta-capi", blob)) {
+        void fetch("/api/meta-capi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body,
+          keepalive: true,
+        }).catch(() => undefined);
+      }
+    } else {
+      void fetch("/api/meta-capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+        keepalive: true,
+      }).catch(() => undefined);
+    }
+  } catch (err) {
+    console.error("CAPI mirror failed", err);
+  }
 };
 
 interface ScrollToFormButtonProps {
