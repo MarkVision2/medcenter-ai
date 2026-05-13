@@ -39,7 +39,41 @@
       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '3912939922347990');
-      fbq('track', 'PageView');
+
+      // PageView with deduplicated eventID for browser pixel + server CAPI.
+      (function () {
+        var eventId =
+          (window.crypto && window.crypto.randomUUID && window.crypto.randomUUID()) ||
+          'pv-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+        window.__metaPageViewId = eventId;
+        fbq('track', 'PageView', {}, { eventID: eventId });
+
+        function getCookie(name) {
+          var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+          return m ? decodeURIComponent(m[1]) : undefined;
+        }
+
+        try {
+          var body = JSON.stringify({
+            event_name: 'PageView',
+            event_id: eventId,
+            event_time: Math.floor(Date.now() / 1000),
+            event_source_url: window.location.href,
+            fbp: getCookie('_fbp'),
+            fbc: getCookie('_fbc'),
+          });
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon('/api/meta-capi', new Blob([body], { type: 'application/json' }));
+          } else {
+            fetch('/api/meta-capi', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: body,
+              keepalive: true,
+            }).catch(function () {});
+          }
+        } catch (e) { /* swallow */ }
+      })();
     </script>
     <!-- End Meta Pixel Code -->
 </head>
