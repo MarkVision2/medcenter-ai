@@ -2,7 +2,6 @@ import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Meg
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
-import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
 import yuriPhoto from "@/assets/yuri.png";
 
 const Index = () => {
@@ -74,10 +73,8 @@ const Index = () => {
 
           {/* CTA */}
           <div className="mt-3 sm:mt-6">
-            <ScrollToFormButton
+            <WhatsAppButton
               label="Забронировать диагностику"
-              ctaId={1}
-              ctaName="Hero — Забронировать диагностику"
             />
             <p className="mt-2 flex items-center justify-center gap-2 text-center text-[11px] font-medium text-muted-foreground sm:mt-3 sm:text-xs">
               <span className="relative flex h-2 w-2">
@@ -501,12 +498,10 @@ const Index = () => {
         </div>
 
         <div className="mt-6">
-          <ScrollToFormButton
+          <WhatsAppButton
             variant="cta-orange"
             label="Забронировать диагностику"
             className="uppercase"
-            ctaId={2}
-            ctaName="Финальный CTA — Забронировать диагностику"
           />
         </div>
 
