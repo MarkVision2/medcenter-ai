@@ -6,6 +6,14 @@ import { cn } from "@/lib/utils";
 const WHATSAPP_NUMBER = "77472842595";
 const WHATSAPP_MESSAGE = "Хочу записаться на диагностику клиники";
 
+// MarkVision multi-tenant click tracker (separate Supabase project).
+// Resolves cabinet by host, writes the click into whatsapp_clicks, and
+// fires Meta CAPI "Contact" (intent — not Lead). The real "Lead" event is
+// fired server-side from greenapi-webhook when the user actually sends the
+// WhatsApp message carrying the [#xxxxxxxx] marker we append below.
+const TRACK_CLICK_URL =
+  "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";
+
 type Fbq = (
   command: "track",
   eventName: string,
@@ -81,48 +89,70 @@ const resolveSourceCode = (utm: Utm): string => {
   return "direct";
 };
 
-const generateEventId = (): string =>
-  typeof crypto !== "undefined" && "randomUUID" in crypto
-    ? crypto.randomUUID()
-    : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+// 8-character URL-safe id used as: (a) marker [#xxxxxxxx] in the WhatsApp
+// message text and (b) eventID for the browser pixel Contact event. The
+// greenapi-webhook matches this marker against whatsapp_clicks and fires
+// the Meta CAPI "Lead" event with the original fbp/fbc when the user
+// actually sends the message.
+const CLICK_ID_CHARS =
+  "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+const generateClickId = (): string => {
+  let s = "";
+  if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+    const buf = new Uint8Array(8);
+    crypto.getRandomValues(buf);
+    for (let i = 0; i < buf.length; i++) {
+      s += CLICK_ID_CHARS[buf[i] % CLICK_ID_CHARS.length];
+    }
+    return s;
+  }
+  for (let i = 0; i < 8; i++) {
+    s += CLICK_ID_CHARS[Math.floor(Math.random() * CLICK_ID_CHARS.length)];
+  }
+  return s;
+};
 
-interface TrackLeadParams {
-  eventId: string;
+interface TrackContactParams {
+  clickId: string;
   ctaId?: number;
   ctaName?: string;
   utm: Utm;
   sourceCode: string;
 }
 
-const trackLeadEvents = ({
-  eventId,
+// Browser-side bookkeeping for the click. Lead is intentionally NOT fired
+// here — only an intent-level Contact + analytics events. The real Lead
+// fires from the server only when the WhatsApp message arrives.
+const trackContactIntent = ({
+  clickId,
   ctaId,
   ctaName,
   utm,
   sourceCode,
-}: TrackLeadParams): void => {
+}: TrackContactParams): void => {
   if (typeof window === "undefined") return;
 
-  // Meta Pixel — Lead event with eventID for future server-side CAPI dedup.
+  // Meta Pixel — Contact (intent, not Lead) with eventID matching the
+  // server-side track-whatsapp-click call for dedup.
   const fbq = window.fbq;
   if (typeof fbq === "function") {
     fbq(
       "track",
-      "Lead",
+      "Contact",
       {
-        content_name: "Диагностика медцентра",
-        content_category: "lead",
-        value: 9900,
-        currency: "KZT",
+        content_name: "WhatsApp Click",
+        content_category: "contact",
       },
-      { eventID: eventId },
+      { eventID: clickId },
     );
   }
 
-  // GTM dataLayer — carries UTM + source code so triggers can route by channel.
+  // GTM dataLayer — kept as a high-signal "contact_intent" event so existing
+  // GTM triggers can still route by channel, but no longer marked as a Lead
+  // conversion in Google Ads.
   const dataLayer = (window.dataLayer = window.dataLayer || []);
   dataLayer.push({
-    event: "generate_lead",
+    event: "contact_intent",
     event_category: "engagement",
     event_label: ctaName ?? "whatsapp_cta",
     method: "whatsapp",
@@ -134,54 +164,46 @@ const trackLeadEvents = ({
     utm_campaign: utm.utm_campaign ?? null,
     utm_content: utm.utm_content ?? null,
     utm_term: utm.utm_term ?? null,
-    value: 9900,
-    currency: "KZT",
-    transaction_id: eventId,
+    transaction_id: clickId,
   });
 
-  // gtag direct fallback for Google Ads conversions when GTM bypassed.
+  // gtag direct fallback — also as engagement, not a conversion event.
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag === "function") {
-    gtag("event", "generate_lead", {
+    gtag("event", "click_whatsapp", {
       event_category: "engagement",
       event_label: ctaName ?? "whatsapp_cta",
-      value: 9900,
-      currency: "KZT",
-      transaction_id: eventId,
+      transaction_id: clickId,
     });
   }
 
-  // Meta Conversions API — server-side mirror of the browser Lead event.
-  // Same event_id → Meta dedupes against the browser pixel call above.
+  // MarkVision tracker — persists the click in whatsapp_clicks with
+  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Contact" server-side. When
+  // the user actually messages WhatsApp, greenapi-webhook reads the
+  // [#marker] from the message, looks up this row, and only then fires
+  // the Meta CAPI "Lead" event with full attribution.
   try {
     const body = JSON.stringify({
-      event_name: "Lead",
-      event_id: eventId,
-      event_time: Math.floor(Date.now() / 1000),
+      click_id: clickId,
+      event_id: clickId,
       event_source_url: window.location.href,
+      user_agent: navigator.userAgent,
       fbp: getCookie("_fbp"),
       fbc: getCookie("_fbc"),
-      custom_data: {
-        content_name: "Диагностика медцентра",
-        content_category: "lead",
-        value: 9900,
-        currency: "KZT",
-        cta_id: ctaId ?? null,
-        cta_name: ctaName ?? null,
-        source_code: sourceCode,
-        utm_source: utm.utm_source ?? null,
-        utm_medium: utm.utm_medium ?? null,
-        utm_campaign: utm.utm_campaign ?? null,
-        utm_content: utm.utm_content ?? null,
-        utm_term: utm.utm_term ?? null,
-      },
+      fbclid: new URLSearchParams(window.location.search).get("fbclid") ?? undefined,
+      referrer: document.referrer,
+      utm_source: utm.utm_source ?? undefined,
+      utm_medium: utm.utm_medium ?? undefined,
+      utm_campaign: utm.utm_campaign ?? undefined,
+      utm_content: utm.utm_content ?? undefined,
+      utm_term: utm.utm_term ?? undefined,
+      source_label: "medcenter-ai",
     });
-    // sendBeacon survives the WhatsApp tab switch on mobile; fall back to
-    // keepalive fetch when unsupported.
+    // sendBeacon survives navigation/tab switch to WhatsApp on mobile.
     if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
       const blob = new Blob([body], { type: "application/json" });
-      if (!navigator.sendBeacon("/api/meta-capi", blob)) {
-        void fetch("/api/meta-capi", {
+      if (!navigator.sendBeacon(TRACK_CLICK_URL, blob)) {
+        void fetch(TRACK_CLICK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body,
@@ -189,7 +211,7 @@ const trackLeadEvents = ({
         }).catch(() => undefined);
       }
     } else {
-      void fetch("/api/meta-capi", {
+      void fetch(TRACK_CLICK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body,
@@ -197,7 +219,7 @@ const trackLeadEvents = ({
       }).catch(() => undefined);
     }
   } catch (err) {
-    console.error("CAPI mirror failed", err);
+    console.error("track-whatsapp-click failed", err);
   }
 };
 
@@ -220,16 +242,17 @@ const ScrollToFormButton = ({
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const eventId = generateEventId();
+    const clickId = generateClickId();
     const utm = getUtmParams();
     const sourceCode = resolveSourceCode(utm);
 
-    // Plain trailing channel code, e.g. "Хочу записаться на диагностику клиники. fb"
-    const text = `${WHATSAPP_MESSAGE}. ${sourceCode}`;
+    // Visible suffix: channel code Yuri reads in WhatsApp + a hidden marker
+    // greenapi-webhook parses to attribute the real Lead event server-side.
+    const text = `${WHATSAPP_MESSAGE}. ${sourceCode} [#${clickId}]`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 
-    trackLeadEvents({
-      eventId,
+    trackContactIntent({
+      clickId,
       ctaId,
       ctaName: resolvedCtaName,
       utm,
