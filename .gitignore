@@ -27,3 +27,4 @@ dist-ssr
 
 # Local setup secrets — never commit
 scripts/.env.setup
+deno.lock

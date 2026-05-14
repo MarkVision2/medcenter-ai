@@ -1,13 +1,11 @@
 project_id = "sfmetefxxvmxsdpyjbbm"
 
+# WhatsApp click attribution lives in a separate Supabase project (MarkVision
+# multi-tenant CRM). See src/components/landing/WhatsAppButton.tsx for the
+# direct endpoint URL.
+
 [functions.meta-capi-lead]
 verify_jwt = false
 
 [functions.submit-diagnostic-lead]
-verify_jwt = false
-
-[functions.track-whatsapp-click]
-verify_jwt = false
-
-[functions.whatsapp-incoming]
 verify_jwt = false

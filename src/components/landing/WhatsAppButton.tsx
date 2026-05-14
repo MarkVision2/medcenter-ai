@@ -1,11 +1,17 @@
 import type { MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/integrations/supabase/client";
 
 const WHATSAPP_NUMBER = "77472842595";
 const DEFAULT_MESSAGE =
   "Здравствуйте, Юрий! Хочу записаться на диагностику по системе «Врач на миллион»";
+
+// MarkVision Supabase endpoint (multi-tenant click tracker).
+// This is intentionally a separate Supabase from the landing's own Lovable
+// project — clicks land in the MarkVision CRM where Green-API and
+// pixel-per-cabinet config already live.
+const TRACK_CLICK_URL =
+  "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";
 
 interface WhatsAppButtonProps {
   label?: string;
@@ -91,27 +97,30 @@ const WhatsAppButton = ({
     const fbc = getCookie("_fbc");
     const fbclid = getQueryParam("fbclid");
 
-    supabase.functions
-      .invoke("track-whatsapp-click", {
-        body: {
-          click_id: clickId,
-          event_id: clickId,
-          event_source_url: window.location.href,
-          user_agent: navigator.userAgent,
-          fbp,
-          fbc,
-          fbclid,
-          referrer: document.referrer,
-          utm_source: getQueryParam("utm_source"),
-          utm_medium: getQueryParam("utm_medium"),
-          utm_campaign: getQueryParam("utm_campaign"),
-          utm_content: getQueryParam("utm_content"),
-          utm_term: getQueryParam("utm_term"),
-        },
-      })
-      .catch((err) => {
-        console.error("track-whatsapp-click invoke failed", err);
-      });
+    // Fire-and-forget: must not block the WhatsApp open.
+    fetch(TRACK_CLICK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        click_id: clickId,
+        event_id: clickId,
+        event_source_url: window.location.href,
+        user_agent: navigator.userAgent,
+        fbp,
+        fbc,
+        fbclid,
+        referrer: document.referrer,
+        utm_source: getQueryParam("utm_source"),
+        utm_medium: getQueryParam("utm_medium"),
+        utm_campaign: getQueryParam("utm_campaign"),
+        utm_content: getQueryParam("utm_content"),
+        utm_term: getQueryParam("utm_term"),
+        source_label: "medcenter-ai",
+      }),
+    }).catch((err) => {
+      console.error("track-whatsapp-click failed", err);
+    });
   };
 
   return (
