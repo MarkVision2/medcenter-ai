@@ -67,7 +67,9 @@ Deno.serve(async (req) => {
 
     const eventTime = Math.floor(Date.now() / 1000);
 
-    const eventName = body.event_name || "Lead";
+    // Legacy endpoint: never fire Lead here — real Lead now fires from
+    // whatsapp-incoming when the user actually sends a WhatsApp message.
+    const eventName = body.event_name === "Lead" ? "Contact" : body.event_name || "Contact";
 
     const payload = {
       data: [
@@ -78,15 +80,10 @@ Deno.serve(async (req) => {
           action_source: "website",
           event_source_url: body.event_source_url,
           user_data: userData,
-          attribution_data: {
-            attribution_share: "0.3",
-          },
           custom_data: {
-            currency: "KZT",
-            value: "0",
-            lead_event_source: "whatsapp_button",
-            content_name: "Диагностика медцентра",
-            content_category: "lead",
+            lead_event_source: "whatsapp_button_legacy",
+            content_name: "WhatsApp Click",
+            content_category: "contact",
           },
           original_event_data: {
             event_name: eventName,

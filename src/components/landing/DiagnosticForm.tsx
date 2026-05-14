@@ -124,17 +124,17 @@ const DiagnosticForm = () => {
           ? crypto.randomUUID()
           : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-      // Browser Pixel (with eventID for deduplication)
+      // Browser Pixel: fires Contact (intent), not Lead. Real Lead is sent
+      // server-side from the WhatsApp incoming webhook to avoid counting
+      // un-answered form fills as leads.
       const fbq = (window as any).fbq;
       if (typeof fbq === "function") {
         fbq(
           "track",
-          "Lead",
+          "Contact",
           {
             content_name: "Диагностика медцентра",
-            content_category: "lead",
-            value: 9900,
-            currency: "KZT",
+            content_category: "contact",
           },
           { eventID: eventId },
         );

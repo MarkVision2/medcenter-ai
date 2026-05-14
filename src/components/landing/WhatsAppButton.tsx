@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,52 +25,92 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+const CLICK_ID_CHARS =
+  "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+const generateClickId = (): string => {
+  let s = "";
+  if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+    const buf = new Uint8Array(8);
+    crypto.getRandomValues(buf);
+    for (let i = 0; i < buf.length; i++) {
+      s += CLICK_ID_CHARS[buf[i] % CLICK_ID_CHARS.length];
+    }
+    return s;
+  }
+  for (let i = 0; i < 8; i++) {
+    s += CLICK_ID_CHARS[Math.floor(Math.random() * CLICK_ID_CHARS.length)];
+  }
+  return s;
+};
+
+const getCookie = (name: string): string | undefined => {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.match(
+    new RegExp("(?:^|; )" + name + "=([^;]*)"),
+  );
+  return match ? decodeURIComponent(match[1]) : undefined;
+};
+
+const getQueryParam = (key: string): string | undefined => {
+  if (typeof window === "undefined") return undefined;
+  const value = new URLSearchParams(window.location.search).get(key);
+  return value ?? undefined;
+};
+
+const buildFallbackHref = (): string =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
+
 const WhatsAppButton = ({
   label = "Хочу получить доступ к системе «Врач на миллион»",
   className,
   fullWidth = true,
   variant = "whatsapp",
 }: WhatsAppButtonProps) => {
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MESSAGE)}`;
-
-  const getCookie = (name: string): string | undefined => {
-    if (typeof document === "undefined") return undefined;
-    const match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
-    return match ? decodeURIComponent(match[1]) : undefined;
-  };
-
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (typeof window === "undefined") return;
 
-    // Stable event_id so browser pixel and server CAPI events deduplicate.
-    const eventId =
-      typeof crypto !== "undefined" && "randomUUID" in crypto
-        ? crypto.randomUUID()
-        : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    // Cancel default navigation — we open WhatsApp with a unique marker per click.
+    e.preventDefault();
 
-    // Browser Pixel (with eventID for deduplication)
-    const fbq = (window as any).fbq;
+    const clickId = generateClickId();
+    const messageWithMarker = `${DEFAULT_MESSAGE} [#${clickId}]`;
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageWithMarker)}`;
+
+    // Open WhatsApp synchronously so the browser doesn't block the popup.
+    window.open(waLink, "_blank", "noopener,noreferrer");
+
+    // Browser pixel: Contact (intent), not Lead. Real Lead fires from the
+    // WhatsApp incoming webhook when the user actually sends the message.
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
     if (typeof fbq === "function") {
-      fbq("track", "Lead", {}, { eventID: eventId });
+      fbq("track", "Contact", {}, { eventID: clickId });
     }
 
-    // Server-side Conversions API (fire-and-forget, must not block navigation)
     const fbp = getCookie("_fbp");
     const fbc = getCookie("_fbc");
+    const fbclid = getQueryParam("fbclid");
 
     supabase.functions
-      .invoke("meta-capi-lead", {
+      .invoke("track-whatsapp-click", {
         body: {
-          event_id: eventId,
-          event_name: "Lead",
+          click_id: clickId,
+          event_id: clickId,
           event_source_url: window.location.href,
           user_agent: navigator.userAgent,
           fbp,
           fbc,
+          fbclid,
+          referrer: document.referrer,
+          utm_source: getQueryParam("utm_source"),
+          utm_medium: getQueryParam("utm_medium"),
+          utm_campaign: getQueryParam("utm_campaign"),
+          utm_content: getQueryParam("utm_content"),
+          utm_term: getQueryParam("utm_term"),
         },
       })
       .catch((err) => {
-        console.error("Meta CAPI invoke failed", err);
+        console.error("track-whatsapp-click invoke failed", err);
       });
   };
 
@@ -84,7 +125,12 @@ const WhatsAppButton = ({
         className,
       )}
     >
-      <a href={href} target="_blank" rel="noopener noreferrer" onClick={handleClick}>
+      <a
+        href={buildFallbackHref()}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+      >
         <WhatsAppIcon />
         <span>{label}</span>
       </a>

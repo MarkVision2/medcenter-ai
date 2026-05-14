@@ -5,3 +5,9 @@ verify_jwt = false
 
 [functions.submit-diagnostic-lead]
 verify_jwt = false
+
+[functions.track-whatsapp-click]
+verify_jwt = false
+
+[functions.whatsapp-incoming]
+verify_jwt = false
