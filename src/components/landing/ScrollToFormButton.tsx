@@ -8,9 +8,11 @@ const WHATSAPP_MESSAGE = "Хочу записаться на диагности�
 
 // MarkVision multi-tenant click tracker (separate Supabase project).
 // Resolves cabinet by host, writes the click into whatsapp_clicks, and
-// fires Meta CAPI "Contact" (intent — not Lead). The real "Lead" event is
-// fired server-side from greenapi-webhook when the user actually sends the
-// WhatsApp message carrying the [#xxxxxxxx] marker we append below.
+// fires Meta CAPI "Lead" with the click_id as event_id. When the user
+// then actually sends the WhatsApp message, greenapi-webhook fires a
+// second "Lead" with the same event_id and a phone hash — Meta
+// deduplicates by event_id+event_name and enriches the original Lead
+// with the user_data (phone) from the message.
 const TRACK_CLICK_URL =
   "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";
 
@@ -132,16 +134,18 @@ const trackContactIntent = ({
 }: TrackContactParams): void => {
   if (typeof window === "undefined") return;
 
-  // Meta Pixel — Contact (intent, not Lead) with eventID matching the
-  // server-side track-whatsapp-click call for dedup.
+  // Meta Pixel — Lead with eventID == click_id so the inbound webhook's
+  // server-side Lead (same event_id, with phone hash) deduplicates and
+  // enriches user_data. Optimization on Lead keeps the existing campaign
+  // setup untouched.
   const fbq = window.fbq;
   if (typeof fbq === "function") {
     fbq(
       "track",
-      "Contact",
+      "Lead",
       {
         content_name: "WhatsApp Click",
-        content_category: "contact",
+        content_category: "lead",
       },
       { eventID: clickId },
     );
@@ -178,10 +182,10 @@ const trackContactIntent = ({
   }
 
   // MarkVision tracker — persists the click in whatsapp_clicks with
-  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Contact" server-side. When
-  // the user actually messages WhatsApp, greenapi-webhook reads the
-  // [#marker] from the message, looks up this row, and only then fires
-  // the Meta CAPI "Lead" event with full attribution.
+  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Lead" server-side with
+  // event_id == click_id. greenapi-webhook will fire a second Lead with
+  // the same event_id + phone hash when the user actually messages —
+  // Meta dedupes and merges user_data.
   try {
     const body = JSON.stringify({
       click_id: clickId,
