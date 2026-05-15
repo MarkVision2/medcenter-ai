@@ -199,23 +199,29 @@ const trackContactIntent = ({
       utm_term: utm.utm_term ?? undefined,
       source_label: "medcenter-ai",
     });
-    // sendBeacon survives navigation/tab switch to WhatsApp on mobile.
+    // CRITICAL: send as text/plain to avoid CORS preflight on mobile Safari.
+    // application/json triggers OPTIONS preflight, which is cancelled when
+    // the page navigates to WhatsApp before the request lands → click never
+    // makes it into whatsapp_clicks and the inbound Lead can't be attributed.
+    // text/plain is a "simple request" — no preflight, beacon ships immediately.
     if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
-      const blob = new Blob([body], { type: "application/json" });
+      const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
       if (!navigator.sendBeacon(TRACK_CLICK_URL, blob)) {
         void fetch(TRACK_CLICK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
           body,
           keepalive: true,
+          mode: "cors",
         }).catch(() => undefined);
       }
     } else {
       void fetch(TRACK_CLICK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
         body,
         keepalive: true,
+        mode: "cors",
       }).catch(() => undefined);
     }
   } catch (err) {
