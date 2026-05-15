@@ -8,11 +8,10 @@ const WHATSAPP_MESSAGE = "Хочу записаться на диагности�
 
 // MarkVision multi-tenant click tracker (separate Supabase project).
 // Resolves cabinet by host, writes the click into whatsapp_clicks, and
-// fires Meta CAPI "Lead" with the click_id as event_id. When the user
-// then actually sends the WhatsApp message, greenapi-webhook fires a
-// second "Lead" with the same event_id and a phone hash — Meta
-// deduplicates by event_id+event_name and enriches the original Lead
-// with the user_data (phone) from the message.
+// fires Meta CAPI "Contact" (intent only — not Lead). The real "Lead"
+// event is fired server-side from greenapi-webhook when the user actually
+// sends the WhatsApp message carrying the [#xxxxxxxx] marker. This keeps
+// Lead in Ads Manager strictly = real WhatsApp conversations, not clicks.
 const TRACK_CLICK_URL =
   "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";
 
@@ -134,18 +133,17 @@ const trackContactIntent = ({
 }: TrackContactParams): void => {
   if (typeof window === "undefined") return;
 
-  // Meta Pixel — Lead with eventID == click_id so the inbound webhook's
-  // server-side Lead (same event_id, with phone hash) deduplicates and
-  // enriches user_data. Optimization on Lead keeps the existing campaign
-  // setup untouched.
+  // Meta Pixel — Contact (intent), NOT Lead. The Lead event fires from
+  // greenapi-webhook only when a real WhatsApp message with the marker
+  // arrives — so Lead count in Ads Manager == real conversations.
   const fbq = window.fbq;
   if (typeof fbq === "function") {
     fbq(
       "track",
-      "Lead",
+      "Contact",
       {
         content_name: "WhatsApp Click",
-        content_category: "lead",
+        content_category: "contact",
       },
       { eventID: clickId },
     );
@@ -182,10 +180,9 @@ const trackContactIntent = ({
   }
 
   // MarkVision tracker — persists the click in whatsapp_clicks with
-  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Lead" server-side with
-  // event_id == click_id. greenapi-webhook will fire a second Lead with
-  // the same event_id + phone hash when the user actually messages —
-  // Meta dedupes and merges user_data.
+  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Contact" server-side.
+  // Lead fires later, only from greenapi-webhook, when a real WhatsApp
+  // message arrives with the marker.
   try {
     const body = JSON.stringify({
       click_id: clickId,
