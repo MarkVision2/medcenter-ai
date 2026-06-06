@@ -74,42 +74,48 @@ const Index = () => {
           />
         </div>
 
-        <div className="mx-auto flex min-h-[100svh] w-full max-w-3xl flex-col px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-5 sm:min-h-0 sm:flex-1 sm:justify-center sm:px-6 sm:pt-10 sm:pb-16">
-          {/* Верхние плашки */}
-          <div className="mx-auto flex w-full max-w-md flex-col items-center gap-2">
-            <div className="flex w-fit items-center gap-1.5 rounded-full border border-accent/30 bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
-              <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-deep sm:h-5 sm:w-5">
-                <BadgeCheck className="h-2.5 w-2.5 text-white sm:h-3.5 sm:w-3.5" strokeWidth={3} />
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-wide text-accent-deep sm:text-xs sm:tracking-wider">
-                Проверенная методика
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-3 pb-8 pt-4 sm:gap-5 sm:px-6 sm:pt-8 sm:pb-14">
+          {/* Верхняя плашка — "Проверенная методика" */}
+          <div className="rounded-3xl bg-gradient-to-b from-accent-deep to-accent-deep/90 px-6 py-5 text-center shadow-lg sm:px-8 sm:py-6">
+            <div className="flex items-center justify-center gap-2">
+              <Sparkles className="h-4 w-4 text-highlight sm:h-5 sm:w-5" strokeWidth={2.5} />
+              <span className="text-[15px] font-bold italic text-highlight sm:text-lg">
+                Проверенная методика:
               </span>
             </div>
-            <div className="flex w-fit items-center gap-1.5 rounded-full bg-accent-deep/5 px-3 py-1 sm:px-3.5">
-              <Stethoscope className="h-3 w-3 text-accent-deep/80 sm:h-3.5 sm:w-3.5" strokeWidth={2.5} />
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-accent-deep/80 sm:text-[11px]">
-                Для владельцев медицинских клиник
-              </span>
-            </div>
+            <p className="mt-2 text-[12px] font-bold uppercase leading-snug tracking-wider text-white sm:text-sm">
+              Для владельцев<br className="sm:hidden" /> медицинских центров
+            </p>
           </div>
 
-          {/* H1 */}
-          <h1 className="mx-auto mt-5 max-w-[23rem] text-center text-[44px] font-black leading-[0.92] tracking-tight sm:mt-6 sm:max-w-none sm:text-6xl sm:leading-[1.02]">
-            Хватит терять{" "}
-            <span className="relative inline-block text-accent-deep">
-              пациентов
-              <span className="absolute inset-x-1 -bottom-1 -z-0 h-2.5 rounded-full bg-highlight/70" />
-            </span>
-          </h1>
+          {/* Белая карточка с главным оффером */}
+          <div className="rounded-3xl bg-white px-5 py-7 shadow-xl ring-1 ring-black/5 sm:px-10 sm:py-10">
+            <h1 className="text-center text-[26px] font-black uppercase leading-[1.05] tracking-tight text-foreground sm:text-4xl">
+              Хватит терять{" "}
+              <span className="text-accent-deep">пациентов</span>
+            </h1>
+            <p className="mt-5 text-center text-[22px] font-black uppercase leading-[1.1] tracking-tight text-accent-deep sm:mt-6 sm:text-[34px]">
+              Ищу <span className="text-foreground">2-х владельцев</span> медицинских центров,
+            </p>
+            <p className="mt-3 text-center text-[20px] font-black uppercase leading-[1.15] tracking-tight text-accent-deep sm:mt-4 sm:text-[30px]">
+              которые хотят стабильный поток пациентов
+            </p>
+          </div>
 
-          <p className="mx-auto mt-4 max-w-[22rem] text-center text-[16px] leading-snug text-foreground/75 sm:mt-5 sm:max-w-2xl sm:text-xl">
-            Ищу <span className="font-bold text-accent-deep">2-х владельцев</span> медицинских центров, которые хотят стабильный поток пациентов
-          </p>
+          {/* Нижняя плашка с усилителем */}
+          <div className="rounded-3xl bg-gradient-to-b from-accent-deep/95 to-accent-deep px-5 py-6 text-center shadow-lg sm:px-8 sm:py-7">
+            <p className="text-[13px] font-bold uppercase leading-snug tracking-wider text-white sm:text-base">
+              Которые устали работать за копейки и хотят выйти на{" "}
+              <span className="inline-block border-b-2 border-highlight pb-0.5 text-highlight">
+                стабильную загрузку клиники
+              </span>{" "}
+              без выгорания и стресса
+            </p>
+          </div>
 
-          {/* Фото вместо видео */}
-          <div className="relative mx-auto mt-7 w-full max-w-2xl sm:mt-8">
-            <div className="absolute -inset-1 rounded-[1.6rem] bg-gradient-to-tr from-accent-deep/25 via-accent/15 to-highlight/25 blur-md sm:-inset-2 sm:rounded-[2rem] sm:blur-xl" />
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.35rem] border-2 border-white bg-muted shadow-xl ring-1 ring-accent-deep/10 sm:rounded-3xl sm:shadow-2xl">
+          {/* Фото с подписью */}
+          <div className="relative overflow-hidden rounded-3xl bg-muted shadow-2xl ring-1 ring-black/10">
+            <div className="aspect-[4/5] w-full sm:aspect-[16/10]">
               <img
                 src={heroDoctorAsset.url}
                 alt="Врач многопрофильной клиники"
@@ -117,7 +123,12 @@ const Index = () => {
                 loading="eager"
                 fetchPriority="high"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
+            </div>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 px-4 pb-5 text-center sm:pb-7">
+              <p className="text-[16px] font-bold text-white drop-shadow-md sm:text-xl">
+                Первичные пациенты каждый месяц
+              </p>
             </div>
           </div>
         </div>
