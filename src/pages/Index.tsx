@@ -5,6 +5,7 @@ import Banner from "@/components/landing/Banner";
 import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
 import yuriPhoto from "@/assets/yuri-optimized.jpg";
+import aigerimPhoto from "@/assets/aigerim.jpg";
 
 const DeferredHeroVideo = () => {
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -19,8 +20,8 @@ const DeferredHeroVideo = () => {
       return () => window.cancelIdleCallback(id);
     }
 
-    const id = window.setTimeout(load, 900);
-    return () => window.clearTimeout(id);
+    const id = (window as Window).setTimeout(load, 900);
+    return () => (window as Window).clearTimeout(id);
   }, []);
 
   useEffect(() => {
