@@ -6,6 +6,7 @@ import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
 import yuriPhoto from "@/assets/yuri-optimized.jpg";
 import aigerimPhoto from "@/assets/aigerim.jpg";
+import heroDoctorAsset from "@/assets/hero-doctor.png.asset.json";
 
 const DeferredHeroVideo = () => {
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -73,59 +74,51 @@ const Index = () => {
           />
         </div>
 
-        <div className="mx-auto flex min-h-[100svh] w-full max-w-3xl flex-col px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:min-h-0 sm:flex-1 sm:justify-center sm:px-6 sm:pt-10 sm:pb-16">
-          {/* Верхняя плашка-капсула */}
-          <div className="mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-accent/25 bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-deep sm:h-5 sm:w-5">
-              <BadgeCheck className="h-2.5 w-2.5 text-white sm:h-3.5 sm:w-3.5" strokeWidth={3} />
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-wide text-accent-deep sm:text-xs sm:tracking-wider">
-              Методика для&nbsp;медицинских клиник
-            </span>
-          </div>
-
-          {/* H1 */}
-          <h1 className="mx-auto mt-5 max-w-[23rem] text-center text-[40px] font-black leading-[0.92] tracking-tight sm:mt-5 sm:max-w-none sm:text-5xl sm:leading-[1.02] md:text-6xl">
-            Хватит терять{" "}
-            <span className="relative inline-block text-accent-deep">
-              пациентов
-              <span className="absolute inset-x-1 -bottom-1 -z-0 h-2 rounded-full bg-highlight/65" />
-            </span>
-          </h1>
-
-          <p className="mx-auto mt-3 max-w-[22rem] text-center text-[17px] font-semibold leading-snug text-foreground/75 sm:mt-5 sm:max-w-2xl sm:text-2xl">
-            Увеличьте выручку медицинской клиники{" "}
-            <span className="whitespace-nowrap font-black text-accent-deep">в 2–3 раза</span>{" "}
-            без дополнительных расходов на рекламу
-          </p>
-
-          {/* Видео */}
-          <div className="relative mx-auto mt-8 w-full max-w-2xl sm:mt-7">
-            <div className="absolute -inset-1 rounded-[1.35rem] bg-gradient-to-tr from-accent-deep/20 via-accent/10 to-highlight/20 blur-md sm:-inset-2 sm:rounded-3xl sm:blur-xl" />
-            <div className="relative aspect-video w-full overflow-hidden rounded-[1.1rem] border border-white bg-black shadow-lg ring-1 ring-accent-deep/10 sm:rounded-2xl sm:border-2 sm:shadow-2xl">
-              <DeferredHeroVideo />
+        <div className="mx-auto flex min-h-[100svh] w-full max-w-3xl flex-col px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-5 sm:min-h-0 sm:flex-1 sm:justify-center sm:px-6 sm:pt-10 sm:pb-16">
+          {/* Верхние плашки */}
+          <div className="mx-auto flex w-full max-w-md flex-col items-center gap-2">
+            <div className="flex w-fit items-center gap-1.5 rounded-full border border-accent/30 bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur sm:gap-2 sm:px-4 sm:py-2">
+              <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent-deep sm:h-5 sm:w-5">
+                <BadgeCheck className="h-2.5 w-2.5 text-white sm:h-3.5 sm:w-3.5" strokeWidth={3} />
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-wide text-accent-deep sm:text-xs sm:tracking-wider">
+                Проверенная методика
+              </span>
+            </div>
+            <div className="flex w-fit items-center gap-1.5 rounded-full bg-accent-deep/5 px-3 py-1 sm:px-3.5">
+              <Stethoscope className="h-3 w-3 text-accent-deep/80 sm:h-3.5 sm:w-3.5" strokeWidth={2.5} />
+              <span className="text-[10px] font-semibold uppercase tracking-wide text-accent-deep/80 sm:text-[11px]">
+                Для владельцев медицинских клиник
+              </span>
             </div>
           </div>
 
-          <p className="mt-2 text-center text-[12px] italic leading-snug text-muted-foreground sm:mt-4 sm:text-base">
-            Посмотрите видео или прочитайте статью ниже
+          {/* H1 */}
+          <h1 className="mx-auto mt-5 max-w-[23rem] text-center text-[44px] font-black leading-[0.92] tracking-tight sm:mt-6 sm:max-w-none sm:text-6xl sm:leading-[1.02]">
+            Хватит терять{" "}
+            <span className="relative inline-block text-accent-deep">
+              пациентов
+              <span className="absolute inset-x-1 -bottom-1 -z-0 h-2.5 rounded-full bg-highlight/70" />
+            </span>
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-[22rem] text-center text-[16px] leading-snug text-foreground/75 sm:mt-5 sm:max-w-2xl sm:text-xl">
+            Ищу <span className="font-bold text-accent-deep">2-х владельцев</span> медицинских центров, которые хотят стабильный поток пациентов
           </p>
 
-          {/* CTA */}
-          <div className="mt-auto pt-4 sm:mt-6 sm:pt-0">
-            <ScrollToFormButton
-              label="Забронировать диагностику"
-              className="h-16 rounded-2xl text-[21px] shadow-lg shadow-accent/20 sm:h-14 sm:rounded-xl sm:text-base"
-              ctaId={1}
-              ctaName="Hero — Забронировать диагностику"
-            />
-            <p className="mt-3 flex items-center justify-center gap-2 text-center text-sm font-medium text-muted-foreground sm:mt-3 sm:text-xs">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-destructive" />
-              </span>
-              Количество мест ограничено
-            </p>
+          {/* Фото вместо видео */}
+          <div className="relative mx-auto mt-7 w-full max-w-2xl sm:mt-8">
+            <div className="absolute -inset-1 rounded-[1.6rem] bg-gradient-to-tr from-accent-deep/25 via-accent/15 to-highlight/25 blur-md sm:-inset-2 sm:rounded-[2rem] sm:blur-xl" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.35rem] border-2 border-white bg-muted shadow-xl ring-1 ring-accent-deep/10 sm:rounded-3xl sm:shadow-2xl">
+              <img
+                src={heroDoctorAsset.url}
+                alt="Врач многопрофильной клиники"
+                className="h-full w-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
+            </div>
           </div>
         </div>
       </section>
