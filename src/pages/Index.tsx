@@ -261,46 +261,145 @@ const Index = () => {
           Разные города, разные ниши — одна система.
         </p>
 
-        <div className="mx-auto mt-6 max-w-2xl overflow-hidden rounded-2xl border bg-card shadow-md">
-          <div className="border-b bg-accent-soft/40 px-6 py-4 sm:px-8">
-            <div className="flex items-center justify-center gap-2 text-center font-semibold text-accent-deep">
-              <MapPin className="h-5 w-5 shrink-0" />
-              <span className="text-lg sm:text-xl">Клиника из Алматы</span>
+        <div className="mx-auto mt-6 max-w-2xl overflow-hidden rounded-3xl border bg-card shadow-md">
+          {/* Знакомство с героиней */}
+          <div className="border-b bg-gradient-to-br from-accent-soft via-accent-soft/40 to-background px-5 py-6 sm:px-8 sm:py-7">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-5">
+              <img
+                src={aigerimPhoto}
+                alt="Айгерим — директор многопрофильной клиники"
+                loading="lazy"
+                decoding="async"
+                width={160}
+                height={160}
+                className="h-24 w-24 shrink-0 rounded-full object-cover ring-4 ring-white shadow-lg sm:h-28 sm:w-28"
+              />
+              <div className="text-center sm:text-left">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-deep ring-1 ring-accent/20">
+                  <BadgeCheck className="h-3 w-3" />
+                  Знакомьтесь
+                </span>
+                <p className="mt-2 text-xl font-black leading-tight sm:text-2xl">Айгерим</p>
+                <p className="mt-1 text-sm leading-snug text-muted-foreground sm:text-base">
+                  Директор многопрофильной клиники
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="p-6 sm:p-8">
-            <div className="rounded-xl border-l-4 border-destructive bg-destructive/5 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-destructive">
-                Было
+          <div className="p-5 sm:p-8">
+            {/* Запрос при обращении */}
+            <div className="rounded-2xl border-l-4 border-muted-foreground/40 bg-muted/40 p-4 sm:p-5">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                Запрос при обращении
               </p>
-              <p className="mt-2 text-base leading-relaxed sm:text-lg">
-                Один администратор не справлялся со звонками. Записывал всех подряд приходило только <span className="font-bold text-destructive">30%</span> от записанных.
+              <p className="mt-2 text-base italic leading-relaxed sm:text-lg">
+                «Нужен SMM, чтобы было больше пациентов и выручки»
               </p>
             </div>
 
-            <h3 className="mt-7 text-center text-lg font-bold sm:text-xl">
-              Что мы сделали?
-            </h3>
-            <ul className="mx-auto mt-4 max-w-md space-y-3">
-              {[
-                "Вывели 2 девушек в отдельный колл-центр",
-                "Обучили скриптам продаж первичных консультаций",
-                "Поставили задачу: продать приём с предоплатой или полной оплатой",
-              ].map((item, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 rounded-xl bg-muted/50 p-3"
-                >
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                    <Check className="h-4 w-4" strokeWidth={3} />
-                  </span>
-                  <span className="text-base leading-snug sm:text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Что увидел на диагностике */}
+            <div className="mt-4 rounded-2xl border-l-4 border-accent-deep bg-accent-soft/50 p-4 sm:p-5">
+              <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-accent-deep">
+                <Target className="h-3.5 w-3.5" />
+                Что увидел на диагностике
+              </p>
+              <p className="mt-2 text-[15px] leading-relaxed text-foreground/85 sm:text-base">
+                SMM здесь не поможет. В клинике не было системы, которая стабильно приводит первичных пациентов на платную диагностику и оставляет их на курс лечения. Клиника работала в основном через ОСМС, а из платных услуг — только обед за 1000 тенге.
+              </p>
+            </div>
 
-            <div className="mt-7 rounded-2xl bg-banner p-6 text-center text-white shadow-lg">
+            {/* Трансформация: До / После */}
+            <h3 className="mt-7 text-center text-lg font-bold sm:text-xl">
+              Трансформация клиники
+            </h3>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wider text-destructive">
+                  До
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {[
+                    "Дорогие процедуры почти не продаются",
+                    "Скидки съедают прибыль",
+                    "Пациенты только по сарафану",
+                    "Кабинеты простаивают",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm leading-snug">
+                      <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" strokeWidth={2.5} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-accent/30 bg-accent-soft/60 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wider text-accent-deep">
+                  После
+                </p>
+                <ul className="mt-3 space-y-2.5">
+                  {[
+                    <>Выручка выросла на <span className="font-bold">10+ млн ₸</span></>,
+                    <>Загруженность клиники до <span className="font-bold">80%</span></>,
+                    <>Увеличили чек в <span className="font-bold">3 раза</span></>,
+                    "Пациенты остаются на курсы лечения",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm leading-snug">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent-deep" strokeWidth={3} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Как решали задачу — 3 шага */}
+            <div className="mt-7">
+              <div className="mx-auto flex w-fit items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent-deep">
+                <Workflow className="h-3.5 w-3.5" />
+                Как решали задачу — 3 шага
+              </div>
+              <h3 className="mt-3 text-center text-lg font-bold sm:text-xl">
+                Что мы сделали
+              </h3>
+
+              <ol className="mt-4 space-y-3">
+                {[
+                  {
+                    title: "Упаковали продукт",
+                    text: "Разработали пакеты лечения, посчитали себестоимость, выстроили стратегию продаж.",
+                  },
+                  {
+                    title: "Перестроили отдел продаж",
+                    text: "Отказались от формата «просто консультаций». Вывели 2 девушек в отдельный колл-центр, обучили скриптам и поставили задачу — продать приём с предоплатой или полной оплатой.",
+                  },
+                  {
+                    title: "Запустили рекламу",
+                    text: "Написали сценарии, сняли видео, запустили рекламу, получили первые обращения и записи на диагностику.",
+                  },
+                ].map((step, i) => (
+                  <li
+                    key={i}
+                    className="flex gap-4 rounded-2xl border border-border/60 bg-card p-4 transition-shadow hover:shadow-md sm:p-5"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-deep text-base font-black text-white shadow-md sm:h-11 sm:w-11 sm:text-lg">
+                      {i + 1}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-base font-bold leading-snug sm:text-lg">{step.title}</p>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+                        {step.text}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        {/* Синий блок с результатом — оставляем как был */}
+        <div className="mx-auto mt-6 max-w-2xl">
+          <div className="rounded-2xl bg-banner p-6 text-center text-white shadow-lg">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-highlight">
                 <TrendingUp className="h-3.5 w-3.5" />
                 Результат за 2 недели
@@ -342,17 +441,6 @@ const Index = () => {
                   выручки в кассу
                 </p>
               </div>
-            </div>
-
-            <p className="mt-6 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Тот же бюджет на рекламу в{" "}
-              <span className="font-bold text-foreground">3 раза больше</span>{" "}
-              реально пришедших и оплативших пациентов.
-            </p>
-            <p className="mt-3 text-center text-base font-semibold leading-snug sm:text-lg">
-              В чём разница?{" "}
-              <span className="text-accent-deep">Правильные люди на правильных позициях.</span>
-            </p>
           </div>
         </div>
 
