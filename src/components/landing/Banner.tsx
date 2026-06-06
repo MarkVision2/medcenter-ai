@@ -4,21 +4,16 @@ import type { ReactNode } from "react";
 interface BannerProps {
   children: ReactNode;
   className?: string;
-  /** italic + жёлтый текст на синем — как в референсе */
   italic?: boolean;
 }
 
-/**
- * "Колхозная" продающая плашка-баннер: синий фон, жёлтый жирный текст, на всю ширину.
- * Используется для главных тезисов / якорей внимания.
- */
 const Banner = ({ children, className, italic = true }: BannerProps) => {
   return (
     <div
       className={cn(
-        "rounded-md bg-banner px-5 py-5 text-center sm:px-6 sm:py-6",
-        "text-banner-foreground font-extrabold uppercase",
-        "text-sm leading-tight sm:text-xl md:text-2xl",
+        "rounded-[1.25rem] bg-accent-deep px-5 py-5 text-center shadow-[0_8px_30px_rgba(22,80,60,0.15)] sm:rounded-2xl sm:px-6 sm:py-6",
+        "font-extrabold uppercase text-highlight",
+        "text-sm leading-tight sm:text-xl",
         italic && "italic",
         className,
       )}

@@ -1,133 +1,96 @@
-import { useEffect, useRef, useState } from "react";
-import { Check, AlertTriangle, MapPin, Square, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X, Clock, Flame } from "lucide-react";
+import { Check, AlertTriangle, MapPin, TrendingUp, Wallet, Sparkles, Megaphone, Inbox, Stethoscope, UserPlus, Receipt, BadgeCheck, Target, Workflow, Layers, HelpCircle, Phone, ArrowRight, X, Clock, Flame } from "lucide-react";
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
-import WhatsAppButton from "@/components/landing/WhatsAppButton";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
 import yuriPhoto from "@/assets/yuri-optimized.jpg";
 import aigerimPhoto from "@/assets/aigerim.jpg";
-import heroDoctorAsset from "@/assets/hero-doctor.png.asset.json";
+import heroDoctorPhoto from "@/assets/hero-doctor.png";
 
-const DeferredHeroVideo = () => {
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const load = () => setShouldLoadVideo(true);
-    if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(load, { timeout: 1600 });
-      return () => window.cancelIdleCallback(id);
-    }
-
-    const id = (window as Window).setTimeout(load, 900);
-    return () => (window as Window).clearTimeout(id);
-  }, []);
-
-  useEffect(() => {
-    if (!shouldLoadVideo) return;
-
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.load();
-    video.play().catch(() => {
-      /* Autoplay can be blocked by browser policy; controls remain available. */
-    });
-  }, [shouldLoadVideo]);
-
-  return (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 h-full w-full bg-black object-cover"
-      autoPlay={shouldLoadVideo}
-      muted
-      controls
-      playsInline
-      preload="metadata"
-      poster="/videos/case-video-poster.jpg"
-    >
-      {shouldLoadVideo && <source src="/videos/case-video-optimized.mp4" type="video/mp4" />}
-      Ваш браузер не поддерживает видео.
-    </video>
-  );
-};
+const painPoints = [
+  {
+    text: "Если у вас нет стабильного потока первичных пациентов",
+  },
+  {
+    text: "Вы устали постоянно нанимать таргетологов которые что-то делают, но результата как не было, так и нет, и при этом у вас есть ощущение, что вы платите и не понимаете, за что.",
+  },
+  {
+    text: (
+      <>
+        Видите, как ваши коллеги успешно зарабатывают и путешествуют, а вы смотрите на них и не понимаете,{" "}
+        <span className="font-extrabold text-foreground">ЧТО ДЕЛАЕТЕ НЕ ТАК.</span>
+      </>
+    ),
+  },
+  {
+    text: "Вынуждены цепляться за каждого пациента, даже на невыгодных условиях, и работаете в минус.",
+  },
+  {
+    text: "Не знаете, как привлекать пациентов на премиум-услуги и выйти из ловушки дешёвых пациентов?",
+  },
+];
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased">
-      {/* 1. HERO + ВИДЕО */}
-      <section className="relative flex min-h-[100svh] flex-col overflow-hidden">
-        {/* Декоративный фон */}
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-accent-soft/60 via-background to-background" />
-          <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute top-40 -left-20 h-72 w-72 rounded-full bg-accent-deep/10 blur-3xl" />
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, hsl(var(--accent-deep)) 1px, transparent 1px)",
-              backgroundSize: "22px 22px",
-            }}
-          />
+    <main className="min-h-screen bg-gradient-to-b from-accent-soft/30 via-background to-background text-foreground antialiased">
+      {/* 1. HERO */}
+      <section className="relative overflow-hidden bg-background">
+        <div className="pointer-events-none absolute inset-0 -z-10 hidden sm:block">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent-soft/40 via-background to-background" />
+          <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
         </div>
 
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-3 pb-8 pt-4 sm:gap-5 sm:px-6 sm:pt-8 sm:pb-14">
-          {/* Верхняя плашка — "Проверенная методика" */}
-          <div className="rounded-3xl bg-gradient-to-b from-accent-deep to-accent-deep/90 px-6 py-5 text-center shadow-lg sm:px-8 sm:py-6">
-            <div className="flex items-center justify-center gap-2">
-              <Sparkles className="h-4 w-4 text-highlight sm:h-5 sm:w-5" strokeWidth={2.5} />
-              <span className="text-[15px] font-bold italic text-highlight sm:text-lg">
-                Проверенная методика:
-              </span>
+        <div className="mx-auto w-full max-w-lg px-2 pb-5 pt-2 sm:max-w-3xl sm:px-6 sm:pb-14 sm:pt-8">
+          {/* Единый оффер-блок: медицинский → белый → медицинский */}
+          <div className="overflow-hidden rounded-[1.25rem] shadow-[0_8px_30px_rgba(0,0,0,0.12)] sm:rounded-3xl">
+            {/* Шапка */}
+            <div className="bg-accent-deep px-4 py-4 text-center sm:px-8 sm:py-6">
+              <div className="flex items-center justify-center gap-1.5">
+                <Sparkles className="h-4 w-4 shrink-0 text-highlight sm:h-5 sm:w-5" strokeWidth={2.5} />
+                <span className="text-[15px] font-bold italic leading-none text-highlight sm:text-lg">
+                  Проверенная методика:
+                </span>
+              </div>
+              <p className="mt-2 text-[11px] font-bold uppercase leading-snug tracking-[0.08em] text-white sm:text-sm">
+                Для владельцев медицинских центров
+              </p>
             </div>
-            <p className="mt-2 text-[12px] font-bold uppercase leading-snug tracking-wider text-white sm:text-sm">
-              Для владельцев<br className="sm:hidden" /> медицинских центров
-            </p>
+
+            {/* Главный оффер */}
+            <div className="bg-white px-3 py-5 sm:px-10 sm:py-10">
+              <h1 className="text-center text-[17px] font-black uppercase leading-[1.18] tracking-tight text-foreground sm:text-[34px] sm:leading-[1.1]">
+                Ищу{" "}
+                <span className="text-accent">2</span>{" "}
+                владельцев медицинских центров, которые хотят стабильный поток пациентов и полную загрузку всех докторов.
+              </h1>
+            </div>
+
+            {/* Усилитель */}
+            <div className="bg-accent-deep px-3 py-4 text-center sm:px-8 sm:py-7">
+              <p className="text-[11.5px] font-bold uppercase leading-[1.35] tracking-[0.04em] text-highlight sm:text-base sm:leading-snug">
+                <span className="rounded-sm bg-white/15 px-1 py-0.5">Тех</span>, кто устал работать за копейки и хочет выйти на доход{" "}
+                <span className="underline decoration-highlight decoration-2 underline-offset-[3px]">
+                  от 300 000 до 500 000 тенге
+                </span>{" "}
+                в день , с большим количеством свободного времени и меньшим стрессом.
+              </p>
+            </div>
           </div>
 
-          {/* Белая карточка с главным оффером */}
-          <div className="rounded-3xl bg-white px-5 py-7 shadow-xl ring-1 ring-black/5 sm:px-10 sm:py-10">
-            <h1 className="text-center text-[26px] font-black uppercase leading-[1.05] tracking-tight text-foreground sm:text-4xl">
-              Хватит терять{" "}
-              <span className="text-accent-deep">пациентов</span>
-            </h1>
-            <p className="mt-5 text-center text-[22px] font-black uppercase leading-[1.1] tracking-tight text-accent-deep sm:mt-6 sm:text-[34px]">
-              Ищу <span className="text-foreground">2-х владельцев</span> медицинских центров,
-            </p>
-            <p className="mt-3 text-center text-[20px] font-black uppercase leading-[1.15] tracking-tight text-accent-deep sm:mt-4 sm:text-[30px]">
-              которые хотят стабильный поток пациентов
-            </p>
-          </div>
-
-          {/* Нижняя плашка с усилителем */}
-          <div className="rounded-3xl bg-gradient-to-b from-accent-deep/95 to-accent-deep px-5 py-6 text-center shadow-lg sm:px-8 sm:py-7">
-            <p className="text-[13px] font-bold uppercase leading-snug tracking-wider text-white sm:text-base">
-              Которые устали работать за копейки и хотят выйти на{" "}
-              <span className="inline-block border-b-2 border-highlight pb-0.5 text-highlight">
-                стабильную загрузку клиники
-              </span>{" "}
-              без выгорания и стресса
-            </p>
-          </div>
-
-          {/* Фото с подписью */}
-          <div className="relative overflow-hidden rounded-3xl bg-muted shadow-2xl ring-1 ring-black/10">
+          {/* Фото */}
+          <div className="relative mt-2.5 overflow-hidden rounded-[1.25rem] bg-white shadow-[0_8px_30px_rgba(22,80,60,0.08)] ring-1 ring-accent/10 sm:mt-5 sm:rounded-3xl">
             <div className="aspect-[4/5] w-full sm:aspect-[16/10]">
               <img
-                src={heroDoctorAsset.url}
+                src={heroDoctorPhoto}
                 alt="Врач многопрофильной клиники"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-[center_20%]"
                 loading="eager"
                 fetchPriority="high"
               />
             </div>
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 px-4 pb-5 text-center sm:pb-7">
-              <p className="text-[16px] font-bold text-white drop-shadow-md sm:text-xl">
-                Первичные пациенты каждый месяц
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 px-3 pb-4 text-center sm:pb-7">
+              <p className="text-[15px] font-bold leading-snug text-white drop-shadow-md sm:text-xl">
+                Первичные пациенты каждый месяц.
               </p>
             </div>
           </div>
@@ -135,68 +98,56 @@ const Index = () => {
       </section>
 
       {/* 2. БОЛИ */}
-      <Section tone="muted">
-        <div className="relative overflow-hidden rounded-3xl border border-destructive/20 bg-background p-5 shadow-lg shadow-destructive/5 sm:p-8">
-          {/* Декоративный градиент */}
-          <div className="pointer-events-none absolute -top-20 -right-20 h-48 w-48 rounded-full bg-destructive/10 blur-3xl" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-destructive/60 to-transparent" />
-
-          <div className="relative mx-auto flex w-fit items-center gap-2 rounded-full border border-destructive/30 bg-destructive/5 px-3 py-1">
-            <AlertTriangle className="h-3.5 w-3.5 text-destructive" strokeWidth={2.5} />
-            <span className="text-[10px] font-bold uppercase tracking-wider text-destructive sm:text-xs">
-              Знакомая ситуация?
-            </span>
+      <Section tone="default" contentClassName="sm:max-w-2xl">
+        <div className="text-center">
+          <div className="landing-badge-warn mx-auto">
+            <AlertTriangle className="h-3.5 w-3.5" strokeWidth={2.5} />
+            <span>Знакомая ситуация?</span>
           </div>
 
-          <h2 className="relative mt-4 text-center text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
-            Узнайте себя?
-          </h2>
-
-          <ul className="relative mx-auto mt-6 max-w-md space-y-3">
-            {[
-              "Если у вас нет стабильного потока первичных пациентов",
-              "Вы устали постоянно нанимать таргетологов которые что-то делают, но результата как не было, так и нет, и при этом у вас есть ощущение, что вы платите и не понимаете, за что.",
-              "Видите, как ваши коллеги успешно зарабатывают и путешествуют, а вы смотрите на них и не понимаете, ЧТО ДЕЛАЕТЕ НЕ ТАК.",
-              "Вынуждены цепляться за каждого пациента, даже на невыгодных условиях, и работаете в минус.",
-              "Не знаете, как привлекать пациентов на премиум-услуги и выйти из ловушки дешёвых пациентов?",
-            ].map((item, i) => (
-              <li
-                key={i}
-                className="group flex items-start gap-3 rounded-xl border border-border/60 bg-muted/40 p-3 transition-colors hover:border-destructive/40 hover:bg-destructive/[0.03] sm:gap-4 sm:p-4"
-              >
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-destructive/10 text-destructive ring-1 ring-destructive/20 sm:h-7 sm:w-7">
-                  <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={3} />
-                </span>
-                <span className="text-sm leading-relaxed text-foreground/80 sm:text-base">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <h2 className="landing-title mt-5 sm:mt-6">Узнайте себя?</h2>
         </div>
 
-        <div className="mt-6">
-          <Banner>
-            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp; ТО&nbsp;ЭТА ИНФОРМАЦИЯ ТОЧНО ДЛЯ&nbsp;ВАС
+        <ul className="mt-6 space-y-2.5 sm:mt-8 sm:space-y-3">
+          {painPoints.map((item, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 rounded-2xl bg-white px-3.5 py-3.5 shadow-[0_4px_20px_rgba(22,80,60,0.06)] ring-1 ring-accent/10 sm:gap-4 sm:px-4 sm:py-4"
+            >
+              <span className="landing-icon-wrap mt-0.5 h-7 w-7 sm:h-8 sm:w-8">
+                <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={3} />
+              </span>
+              <span className="text-[14.5px] leading-[1.45] text-foreground/85 sm:text-base sm:leading-relaxed">
+                {item.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 sm:mt-7">
+          <Banner className="px-4 py-4 text-[13px] leading-snug sm:px-6 sm:py-6 sm:text-xl">
+            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp;— ТО&nbsp;ЭТА ИНФОРМАЦИЯ ТОЧНО ДЛЯ&nbsp;ВАС
           </Banner>
         </div>
       </Section>
 
       {/* 3. ПЕРЕХОД */}
-      <Section>
-        <p className="text-center text-lg leading-relaxed sm:text-xl">
-          Сейчас я расскажу, как забыть о&nbsp;работе за&nbsp;копейки и&nbsp;начать зарабатывать, как{" "}
-          <span className="font-bold text-accent-deep">лучшие клиники Казахстана</span>, имея больше свободного времени и&nbsp;энергии.
-        </p>
+      <Section tone="soft">
+        <div className="landing-card px-5 py-6 sm:px-8 sm:py-8">
+          <p className="text-center text-lg leading-relaxed sm:text-xl">
+            Сейчас я расскажу, как забыть о&nbsp;работе за&nbsp;копейки и&nbsp;начать зарабатывать, как{" "}
+            <span className="font-bold text-accent-deep">лучшие клиники Казахстана</span>, имея больше свободного времени и&nbsp;энергии.
+          </p>
+        </div>
       </Section>
 
       {/* 4. СУТЬ СИСТЕМЫ — 3 ЗОНЫ */}
-      <Section tone="muted">
-        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+      <Section tone="default">
+        <div className="landing-badge mx-auto mb-4">
           <Sparkles className="h-3.5 w-3.5" />
           Суть системы
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight sm:text-3xl">
+        <h2 className="landing-title">
           Система, которая работает <br />
           <span className="text-accent-deep">в трёх зонах</span>
         </h2>
@@ -223,7 +174,7 @@ const Index = () => {
             return (
               <li
                 key={i}
-                className="group relative overflow-hidden rounded-2xl border bg-card p-5 shadow-sm sm:p-6"
+                className="landing-card p-5 sm:p-6"
               >
                 <span className="absolute right-3 top-3 text-5xl font-black leading-none text-accent/10 sm:text-6xl">
                   {i + 1}
@@ -244,28 +195,28 @@ const Index = () => {
           })}
         </ul>
 
-        <div className="mt-6 rounded-2xl bg-banner p-5 text-center text-white shadow-lg sm:p-6">
-          <p className="text-base font-extrabold uppercase leading-snug text-highlight sm:text-lg">
+        <div className="mt-6">
+          <Banner className="sm:p-6">
             Именно здесь находится ваша максимальная прибыль
-          </p>
+          </Banner>
         </div>
       </Section>
 
       {/* 5. КЕЙСЫ */}
-      <Section contentClassName="max-w-6xl">
-        <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-accent-deep">
+      <Section tone="soft" contentClassName="max-w-6xl">
+        <div className="landing-badge mx-auto mb-4">
           <Sparkles className="h-3.5 w-3.5" />
           Реальный кейс
         </div>
-        <h2 className="text-center font-bold leading-tight sm:text-3xl text-xl">
-          Результаты&nbsp;
+        <h2 className="landing-title text-xl sm:text-3xl">
+          Результаты{" "}
           <span className="text-accent-deep">из реальных клиник</span>
         </h2>
-        <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
+        <p className="landing-subtitle">
           Разные города, разные ниши — одна система.
         </p>
 
-        <div className="mx-auto mt-6 max-w-2xl overflow-hidden rounded-3xl border bg-card shadow-md">
+        <div className="landing-card mx-auto mt-6 max-w-2xl">
           {/* Знакомство с героиней */}
           <div className="border-b bg-gradient-to-br from-accent-soft via-accent-soft/40 to-background px-5 py-6 sm:px-8 sm:py-7">
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-5">
@@ -293,7 +244,7 @@ const Index = () => {
 
           <div className="p-5 sm:p-8">
             {/* Запрос при обращении */}
-            <div className="rounded-2xl border-l-4 border-muted-foreground/40 bg-muted/40 p-4 sm:p-5">
+            <div className="rounded-2xl border-l-4 border-accent/30 bg-accent-soft/50 p-4 sm:p-5">
               <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                 Запрос при обращении
               </p>
@@ -383,7 +334,7 @@ const Index = () => {
                 ].map((step, i) => (
                   <li
                     key={i}
-                    className="flex gap-4 rounded-2xl border border-border/60 bg-card p-4 transition-shadow hover:shadow-md sm:p-5"
+                    className="flex gap-4 rounded-2xl bg-white p-4 ring-1 ring-accent/10 sm:p-5"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-deep text-base font-black text-white shadow-md sm:h-11 sm:w-11 sm:text-lg">
                       {i + 1}
@@ -403,8 +354,8 @@ const Index = () => {
 
         {/* Синий блок с результатом — оставляем как был */}
         <div className="mx-auto mt-6 max-w-2xl">
-          <div className="rounded-2xl bg-banner p-6 text-center text-white shadow-lg">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-highlight">
+          <div className="landing-accent-panel p-6 text-center sm:p-8">
+              <div className="landing-badge mx-auto border-0 bg-white/15 text-highlight ring-white/20">
                 <TrendingUp className="h-3.5 w-3.5" />
                 Результат за 2 недели
               </div>
@@ -477,7 +428,7 @@ const Index = () => {
           ].map((c, i) => (
             <div
               key={i}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="landing-card flex min-w-0 flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(22,80,60,0.12)]"
             >
               <div className="border-b bg-gradient-to-br from-accent-soft/80 via-background to-background px-5 py-5">
                 <div className="flex min-w-0 items-start justify-between gap-4">
@@ -540,20 +491,20 @@ const Index = () => {
           ))}
         </div>
 
-        <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-muted/50 px-4 py-3 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-accent-soft/60 px-4 py-3 text-center text-sm leading-relaxed text-muted-foreground ring-1 ring-accent/10 sm:text-base">
           Это не разовые истории —{" "}
           <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
         </p>
       </Section>
 
       {/* 6. ОБО МНЕ */}
-      <Section tone="muted" className="sm:py-20" contentClassName="max-w-5xl">
-        <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full bg-accent-soft px-4 py-1.5 text-xs font-semibold uppercase text-accent-deep">
+      <Section tone="default" className="sm:py-20" contentClassName="max-w-5xl">
+        <div className="landing-badge mx-auto mb-6">
           <BadgeCheck className="h-3.5 w-3.5" />
           Знакомство
         </div>
 
-        <div className="overflow-hidden rounded-[2rem] border bg-background shadow-xl shadow-accent/5">
+        <div className="landing-card">
           <div className="grid lg:grid-cols-[minmax(280px,0.82fr)_minmax(0,1.18fr)]">
             <div className="bg-gradient-to-br from-accent-soft/80 via-background to-background p-4 sm:p-6 lg:p-7">
               <div className="mx-auto max-w-sm overflow-hidden rounded-[1.5rem] border bg-card shadow-lg lg:max-w-none">
@@ -576,51 +527,11 @@ const Index = () => {
             </div>
 
             <div className="p-5 sm:p-7 lg:p-9">
-              <h2 className="text-center text-[2.2rem] font-black leading-none sm:text-5xl md:text-left">
-                Меня зовут <span className="text-accent-deep">Юрий</span>
-              </h2>
-              <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent-deep/70 md:mx-0" />
-
-              <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg md:text-left">
+              <p className="text-center text-base leading-relaxed text-muted-foreground sm:text-lg md:text-left">
                 Я помогаю клиникам находить неочевидные точки потерь: от рекламы и заявок до администраторов, первичных консультаций и повторных продаж.
               </p>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {[
-                  {
-                    value: "5 лет",
-                    label: "в медицинском маркетинге",
-                    note: "знаю, где чаще всего теряются заявки",
-                  },
-                  {
-                    value: "десятки",
-                    label: "разобранных клиник",
-                    note: "стоматологии, косметологии и многопрофильные центры",
-                  },
-                  {
-                    value: "до 10x",
-                    label: "рост окупаемости",
-                    note: "когда исправлена вся система, а не только реклама",
-                  },
-                ].map((item) => (
-                  <div key={item.label} className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-accent-soft/60 via-background to-background p-4 shadow-sm">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent-deep text-white shadow-sm">
-                      <Check className="h-4 w-4" strokeWidth={3} />
-                    </span>
-                    <p className="mt-4 text-3xl font-black leading-none text-accent-deep">
-                      {item.value}
-                    </p>
-                    <p className="mt-2 text-sm font-extrabold leading-snug text-foreground">
-                      {item.label}
-                    </p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                      {item.note}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-7 grid gap-4 text-base leading-relaxed text-foreground/85 sm:text-lg lg:grid-cols-2">
+              <div className="mt-6 grid gap-4 text-base leading-relaxed text-foreground/85 sm:text-lg lg:grid-cols-2">
                 <p>
                   Я не смотрю на рекламу отдельно от продаж. В клинике всё связано: заявка, звонок, запись, визит, план лечения и повторный приём.
                 </p>
@@ -652,9 +563,9 @@ const Index = () => {
       </Section>
 
       {/* 7. СТОИМОСТЬ */}
-      <Section>
-        <div className="overflow-hidden rounded-3xl border bg-card shadow-md">
-          <div className="flex items-center gap-3 border-b bg-accent-soft/50 px-5 py-4 sm:px-7">
+      <Section tone="soft">
+        <div className="landing-card">
+          <div className="flex items-center gap-3 border-b border-accent/10 bg-accent-soft/50 px-5 py-4 sm:px-7">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-deep text-white">
               <HelpCircle className="h-5 w-5" />
             </span>
@@ -671,17 +582,17 @@ const Index = () => {
       </Section>
 
       {/* 8. ФИНАЛЬНЫЙ CTA */}
-      <Section tone="muted" contentClassName="max-w-5xl">
-        <h2 className="text-center text-2xl font-extrabold leading-tight sm:text-3xl">
+      <Section tone="default" contentClassName="max-w-5xl">
+        <h2 className="landing-title">
           Если вы хотите оставить конкурентов позади и{" "}
           <span className="text-accent-deep">кратно увеличить выручку</span> вашей клиники…
         </h2>
 
-        <p className="mt-5 text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="landing-subtitle mt-5 sm:text-lg">
           Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет — жмите на кнопку и записывайтесь на диагностику.
         </p>
 
-        <div className="mt-8 overflow-hidden rounded-[2rem] border bg-background shadow-xl shadow-accent/5">
+        <div className="landing-card mt-8">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
             <div className="bg-gradient-to-br from-accent-deep via-accent to-accent-deep p-5 text-white sm:p-7 lg:p-8">
               <p className="text-xs font-black uppercase tracking-[0.22em] text-highlight">
@@ -724,7 +635,7 @@ const Index = () => {
                   text: "Вы получите список действий: что исправить сейчас, что внедрить дальше и где будет самый быстрый рост.",
                 },
               ].map((item, i) => (
-                <div key={item.title} className="flex gap-4 rounded-2xl border bg-card p-4 shadow-sm">
+                <div key={item.title} className="flex gap-4 rounded-2xl bg-accent-soft/40 p-4 ring-1 ring-accent/10 sm:p-5">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-deep">
                     <span className="text-sm font-black">{i + 1}</span>
                   </span>
@@ -752,7 +663,7 @@ const Index = () => {
         </div>
 
         <div className="mt-7 grid gap-4 lg:grid-cols-2">
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-destructive via-[#bd302b] to-[#9f2925] p-5 text-white shadow-xl shadow-destructive/15 sm:p-7 lg:p-8">
+          <div className="relative overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-destructive/90 via-destructive to-destructive/80 p-5 text-white shadow-[0_8px_30px_rgba(180,40,40,0.15)] sm:p-7 lg:p-8">
             <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
             <div className="relative flex items-center gap-4">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/14 text-white sm:h-20 sm:w-20">
@@ -782,7 +693,7 @@ const Index = () => {
             </ul>
           </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#3b7f47] via-accent-deep to-[#235f48] p-5 text-white shadow-xl shadow-accent-deep/20 sm:p-7 lg:p-8">
+          <div className="relative overflow-hidden rounded-[1.5rem] landing-accent-panel p-5 sm:p-7 lg:p-8">
             <div className="absolute right-5 top-5 rounded-full bg-highlight px-4 py-2 text-[11px] font-black uppercase tracking-widest text-foreground shadow-md sm:right-7">
               Рекомендуем
             </div>
@@ -819,7 +730,7 @@ const Index = () => {
         </div>
 
         <div className="mt-10 space-y-5">
-          <div className="rounded-[2rem] bg-gradient-to-br from-[#356bd1] via-[#2f6a9d] to-accent-deep p-5 text-white shadow-xl shadow-accent-deep/15 sm:p-7">
+          <div className="landing-accent-panel p-5 sm:p-7">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/10">
                 <Clock className="h-7 w-7" strokeWidth={2.5} />
@@ -835,17 +746,17 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border-2 border-dashed border-[#b9cdf4] bg-white/85 px-5 py-6 text-center shadow-sm sm:px-8 sm:py-8">
+          <div className="rounded-[1.5rem] border-2 border-dashed border-accent/30 bg-white px-5 py-6 text-center shadow-[0_4px_20px_rgba(22,80,60,0.06)] sm:px-8 sm:py-8">
             <p className="mx-auto max-w-4xl text-lg font-medium leading-relaxed text-foreground/85 sm:text-2xl">
               Если вы всё ещё думаете — просто представьте, где будете через год, когда узнаете, что{" "}
-              <span className="box-decoration-clone bg-highlight/35 px-1.5 font-black text-foreground">
+              <span className="box-decoration-clone rounded bg-highlight/35 px-1.5 font-black text-foreground">
                 клиники-конкуренты уже делают по 20+ миллионов в месяц
               </span>
               .
             </p>
           </div>
 
-          <div className="rounded-[2rem] bg-gradient-to-br from-[#3f866b] via-accent-deep to-[#2c6c58] p-5 text-white shadow-xl shadow-accent-deep/15 sm:p-6">
+          <div className="landing-accent-panel p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/14 text-highlight ring-1 ring-white/10">
                 <Flame className="h-6 w-6" strokeWidth={2.5} />
@@ -874,7 +785,7 @@ const Index = () => {
         </p>
       </Section>
 
-      <footer className="border-t bg-background px-5 py-8 text-center text-xs text-muted-foreground">
+      <footer className="border-t border-accent/10 bg-accent-soft/30 px-5 py-8 text-center text-xs text-muted-foreground">
         <p className="flex items-center justify-center gap-2">
           <Phone className="h-3.5 w-3.5" />
           WhatsApp: +7 747 284 25 95

@@ -1,17 +1,17 @@
-import { type MouseEvent } from "react";
-import { ArrowRight } from "lucide-react";
+import { type MouseEvent, useState } from "react";
+import { ArrowRight, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 const WHATSAPP_NUMBER = "77472842595";
 const WHATSAPP_MESSAGE = "Хочу записаться на диагностику клиники";
 
-// MarkVision multi-tenant click tracker (separate Supabase project).
-// Resolves cabinet by host, writes the click into whatsapp_clicks, and
-// fires Meta CAPI "Contact" (intent only — not Lead). The real "Lead"
-// event is fired server-side from greenapi-webhook when the user actually
-// sends the WhatsApp message carrying the [#xxxxxxxx] marker. This keeps
-// Lead in Ads Manager strictly = real WhatsApp conversations, not clicks.
 const TRACK_CLICK_URL =
   "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";
 
@@ -70,9 +70,6 @@ const getUtmParams = (): Utm => {
   return out;
 };
 
-// Map utm_source / click-id cookies to a short, human-decodable code.
-// Yuri sees this in WhatsApp: fb = Facebook/Meta/Instagram, g = Google,
-// yt = YouTube, tg = Telegram, direct = no campaign attribution.
 const resolveSourceCode = (utm: Utm): string => {
   const raw = (utm.utm_source ?? "").toLowerCase().trim();
   if (raw) {
@@ -90,13 +87,9 @@ const resolveSourceCode = (utm: Utm): string => {
   return "direct";
 };
 
-// 8-character URL-safe id used as: (a) marker [#xxxxxxxx] in the WhatsApp
-// message text and (b) eventID for the browser pixel Contact event. The
-// greenapi-webhook matches this marker against whatsapp_clicks and fires
-// the Meta CAPI "Lead" event with the original fbp/fbc when the user
-// actually sends the message.
 const CLICK_ID_CHARS =
   "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
 const generateClickId = (): string => {
   let s = "";
   if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
@@ -113,80 +106,59 @@ const generateClickId = (): string => {
   return s;
 };
 
-interface TrackContactParams {
-  clickId: string;
+interface TrackLeadParams {
+  eventId: string;
   ctaId?: number;
   ctaName?: string;
   utm: Utm;
   sourceCode: string;
 }
 
-// Browser-side bookkeeping for the click. Lead is intentionally NOT fired
-// here — only an intent-level Contact + analytics events. The real Lead
-// fires from the server only when the WhatsApp message arrives.
-const trackContactIntent = ({
-  clickId,
+const sendMetaCapiLead = (eventId: string): void => {
+  if (typeof window === "undefined") return;
+
+  try {
+    const body = JSON.stringify({
+      event_name: "Lead",
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      event_source_url: window.location.href,
+      fbp: getCookie("_fbp"),
+      fbc: getCookie("_fbc"),
+      custom_data: {
+        content_name: "WhatsApp Lead",
+        content_category: "lead",
+      },
+    });
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/meta-capi", new Blob([body], { type: "application/json" }));
+    } else {
+      void fetch("/api/meta-capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+        keepalive: true,
+      }).catch(() => undefined);
+    }
+  } catch {
+    /* ignore */
+  }
+};
+
+const trackWhatsAppClick = ({
+  eventId,
   ctaId,
   ctaName,
   utm,
   sourceCode,
-}: TrackContactParams): void => {
+}: TrackLeadParams): void => {
   if (typeof window === "undefined") return;
 
-  // Meta Pixel — Contact (intent), NOT Lead. The Lead event fires from
-  // greenapi-webhook only when a real WhatsApp message with the marker
-  // arrives — so Lead count in Ads Manager == real conversations.
-  const fbq = window.fbq;
-  if (typeof fbq === "function") {
-    fbq(
-      "track",
-      "Contact",
-      {
-        content_name: "WhatsApp Click",
-        content_category: "contact",
-      },
-      { eventID: clickId },
-    );
-  }
-
-  // GTM dataLayer — kept as a high-signal "contact_intent" event so existing
-  // GTM triggers can still route by channel, but no longer marked as a Lead
-  // conversion in Google Ads.
-  const dataLayer = (window.dataLayer = window.dataLayer || []);
-  dataLayer.push({
-    event: "contact_intent",
-    event_category: "engagement",
-    event_label: ctaName ?? "whatsapp_cta",
-    method: "whatsapp",
-    cta_id: ctaId ?? null,
-    cta_name: ctaName ?? null,
-    source_code: sourceCode,
-    utm_source: utm.utm_source ?? null,
-    utm_medium: utm.utm_medium ?? null,
-    utm_campaign: utm.utm_campaign ?? null,
-    utm_content: utm.utm_content ?? null,
-    utm_term: utm.utm_term ?? null,
-    transaction_id: clickId,
-  });
-
-  // gtag direct fallback — also as engagement, not a conversion event.
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (typeof gtag === "function") {
-    gtag("event", "click_whatsapp", {
-      event_category: "engagement",
-      event_label: ctaName ?? "whatsapp_cta",
-      transaction_id: clickId,
-    });
-  }
-
-  // MarkVision tracker — persists the click in whatsapp_clicks with
-  // fbp/fbc/UTM/cabinet, and fires Meta CAPI "Contact" server-side.
-  // Lead fires later, only from greenapi-webhook, when a real WhatsApp
-  // message arrives with the marker.
   try {
     const body = JSON.stringify({
-      click_id: clickId,
-      event_id: clickId,
+      click_id: eventId,
+      event_id: eventId,
       event_source_url: window.location.href,
       user_agent: navigator.userAgent,
       fbp: getCookie("_fbp"),
@@ -200,12 +172,8 @@ const trackContactIntent = ({
       utm_term: utm.utm_term ?? undefined,
       source_label: "medcenter-ai",
     });
-    // CRITICAL: send as text/plain to avoid CORS preflight on mobile Safari.
-    // application/json triggers OPTIONS preflight, which is cancelled when
-    // the page navigates to WhatsApp before the request lands → click never
-    // makes it into whatsapp_clicks and the inbound Lead can't be attributed.
-    // text/plain is a "simple request" — no preflight, beacon ships immediately.
-    if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+
+    if (navigator.sendBeacon) {
       const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
       if (!navigator.sendBeacon(TRACK_CLICK_URL, blob)) {
         void fetch(TRACK_CLICK_URL, {
@@ -228,6 +196,63 @@ const trackContactIntent = ({
   } catch (err) {
     console.error("track-whatsapp-click failed", err);
   }
+
+  const dataLayer = (window.dataLayer = window.dataLayer || []);
+  dataLayer.push({
+    event: "lead",
+    event_category: "conversion",
+    event_label: ctaName ?? "whatsapp_lead",
+    method: "whatsapp",
+    cta_id: ctaId ?? null,
+    cta_name: ctaName ?? null,
+    source_code: sourceCode,
+    utm_source: utm.utm_source ?? null,
+    utm_medium: utm.utm_medium ?? null,
+    utm_campaign: utm.utm_campaign ?? null,
+    utm_content: utm.utm_content ?? null,
+    utm_term: utm.utm_term ?? null,
+    transaction_id: eventId,
+  });
+
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  if (typeof gtag === "function") {
+    gtag("event", "generate_lead", {
+      event_category: "conversion",
+      event_label: ctaName ?? "whatsapp_lead",
+      transaction_id: eventId,
+    });
+  }
+};
+
+const trackLead = ({
+  eventId,
+  ctaId,
+  ctaName,
+  utm,
+  sourceCode,
+}: TrackLeadParams): void => {
+  if (typeof window === "undefined") return;
+
+  const fbq = window.fbq;
+  if (typeof fbq === "function") {
+    fbq(
+      "track",
+      "Lead",
+      {
+        content_name: ctaName ?? "WhatsApp Lead",
+        content_category: "lead",
+      },
+      { eventID: eventId },
+    );
+  }
+
+  sendMetaCapiLead(eventId);
+  trackWhatsAppClick({ eventId, ctaId, ctaName, utm, sourceCode });
+};
+
+const openWhatsApp = (): void => {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 
 interface ScrollToFormButtonProps {
@@ -245,49 +270,101 @@ const ScrollToFormButton = ({
   ctaId,
   ctaName,
 }: ScrollToFormButtonProps) => {
+  const [open, setOpen] = useState(false);
   const resolvedCtaName = ctaName ?? label;
+  const whatsappCtaName = "Попап — Записаться на диагностику";
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleOpenModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const clickId = generateClickId();
+    e.stopPropagation();
+    setOpen(true);
+  };
+
+  const handleWhatsAppLead = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const eventId = generateClickId();
     const utm = getUtmParams();
     const sourceCode = resolveSourceCode(utm);
 
-    // Visible suffix: channel code Yuri reads in WhatsApp + a hidden marker
-    // greenapi-webhook parses to attribute the real Lead event server-side.
-    const text = `${WHATSAPP_MESSAGE}. ${sourceCode} [#${clickId}]`;
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-
-    trackContactIntent({
-      clickId,
+    trackLead({
+      eventId,
       ctaId,
-      ctaName: resolvedCtaName,
+      ctaName: whatsappCtaName,
       utm,
       sourceCode,
     });
 
-    // window.open inside a user click → no popup blocker.
-    if (typeof window !== "undefined") {
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
+    setOpen(false);
+    openWhatsApp();
   };
 
   return (
-    <Button
-      type="button"
-      variant={variant}
-      size="cta"
-      onClick={handleClick}
-      data-cta-id={ctaId}
-      data-cta-name={resolvedCtaName}
-      className={cn(
-        "font-semibold leading-tight whitespace-normal text-center w-full",
-        className,
-      )}
-    >
-      <span>{label}</span>
-      <ArrowRight className="h-5 w-5" />
-    </Button>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Button
+        type="button"
+        variant={variant}
+        size="cta"
+        onClick={handleOpenModal}
+        data-cta-id={ctaId}
+        data-cta-name={resolvedCtaName}
+        data-action="open-booking-modal"
+        className={cn(
+          "w-full whitespace-normal text-center font-semibold leading-tight",
+          className,
+        )}
+      >
+        <span>{label}</span>
+        <ArrowRight className="h-5 w-5" />
+      </Button>
+
+      <DialogContent className="max-h-[92svh] w-[calc(100vw-1.25rem)] max-w-md gap-0 overflow-y-auto rounded-[1.5rem] border-0 p-0 shadow-2xl sm:max-w-lg">
+        <div className="bg-gradient-to-br from-accent-deep via-accent-deep to-accent px-6 pb-6 pt-8 text-center text-white">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20">
+            <CalendarCheck className="h-6 w-6 text-highlight" strokeWidth={2.5} />
+          </div>
+          <DialogTitle className="text-xl font-black leading-tight text-white sm:text-2xl">
+            Запись на диагностику
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Запись на диагностику клиники через WhatsApp
+          </DialogDescription>
+        </div>
+
+        <div className="px-5 py-6 sm:px-7 sm:py-7">
+          <h3 className="text-center text-[1.35rem] font-black leading-tight tracking-tight text-foreground sm:text-2xl">
+            Запись на диагностику клиники
+          </h3>
+
+          <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+            Если вы руководитель или собственник медицинской клиники в Казахстане и хотите получать
+            больше записей на первичную диагностику, увеличить выручку и быть впереди конкурентов,
+            жмите кнопку ниже и пишите мне в WhatsApp.
+          </p>
+
+          <p className="mt-4 text-[15px] leading-relaxed text-foreground/85 sm:text-base">
+            Я свяжусь с вами и расскажу подробнее, как проходит диагностика.
+          </p>
+
+          <Button
+            type="button"
+            variant="whatsapp"
+            size="cta"
+            onClick={handleWhatsAppLead}
+            data-action="open-whatsapp-lead"
+            className="mt-6 w-full font-semibold"
+          >
+            Записаться на диагностику
+            <ArrowRight className="h-5 w-5" />
+          </Button>
+
+          <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            Если не актуально, можете закрыть страницу
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
