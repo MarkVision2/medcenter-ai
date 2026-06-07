@@ -272,7 +272,7 @@ const ScrollToFormButton = ({
 }: ScrollToFormButtonProps) => {
   const [open, setOpen] = useState(false);
   const resolvedCtaName = ctaName ?? label;
-  const whatsappCtaName = "Попап — Записаться на диагностику";
+  const whatsappCtaName = "Попап Записаться на диагностику";
 
   const handleOpenModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

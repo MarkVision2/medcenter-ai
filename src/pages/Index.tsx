@@ -126,7 +126,7 @@ const Index = () => {
 
         <div className="mt-5 sm:mt-7">
           <Banner className="px-4 py-4 text-[13px] leading-snug sm:px-6 sm:py-6 sm:text-xl">
-            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp;— ТО&nbsp;ЭТА ИНФОРМАЦИЯ ТОЧНО ДЛЯ&nbsp;ВАС
+            ЕСЛИ ОТВЕТИЛИ «ДА» ХОТЯ&nbsp;БЫ НА&nbsp;1&nbsp;ВОПРОС&nbsp; ТО&nbsp;ЭТА ИНФОРМАЦИЯ ТОЧНО ДЛЯ&nbsp;ВАС
           </Banner>
         </div>
       </Section>
@@ -141,7 +141,7 @@ const Index = () => {
         </div>
       </Section>
 
-      {/* 4. СУТЬ СИСТЕМЫ — 3 ЗОНЫ */}
+      {/* 4. СУТЬ СИСТЕМЫ 3 ЗОНЫ */}
       <Section tone="default">
         <div className="landing-badge mx-auto mb-4">
           <Sparkles className="h-3.5 w-3.5" />
@@ -213,7 +213,7 @@ const Index = () => {
           <span className="text-accent-deep">из реальных клиник</span>
         </h2>
         <p className="landing-subtitle">
-          Разные города, разные ниши — одна система.
+          Разные города, разные ниши одна система.
         </p>
 
         <div className="landing-card mx-auto mt-6 max-w-2xl">
@@ -222,7 +222,7 @@ const Index = () => {
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-5">
               <img
                 src={aigerimPhoto}
-                alt="Айгерим — директор многопрофильной клиники"
+                alt="Айгерим директор многопрофильной клиники"
                 loading="lazy"
                 decoding="async"
                 width={160}
@@ -260,7 +260,7 @@ const Index = () => {
                 Что увидел на диагностике
               </p>
               <p className="mt-2 text-[15px] leading-relaxed text-foreground/85 sm:text-base">
-                SMM здесь не поможет. В клинике не было системы, которая стабильно приводит первичных пациентов на платную диагностику и оставляет их на курс лечения. Клиника работала в основном через ОСМС, а из платных услуг — только обед за 1000 тенге.
+                SMM здесь не поможет. В клинике не было системы, которая стабильно приводит первичных пациентов на платную диагностику и оставляет их на курс лечения. Клиника работала в основном через ОСМС, а из платных услуг только обед за 1000 тенге.
               </p>
             </div>
 
@@ -307,11 +307,11 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Как решали задачу — 3 шага */}
+            {/* Как решали задачу 3 шага */}
             <div className="mt-7">
               <div className="mx-auto flex w-fit items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent-deep">
                 <Workflow className="h-3.5 w-3.5" />
-                Как решали задачу — 3 шага
+                Как решали задачу 3 шага
               </div>
               <h3 className="mt-3 text-center text-lg font-bold sm:text-xl">
                 Что мы сделали
@@ -325,7 +325,7 @@ const Index = () => {
                   },
                   {
                     title: "Перестроили отдел продаж",
-                    text: "Отказались от формата «просто консультаций». Вывели 2 девушек в отдельный колл-центр, обучили скриптам и поставили задачу — продать приём с предоплатой или полной оплатой.",
+                    text: "Отказались от формата «просто консультаций». Вывели 2 девушек в отдельный колл-центр, обучили скриптам и поставили задачу продать приём с предоплатой или полной оплатой.",
                   },
                   {
                     title: "Запустили рекламу",
@@ -352,7 +352,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Синий блок с результатом — оставляем как был */}
+        {/* Синий блок с результатом оставляем как был */}
         <div className="mx-auto mt-6 max-w-2xl">
           <div className="landing-accent-panel p-6 text-center sm:p-8">
               <div className="landing-badge mx-auto border-0 bg-white/15 text-highlight ring-white/20">
@@ -492,7 +492,7 @@ const Index = () => {
         </div>
 
         <p className="mx-auto mt-6 max-w-2xl rounded-2xl bg-accent-soft/60 px-4 py-3 text-center text-sm leading-relaxed text-muted-foreground ring-1 ring-accent/10 sm:text-base">
-          Это не разовые истории —{" "}
+          Это не разовые истории {" "}
           <span className="font-semibold text-foreground">это повторяющийся результат системы.</span>
         </p>
       </Section>
@@ -510,7 +510,7 @@ const Index = () => {
               <div className="mx-auto max-w-sm overflow-hidden rounded-[1.5rem] border bg-card shadow-lg lg:max-w-none">
                 <img
                   src={yuriPhoto}
-                  alt="Юрий — автор системы для медицинских клиник"
+                  alt="Юрий автор системы для медицинских клиник"
                   loading="lazy"
                   decoding="async"
                   width={720}
@@ -597,7 +597,7 @@ const Index = () => {
           </div>
           <div className="px-5 py-6 sm:px-7 sm:py-7">
             <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Я не знаю, сколько это стоит, потому что не знаю конкретно вашу проблему и что именно нужно будет делать в первую очередь. Возможно, будет достаточно <span className="font-semibold text-foreground">что-то подправить</span>, а возможно — <span className="font-semibold text-foreground">выстроить всю систему под ключ</span>.
+              Я не знаю, сколько это стоит, потому что не знаю конкретно вашу проблему и что именно нужно будет делать в первую очередь. Возможно, будет достаточно <span className="font-semibold text-foreground">что-то подправить</span>, а возможно <span className="font-semibold text-foreground">выстроить всю систему под ключ</span>.
             </p>
           </div>
         </div>
@@ -611,7 +611,7 @@ const Index = () => {
         </h2>
 
         <p className="landing-subtitle mt-5 sm:text-lg">
-          Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет — жмите на кнопку и записывайтесь на диагностику.
+          Если хотите, чтобы маркетинг наконец начал приносить результат, а не «съедал» бюджет жмите на кнопку и записывайтесь на диагностику.
         </p>
 
         <div className="landing-card mt-8">
@@ -770,7 +770,7 @@ const Index = () => {
 
           <div className="rounded-[1.5rem] border-2 border-dashed border-accent/30 bg-white px-5 py-6 text-center shadow-[0_4px_20px_rgba(22,80,60,0.06)] sm:px-8 sm:py-8">
             <p className="mx-auto max-w-4xl text-lg font-medium leading-relaxed text-foreground/85 sm:text-2xl">
-              Если вы всё ещё думаете — просто представьте, где будете через год, когда узнаете, что{" "}
+              Если вы всё ещё думаете просто представьте, где будете через год, когда узнаете, что{" "}
               <span className="box-decoration-clone rounded bg-highlight/35 px-1.5 font-black text-foreground">
                 клиники-конкуренты уже делают по 20+ миллионов в месяц
               </span>
@@ -784,7 +784,7 @@ const Index = () => {
                 <Flame className="h-6 w-6" strokeWidth={2.5} />
               </span>
               <p className="text-xl font-semibold leading-snug sm:text-2xl">
-                Пока вы думаете — ваши{" "}
+                Пока вы думаете ваши{" "}
                 <span className="font-black text-highlight">коллеги-клиники внедряют системы продаж</span>{" "}
                 и забирают ваших пациентов.
               </p>
@@ -798,7 +798,7 @@ const Index = () => {
             label="Забронировать диагностику клиники"
             className="uppercase"
             ctaId={2}
-            ctaName="Финальный CTA — Забронировать диагностику"
+            ctaName="Финальный CTA Забронировать диагностику"
           />
         </div>
 
