@@ -527,24 +527,46 @@ const Index = () => {
             </div>
 
             <div className="p-5 sm:p-7 lg:p-9">
-              <p className="text-center text-base leading-relaxed text-muted-foreground sm:text-lg md:text-left">
-                Я помогаю клиникам находить неочевидные точки потерь: от рекламы и заявок до администраторов, первичных консультаций и повторных продаж.
-              </p>
+              <figure className="relative rounded-2xl border border-accent/15 bg-gradient-to-br from-accent-soft/60 to-background p-5 sm:p-6">
+                <span aria-hidden className="absolute -top-3 left-5 select-none font-serif text-5xl leading-none text-accent-deep/40">“</span>
+                <p className="text-base leading-relaxed text-foreground/90 sm:text-lg">
+                  Я помогаю клиникам находить <span className="font-semibold text-foreground">неочевидные точки потерь</span>: от рекламы и заявок до администраторов, первичных консультаций и повторных продаж.
+                </p>
+              </figure>
 
-              <div className="mt-6 grid gap-4 text-base leading-relaxed text-foreground/85 sm:text-lg lg:grid-cols-2">
-                <p>
-                  Я не смотрю на рекламу отдельно от продаж. В клинике всё связано: заявка, звонок, запись, визит, план лечения и повторный приём.
-                </p>
-                <p>
-                  Поэтому на диагностике мы ищем не “красивую гипотезу”, а конкретные места, где сейчас утекают пациенты и деньги.
-                </p>
+              <div className="mt-5 grid gap-3 sm:gap-4 lg:grid-cols-2">
+                <div className="rounded-2xl border bg-card p-4 sm:p-5 shadow-sm">
+                  <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-accent-deep">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-deep" />
+                    Подход
+                  </div>
+                  <p className="text-[15px] leading-relaxed text-foreground/85 sm:text-base">
+                    Я не смотрю на рекламу отдельно от продаж. В клинике всё связано: <span className="font-semibold text-foreground">заявка, звонок, запись, визит, план лечения и повторный приём.</span>
+                  </p>
+                </div>
+                <div className="rounded-2xl border bg-card p-4 sm:p-5 shadow-sm">
+                  <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-highlight/40 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+                    На диагностике
+                  </div>
+                  <p className="text-[15px] leading-relaxed text-foreground/85 sm:text-base">
+                    Ищем не «красивую гипотезу», а <span className="font-semibold text-foreground">конкретные места, где сейчас утекают пациенты и деньги.</span>
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-6 rounded-2xl border border-highlight/40 bg-highlight/20 p-4 sm:p-5">
-                <p className="text-lg font-black leading-snug text-foreground sm:text-xl">
-                  Мы с командой помогали клиникам повышать окупаемость в{" "}
-                  <span className="rounded bg-highlight px-1.5 text-foreground">3, 5 и даже 10 раз</span>.
+              <div className="mt-5 overflow-hidden rounded-2xl border border-highlight/50 bg-gradient-to-br from-highlight/30 via-highlight/15 to-transparent p-5 sm:p-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-foreground/60">
+                  Результат работы
                 </p>
+                <p className="mt-2 text-xl font-black leading-tight text-foreground sm:text-2xl">
+                  Помогали клиникам повышать окупаемость в
+                </p>
+                <div className="mt-3 flex flex-wrap items-baseline gap-2">
+                  <span className="rounded-lg bg-highlight px-3 py-1 text-2xl font-black text-foreground sm:text-3xl">3×</span>
+                  <span className="rounded-lg bg-highlight px-3 py-1 text-2xl font-black text-foreground sm:text-3xl">5×</span>
+                  <span className="rounded-lg bg-foreground px-3 py-1 text-2xl font-black text-background sm:text-3xl">10×</span>
+                </div>
               </div>
 
               <div className="mt-5 rounded-2xl border border-accent/25 bg-accent-soft/55 p-4 sm:p-5">
