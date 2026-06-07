@@ -37,7 +37,7 @@ All colors MUST be HSL.
     --destructive: 0 65% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Продающие акценты — в единой медицинской палитре */
+    /* Продающие акценты в единой медицинской палитре */
     --banner: 168 75% 22%;
     --banner-foreground: 48 100% 52%;
     --highlight: 48 100% 52%;

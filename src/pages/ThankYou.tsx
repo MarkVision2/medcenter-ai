@@ -32,7 +32,7 @@ const ThankYou = () => {
   const [lead, setLead] = useState<LeadData | null>(null);
 
   useEffect(() => {
-    document.title = "Заявка принята — MarkVision AI";
+    document.title = "Заявка принята MarkVision AI";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
