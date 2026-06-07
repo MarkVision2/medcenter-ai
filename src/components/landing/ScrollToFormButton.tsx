@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_NUMBER = "77472842595";
-const WHATSAPP_MESSAGE = "Хочу записаться на диагностику клиники";
+const WHATSAPP_NUMBER = "77776290913";
+const WHATSAPP_MESSAGE = "Хочу получить систему привлечения первичных пациентов";
 
 const TRACK_CLICK_URL =
   "https://szfgdruhlebfvcmlvxdk.supabase.co/functions/v1/track-whatsapp-click";

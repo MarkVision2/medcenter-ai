@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_NUMBER = "77472842595";
+const WHATSAPP_NUMBER = "77776290913";
 const FALLBACK_MESSAGE =
   "Добрый день! Я оставил заявку на диагностику медицинского центра.";
 
@@ -251,7 +251,7 @@ const ThankYou = () => {
 
             <p className="flex items-center justify-center gap-2 text-sm font-semibold text-muted-foreground">
               <Phone className="h-4 w-4" />
-              WhatsApp: +7 747 284 25 95
+              WhatsApp: +7 777 629 09 13
             </p>
           </aside>
         </div>

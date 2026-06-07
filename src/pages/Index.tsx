@@ -788,7 +788,7 @@ const Index = () => {
       <footer className="border-t border-accent/10 bg-accent-soft/30 px-5 py-8 text-center text-xs text-muted-foreground">
         <p className="flex items-center justify-center gap-2">
           <Phone className="h-3.5 w-3.5" />
-          WhatsApp: +7 747 284 25 95
+          WhatsApp: +7 777 629 09 13
         </p>
         <p className="mt-2">© {new Date().getFullYear()} Система MarkVision AI</p>
       </footer>

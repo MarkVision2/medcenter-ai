@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const WHATSAPP_NUMBER = "77472842595";
+const WHATSAPP_NUMBER = "77776290913";
 const DEFAULT_MESSAGE =
-  "Здравствуйте, Юрий! Хочу записаться на диагностику клиники по системе «Врач на миллион»";
+  "Хочу получить систему привлечения первичных пациентов";
 
 interface WhatsAppButtonProps {
   label?: string;
