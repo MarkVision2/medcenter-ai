@@ -214,12 +214,38 @@ const trackWhatsAppClick = ({
     transaction_id: eventId,
   });
 
+  // GA4-compatible conversion event mirrored into dataLayer so it can be
+  // forwarded as a GA4 event tag in GTM (event name: generate_lead).
+  dataLayer.push({
+    event: "generate_lead",
+    event_category: "conversion",
+    event_label: ctaName ?? "whatsapp_lead",
+    method: "whatsapp",
+    currency: "KZT",
+    value: 1,
+    transaction_id: eventId,
+    source_code: sourceCode,
+  });
+
+  // Yandex.Metrika goal (no-op if Metrika is not installed).
+  const ym = (window as unknown as {
+    ym?: (id: number, action: string, target: string, params?: Record<string, unknown>) => void;
+  }).ym;
+  if (typeof ym === "function") {
+    const counterId = (window as unknown as { __ymCounterId?: number }).__ymCounterId;
+    if (typeof counterId === "number") {
+      ym(counterId, "reachGoal", "lead", { transaction_id: eventId, source_code: sourceCode });
+    }
+  }
+
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag === "function") {
     gtag("event", "generate_lead", {
       event_category: "conversion",
       event_label: ctaName ?? "whatsapp_lead",
       transaction_id: eventId,
+      currency: "KZT",
+      value: 1,
     });
   }
 };
@@ -277,6 +303,16 @@ const ScrollToFormButton = ({
   const handleOpenModal = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    if (typeof window !== "undefined") {
+      const dataLayer = (window.dataLayer = window.dataLayer || []);
+      dataLayer.push({
+        event: "cta_click",
+        event_category: "engagement",
+        event_label: resolvedCtaName,
+        cta_id: ctaId ?? null,
+        cta_name: resolvedCtaName,
+      });
+    }
     setOpen(true);
   };
 
