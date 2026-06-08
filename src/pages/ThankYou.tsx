@@ -46,6 +46,23 @@ const ThankYou = () => {
     } catch {
       /* ignore */
     }
+
+    // Conversion event for analytics (GTM / GA4 via dataLayer).
+    try {
+      const w = window as unknown as {
+        dataLayer?: Array<Record<string, unknown>>;
+      };
+      const dataLayer = (w.dataLayer = w.dataLayer || []);
+      dataLayer.push({
+        event: "lead_thank_you_view",
+        event_category: "conversion",
+        event_label: "thank_you_page",
+        currency: "KZT",
+        value: 1,
+      });
+    } catch {
+      /* ignore */
+    }
   }, []);
 
   const whatsappHref = useMemo(() => {
