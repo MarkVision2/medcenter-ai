@@ -815,6 +815,8 @@ const Index = () => {
         </p>
         <p className="mt-2">© {new Date().getFullYear()} Система MarkVision AI</p>
       </footer>
+      <div className="h-24 sm:hidden" aria-hidden="true" />
+      <FloatingCTA />
     </main>
   );
 };
