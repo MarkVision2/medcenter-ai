@@ -2,6 +2,7 @@ import { Check, AlertTriangle, MapPin, TrendingUp, Wallet, Sparkles, Megaphone, 
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
+import FloatingCTA from "@/components/landing/FloatingCTA";
 import yuriPhoto from "@/assets/yuri-optimized.jpg";
 import aigerimPhoto from "@/assets/aigerim.jpg";
 import heroDoctorPhoto from "@/assets/hero-doctor.png";
