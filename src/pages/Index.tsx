@@ -624,6 +624,80 @@ const Index = () => {
         </div>
       </Section>
 
+      {/* 7.5 ГАРАНТИЯ + FAQ — снимаем возражения */}
+      <Section tone="soft" contentClassName="max-w-4xl">
+        <div className="landing-card overflow-hidden">
+          <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-8 lg:p-9">
+            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent-deep ring-1 ring-accent/15 sm:h-20 sm:w-20">
+              <ShieldCheck className="h-9 w-9 sm:h-11 sm:w-11" strokeWidth={2.2} />
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-accent-deep">
+                Честная гарантия
+              </p>
+              <h3 className="mt-2 text-2xl font-black leading-tight sm:text-3xl">
+                Если на диагностике не увидите{" "}
+                <span className="box-decoration-clone rounded bg-highlight/40 px-1.5">минимум 3 точки роста</span>{" "}
+                выручки — я верну вам время и подарю чек-лист аудита клиники.
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                Никаких договоров, звонков «на подумать» и продаж курса. Только конкретика по вашей клинике.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 text-center">
+          <div className="landing-badge-warn mx-auto">
+            <HelpCircle className="h-3.5 w-3.5" strokeWidth={2.5} />
+            <span>Частые вопросы</span>
+          </div>
+          <h2 className="landing-title mt-4">Что обычно спрашивают владельцы клиник</h2>
+        </div>
+
+        <div className="mt-8 space-y-3">
+          {[
+            {
+              q: "Сколько стоит работа с вами?",
+              a: "На диагностике я не продаю услуги. Сначала разбираем клинику, ищем узкие места и вы получаете пошаговый план. Стоимость сопровождения обсуждаем только если увижу, что реально смогу вам помочь.",
+            },
+            {
+              q: "У меня маленькая клиника, подойдёт ли это?",
+              a: "Да. Система заточена под медцентры выручкой от 3 млн ₸/мес. Малым клиникам чаще всего быстрее всего вырасти — там есть очевидные точки утечки заявок и денег.",
+            },
+            {
+              q: "А если моя ниша — стоматология / косметология / многопрофильная?",
+              a: "Работал со всеми основными направлениями: стома, косметология, гинекология, урология, педиатрия, многопрофильные центры. Механика привлечения первички и удержания на курс — одна.",
+            },
+            {
+              q: "Мы уже пробовали таргет и SMM — не сработало.",
+              a: "Именно поэтому и нужна диагностика. В 8 из 10 случаев проблема не в рекламе, а в упаковке услуг, работе колл-центра и системе допродаж. На разборе покажу, где конкретно у вас теряются деньги.",
+            },
+            {
+              q: "Кто увидит мои данные?",
+              a: "Только я. Всё, что обсуждаем на диагностике, остаётся между нами. При необходимости подпишу NDA.",
+            },
+            {
+              q: "Сколько по времени занимает диагностика?",
+              a: "40–60 минут в Zoom или WhatsApp-видео. Достаточно, чтобы разобрать текущую воронку и собрать план действий.",
+            },
+          ].map(({ q, a }) => (
+            <details
+              key={q}
+              className="group rounded-2xl border border-accent/15 bg-white p-5 shadow-[0_2px_10px_rgba(22,80,60,0.04)] transition-shadow open:shadow-[0_8px_24px_rgba(22,80,60,0.08)] sm:p-6"
+            >
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+                <span className="text-base font-extrabold leading-snug text-foreground sm:text-lg">{q}</span>
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-deep transition-transform group-open:rotate-45">
+                  <Plus className="h-4 w-4" strokeWidth={3} />
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{a}</p>
+            </details>
+          ))}
+        </div>
+      </Section>
+
       {/* 8. ФИНАЛЬНЫЙ CTA */}
       <Section tone="default" contentClassName="max-w-5xl">
         <h2 className="landing-title">
