@@ -2,7 +2,7 @@ import { Check, AlertTriangle, MapPin, TrendingUp, Wallet, Sparkles, Megaphone, 
 import Section from "@/components/landing/Section";
 import Banner from "@/components/landing/Banner";
 import ScrollToFormButton from "@/components/landing/ScrollToFormButton";
-import FloatingCTA from "@/components/landing/FloatingCTA";
+
 import yuriPhoto from "@/assets/yuri-optimized.jpg";
 import aigerimPhoto from "@/assets/aigerim.jpg";
 import heroDoctorPhoto from "@/assets/hero-doctor.png";
@@ -811,8 +811,6 @@ const Index = () => {
       <footer className="border-t border-accent/10 bg-accent-soft/30 px-5 py-8 text-center text-xs text-muted-foreground">
         <p className="mt-2">© {new Date().getFullYear()} Система MarkVision AI</p>
       </footer>
-      <div className="h-24 sm:hidden" aria-hidden="true" />
-      <FloatingCTA />
     </main>
   );
 };
