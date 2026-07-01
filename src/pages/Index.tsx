@@ -98,6 +98,26 @@ const Index = () => {
         </div>
       </section>
 
+      {/* 1.5 TRUST BAR — быстрый соц. proof для медиков */}
+      <section aria-label="Показатели" className="border-y border-accent/10 bg-accent-soft/40">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-4 sm:gap-6 sm:py-8">
+          {[
+            { icon: Users, value: "50+", label: "медцентров в работе" },
+            { icon: TrendingUp, value: "2–3×", label: "рост выручки за 3–6 мес." },
+            { icon: Award, value: "8 лет", label: "в маркетинге медицины" },
+            { icon: ShieldCheck, value: "1 клиника", label: "в нише на город" },
+          ].map(({ icon: Icon, value, label }) => (
+            <div key={label} className="flex flex-col items-center text-center">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-accent-deep ring-1 ring-accent/15 sm:h-12 sm:w-12">
+                <Icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.4} />
+              </span>
+              <p className="mt-2 text-xl font-black leading-none text-accent-deep sm:text-2xl">{value}</p>
+              <p className="mt-1 text-[11px] font-medium leading-tight text-muted-foreground sm:text-xs">{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 2. БОЛИ */}
       <Section tone="default" contentClassName="sm:max-w-2xl">
         <div className="text-center">
