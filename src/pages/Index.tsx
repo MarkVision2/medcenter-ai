@@ -811,8 +811,6 @@ const Index = () => {
       <footer className="border-t border-accent/10 bg-accent-soft/30 px-5 py-8 text-center text-xs text-muted-foreground">
         <p className="mt-2">© {new Date().getFullYear()} Система MarkVision AI</p>
       </footer>
-      <div className="h-24 sm:hidden" aria-hidden="true" />
-      <FloatingCTA />
     </main>
   );
 };
