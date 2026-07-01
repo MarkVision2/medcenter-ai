@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_NUMBER = "77776290913";
+const WHATSAPP_NUMBER = "77472842595";
 const FALLBACK_MESSAGE =
   "Добрый день! Я оставил заявку на диагностику медицинского центра.";
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Flame } from "lucide-react";
 import ScrollToFormButton from "./ScrollToFormButton";
 
-const WHATSAPP_NUMBER = "77776290913";
+const WHATSAPP_NUMBER = "77472842595";
 const WHATSAPP_MESSAGE = "Юрий, добрый день! Хочу получать больше пациентов и записаться на диагностику мед клиники";
 
 const WhatsAppIcon = () => (
