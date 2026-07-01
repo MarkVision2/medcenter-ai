@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const WHATSAPP_NUMBER = "77776290913";
 const DEFAULT_MESSAGE =
-  "Хочу получить систему привлечения первичных пациентов";
+  "Юрий, добрый день! Хочу получать больше пациентов и записаться на диагностику мед клиники";
 
 interface WhatsAppButtonProps {
   label?: string;

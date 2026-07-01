@@ -3,7 +3,7 @@ import { Flame } from "lucide-react";
 import ScrollToFormButton from "./ScrollToFormButton";
 
 const WHATSAPP_NUMBER = "77776290913";
-const WHATSAPP_MESSAGE = "Хочу получить систему привлечения первичных пациентов";
+const WHATSAPP_MESSAGE = "Юрий, добрый день! Хочу получать больше пациентов и записаться на диагностику мед клиники";
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-7 w-7">
