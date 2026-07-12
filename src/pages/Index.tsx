@@ -81,7 +81,6 @@ const Index = () => {
                 alt="Врач многопрофильной клиники"
                 className="h-full w-full object-cover object-[center_20%]"
                 loading="eager"
-                fetchpriority="high"
               />
             </div>
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
