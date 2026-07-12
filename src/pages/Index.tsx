@@ -68,11 +68,7 @@ const Index = () => {
             {/* Усилитель */}
             <div className="bg-accent-deep px-3 py-4 text-center sm:px-8 sm:py-7">
               <p className="text-[11.5px] font-bold uppercase leading-[1.35] tracking-[0.04em] text-highlight sm:text-base sm:leading-snug">
-                <span className="rounded-sm bg-white/15 px-1 py-0.5">Тех</span>, кто устал работать за копейки и хочет выйти на доход{" "}
-                <span className="underline decoration-highlight decoration-2 underline-offset-[3px]">
-                  от 300 000 до 500 000 тенге
-                </span>{" "}
-                в день , с большим количеством свободного времени и меньшим стрессом.
+                ПОМОГАЕМ МЕДИЦИНСКИМ КЛИНИКАМ УВЕЛИЧИТЬ КОЛИЧЕСТВО ОПЛАЧЕННЫХ ПАЦИЕНТОВ И ПОСТРОИТЬ СИСТЕМУ РОСТА ВЫРУЧКИ.
               </p>
             </div>
           </div>
