@@ -52,7 +52,7 @@ const Index = () => {
                 </span>
               </div>
               <p className="mt-2 text-[11px] font-bold uppercase leading-snug tracking-[0.08em] text-white sm:text-sm">
-                Для владельцев медицинских центров
+                ДЛЯ ВЛАДЕЛЬЦЕВ МЕДИЦИНСКИХ ЦЕНТРОВ
               </p>
             </div>
 
@@ -86,7 +86,7 @@ const Index = () => {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 px-3 pb-4 text-center sm:pb-7">
               <p className="text-[15px] font-bold leading-snug text-white drop-shadow-md sm:text-xl">
-                Первичные пациенты каждый месяц.
+                За последние 6 месяцев помогли получить более <strong>2 500</strong> записей для клиник.
               </p>
             </div>
           </div>
